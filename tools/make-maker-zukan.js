@@ -50,6 +50,7 @@ const MAKERS = {
   'adusta':           { name: 'ADUSTA', kana: 'アダスタ' },
   'mi3':              { name: 'Mi3', kana: '' },
   'gaea':             { name: 'Gaea', kana: 'ガイア' },
+  'elements':         { name: 'ELEMENTS', kana: 'エレメンツ' },
   // ルアー図鑑にまだルアーが無いメーカー（メーカー一覧に載っていたもの）
   'waterland':        { name: 'WATERLAND', kana: 'ウォーターランド' },
   'lucky craft':      { name: 'LUCKY CRAFT', kana: 'ラッキークラフト' },
