@@ -146,9 +146,11 @@ Claude Code は**該当箇所にプレースホルダーのコメントだけ残
 
 ## 記事作成後：サイトマップ（sitemap.xml）の更新
 
-記事（個別記事・まとめ記事とも）を追加・更新したら、コミット前に **`node tools/make-sitemap.js`** を実行して `sitemap.xml` を作り直し、記事と一緒にコミットする。
+記事（個別記事・まとめ記事とも）を追加・更新したら、コミット前に **`node tools/make-sitemap.js`** を実行して `sitemap.xml` と **HTMLのサイトマップ `sitemap.html`** を作り直し、記事と一緒にコミットする。
 
 - トップ階層の主要ページと `article/` 内の全記事が自動で載る。`lastmod` は各ファイルの最終コミット日（未コミットの変更は今日の日付）。
+- `sitemap.html` は人が見る用の全ページ一覧。ルアー記事は `lure-zukan.html` の魚種ごと、メーカー記事は `maker-zukan.html` のリンクから分類され、残りは「まとめ・ガイド記事」になる。**直接編集せず、必ずスクリプトで作り直す**（図鑑にカードを足してから実行すると正しい魚種に入る）。
+- **全ページのフッター（`footer-nav`）に「サイトマップ」リンクを置く。** 記事テンプレート（`article/lure_template.html`）には入っているので、新しいページを作るときも消さないこと（`article/` 内は `../sitemap.html`、トップ階層は `sitemap.html`）。
 - テスト用・テンプレートなど載せたくないページは、`tools/make-sitemap.js` の `EXCLUDE` に追加する。
 - Search Console にはサイトマップ（`https://tsuri-boon.github.io/sitemap.xml`）を登録済みの前提。記事ごとの「インデックス登録をリクエスト」は手動作業なので、Claude Code は行わない。
 - `robots.txt` はリポジトリ直下に置いてある（全ページ許可＋`Sitemap:` 行のみ）。検索結果から外したいページは `robots.txt` で `Disallow` せず、そのページの `<head>` に `<meta name="robots" content="noindex">` を入れる（`sitemap.xml` の `EXCLUDE` にも追加）。記事テンプレート（`article/lure_template.html`）には `noindex` を入れない（コピーした記事に写るため）。

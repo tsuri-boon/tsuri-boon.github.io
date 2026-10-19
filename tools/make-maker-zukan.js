@@ -287,6 +287,7 @@ ${section('メーカー紹介記事あり', '釣具メーカー図鑑', withArti
     <a href="index.html">トップ</a>
     <a href="article/privacy.html">プライバシーポリシー</a>
     <a href="form.html">お問い合わせ</a>
+    <a href="sitemap.html">サイトマップ</a>
   </nav>
 </footer>
 
