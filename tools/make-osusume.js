@@ -168,9 +168,20 @@ ${cards}
 
 const only = process.argv.slice(2);
 const targets = (only.length ? only : [...Object.keys(lures), ...Object.keys(others)]).filter(f => (lures[f] || others[f]) && !EXCLUDE.has(f));
-let n = 0;
+// Windows でエディタやウイルス対策ソフトがファイルを一瞬つかんでいると書き込みが失敗するので、少し待ってやり直す
+const sleep = ms => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const writeWithRetry = (file, text) => {
+  for (let i = 1; ; i++) {
+    try { fs.writeFileSync(file, text); return; } catch (err) {
+      if (i >= 5) throw err;
+      sleep(200 * i);
+    }
+  }
+};
+let n = 0, changed = 0;
 for (const f of targets) {
   let h = read(f);
+  const before = h;
   const items = pick(f, h);
   const b = block(items);
   const s = h.indexOf(START), e = h.indexOf(END);
@@ -189,7 +200,8 @@ for (const f of targets) {
     } else at = h.lastIndexOf('</main>');
     h = h.slice(0, at) + '\n\n  ' + b + '\n' + h.slice(at);
   }
-  fs.writeFileSync(path.join(ART, f + '.html'), h);
+  // 中身が変わらない記事は書き込まない（書き込み回数を減らしてロックのエラーを避ける）
+  if (h !== before) { writeWithRetry(path.join(ART, f + '.html'), h); changed++; }
   n++;
 }
-console.log(`オススメ記事を ${n} 記事に反映しました`);
+console.log(`オススメ記事を ${n} 記事に反映しました（書き換え ${changed} 記事）`);
