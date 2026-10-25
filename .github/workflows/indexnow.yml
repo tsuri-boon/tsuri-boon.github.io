@@ -1,0 +1,64 @@
+# GitHub Pages の公開が成功したあと、追加・更新・削除されたページの URL を IndexNow へ通知する
+#   - main への Push → GitHub の「pages build and deployment」が成功 → このワークフローが動く
+#   - 比較するのは「前回成功した公開のコミット」と「今回公開したコミット」。スクリプトは tools/indexnow.js
+#   - キーはリポジトリの Variables（Settings → Secrets and variables → Actions → Variables）の INDEXNOW_KEY
+#   - このワークフローはコミットや Push をしないので、自分自身を呼び出す無限ループにはならない
+#   - 手動実行（Actions → IndexNow → Run workflow）で、指定した URL だけを送れる（初回テスト用）
+name: IndexNow
+
+on:
+  workflow_run:
+    workflows: ["pages build and deployment"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      url:
+        description: '通知する URL（1件。例：https://tsuri-boon.github.io/）'
+        required: true
+        default: 'https://tsuri-boon.github.io/'
+      dry_run:
+        description: '送信せずに対象だけ確認する'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  actions: read
+
+# 同時に2つ動かさない（連続 Push でも順番に1回ずつ処理する）
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    # 公開が成功したときと、手動実行のときだけ動く
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 公開後のページを IndexNow へ通知
+        if: github.event_name == 'workflow_run'
+        env:
+          INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAGES_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: node tools/indexnow.js --from auto --to "${{ github.event.workflow_run.head_sha }}"
+
+      - name: 指定した URL を IndexNow へ通知（手動）
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+          URL: ${{ inputs.url }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node tools/indexnow.js --url "$URL" $([ "$DRY_RUN" = "true" ] && echo --dry-run)
