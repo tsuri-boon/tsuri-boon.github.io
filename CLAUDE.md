@@ -176,7 +176,7 @@ Claude Code は**該当箇所にプレースホルダーのコメントだけ残
 
 ## IndexNow（Bing などへの更新通知）
 
-- main に Push して GitHub Pages の公開（`pages build and deployment`）が成功すると、`.github/workflows/indexnow.yml` が自動で動き、`tools/indexnow.js` が前回公開との差分から**追加・更新・削除された公開HTML**の URL を IndexNow に通知する。**Claude Code が手で送る必要はない。**
+- 公開HTMLを変えて main に Push すると、`.github/workflows/indexnow.yml` が起動して GitHub Pages の公開（`pages build and deployment`）の成功を待ち、`tools/indexnow.js` が前回公開との差分から**追加・更新・削除された公開HTML**の URL を IndexNow に通知する。**Claude Code が手で送る必要はない。**
 - 対象はルートの `*.html` と `article/*.html` だけ。CSS・JS・画像だけの変更では通知しない。`tools/make-sitemap.js` の `EXCLUDE` と `noindex` のページは通知しない。
 - キーはリポジトリの Variables の `INDEXNOW_KEY`。ルートの `<キー>.txt`（中身もキー）を消さないこと。キーの値を勝手に作り直さない。
 - 1回の通知が 500 件を超えると送らずに止まる（誤って大量送信しないため）。必要なら手動で `node tools/indexnow.js --from <コミット> --to <コミット> --max 1000` を実行する。

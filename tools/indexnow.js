@@ -4,8 +4,9 @@
 //       → 2つのコミットの差分から、追加・更新・削除された公開 HTML を通知する
 //     node tools/indexnow.js --url https://tsuri-boon.github.io/ [--dry-run]
 //       → 指定した URL だけ通知する（初回テスト・手動の再通知用。--url は複数指定可）
-//     node tools/indexnow.js --from auto --to <コミット>
-//       → GitHub Actions 用。前回成功した「pages build and deployment」のコミットを API から探して比較する
+//     node tools/indexnow.js --wait-pages --from auto --to <コミット>
+//       → GitHub Actions 用。そのコミットの「pages build and deployment」が成功するまで待ち（最大15分）、
+//         前回成功した公開のコミットを API から探して比較する。公開が失敗・キャンセルされたら送らずに終わる
 //   環境変数：
 //     INDEXNOW_KEY       IndexNow のキー（必須。ルートに「<キー>.txt」を置き、中身もキーにしておく）
 //     INDEXNOW_ENDPOINT  送信先（省略時は https://api.indexnow.org/indexnow）
@@ -33,6 +34,7 @@ for (let i = 0; i < args.length; i++) {
   else if (a === '--url') opt.urls.push(args[++i]);
   else if (a === '--max') opt.max = Number(args[++i]);
   else if (a === '--dry-run') opt.dryRun = true;
+  else if (a === '--wait-pages') opt.waitPages = true;
   else { console.error(`不明な引数: ${a}`); process.exit(2); }
 }
 
@@ -66,18 +68,41 @@ async function checkKey(key) {
   return keyLocation;
 }
 
-// ---- 前回成功した公開のコミットを探す（--from auto）----
-async function previousPagesSha(toSha) {
+// ---- GitHub API（--wait-pages・--from auto で使う）----
+const PAGES = 'pages build and deployment';
+async function runs(query) {
   const repo = process.env.GITHUB_REPOSITORY, token = process.env.GITHUB_TOKEN;
-  if (!repo || !token) fail('--from auto には GITHUB_REPOSITORY と GITHUB_TOKEN が必要です');
-  const r = await fetch(`https://api.github.com/repos/${repo}/actions/runs?branch=main&status=success&per_page=50`, {
+  if (!repo || !token) fail('GitHub API を使うには GITHUB_REPOSITORY と GITHUB_TOKEN が必要です');
+  const r = await fetch(`https://api.github.com/repos/${repo}/actions/runs?${query}`, {
     headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' },
   });
   if (!r.ok) fail(`GitHub API でワークフローの実行履歴を取得できません（HTTP ${r.status}）`);
-  const runs = (await r.json()).workflow_runs
-    .filter(w => w.name === 'pages build and deployment' && String(w.id) !== String(process.env.PAGES_RUN_ID || ''))
+  return (await r.json()).workflow_runs;
+}
+
+// ---- そのコミットの公開が終わるまで待つ（--wait-pages）。成功したら実行を、それ以外は null を返す ----
+async function waitForPages(sha) {
+  const deadline = Date.now() + 15 * 60 * 1000;
+  log(`GitHub Pages の公開（${sha.slice(0, 7)}）が終わるのを待っています…`);
+  while (Date.now() < deadline) {
+    const run = (await runs(`head_sha=${sha}&per_page=20`)).find(w => w.name === PAGES);
+    if (run && run.status === 'completed') {
+      if (run.conclusion === 'success') { log(`公開が成功しました（${run.html_url}）`); return run; }
+      log(`公開が ${run.conclusion} で終わったため、通知しません（次に公開が成功したときにまとめて通知されます）`);
+      return null;
+    }
+    await new Promise(r => setTimeout(r, 20000));
+  }
+  log('15分待っても公開が終わらなかったため、通知しません（次に公開が成功したときにまとめて通知されます）');
+  return null;
+}
+
+// ---- 前回成功した公開のコミットを探す（--from auto）----
+async function previousPagesSha(toSha) {
+  const list = (await runs('branch=main&status=success&per_page=50'))
+    .filter(w => w.name === PAGES && String(w.id) !== String(process.env.PAGES_RUN_ID || ''))
     .filter(w => w.head_sha !== toSha);
-  const prev = runs.find(w => { try { git('merge-base', '--is-ancestor', w.head_sha, toSha); return true; } catch { return false; } });
+  const prev = list.find(w => { try { git('merge-base', '--is-ancestor', w.head_sha, toSha); return true; } catch { return false; } });
   return prev ? prev.head_sha : null;
 }
 
@@ -126,6 +151,11 @@ async function send(urlList, keyLocation, key) {
   } else {
     if (!opt.to) fail('--to（または --url）を指定してください');
     const to = git('rev-parse', opt.to).trim();
+    if (opt.waitPages) {
+      const run = await waitForPages(to);
+      if (!run) return;
+      process.env.PAGES_RUN_ID = String(run.id);
+    }
     let from = opt.from;
     if (from === 'auto') {
       from = await previousPagesSha(to);
