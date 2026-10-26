@@ -13,6 +13,7 @@ const ROOT = path.resolve(__dirname, '..');
 const BASE = 'https://tsuri-boon.github.io/';
 const EXCLUDE = new Set([
   'testindnx.html',              // テスト用ページ
+  'top-test.html',               // トップページのデザイン案（テスト用）
   'article/lure_template.html',  // 記事テンプレート
   'makers.html',                 // maker-zukan.html への転送ページ
 ]);
