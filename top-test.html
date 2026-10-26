@@ -91,6 +91,11 @@ section{padding:52px 0}#pickup,.articles-section,.monthly-section,.tool-section{
 .tool-thumb--index span{font-family:Oswald,Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#FFC53D}
 .tool-thumb--index svg{width:100%;height:56%}
 .tool p{padding-right:0}
+/* 便利ツールの文字色をほかのセクションと揃える */
+.tool-section>.wrap>.section-head h2{color:#143246;border-color:#143246}.tool-section>.wrap>.section-head .kicker{color:#55707F}.tool-section>.wrap>.section-head p{color:#55707F}
+.tool-section .tool p{color:#55707F}.tool-section .tool-tag{color:#143246}.tool-section .tool .link{color:#0099CC}
+/* 今月のおすすめルアーの画像背景を「次に投げたい一本」と揃える */
+.monthly-card .product-visual{background:#edf8fc;border-bottom:2px solid #143246}
 @media(max-width:760px){.entry{display:block}.entry-thumb{width:100%;height:auto;aspect-ratio:16/10;margin-bottom:12px}}
 </style>
 </head>
@@ -116,8 +121,11 @@ let active=0,timer;
 const nearest=()=>cards.reduce((b,c,i)=>Math.abs(c.offsetLeft-track.offsetLeft-track.scrollLeft)<Math.abs(cards[b].offsetLeft-track.offsetLeft-track.scrollLeft)?i:b,0);
 const update=()=>{active=nearest();dots.querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===active))};
 const go=i=>{active=(i+cards.length)%cards.length;track.scrollTo({left:cards[active].offsetLeft-track.offsetLeft,behavior:'smooth'})};
-const auto=()=>{clearInterval(timer);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(()=>{if(!document.hidden&&!track.matches(':hover'))go(active+1)},4800)};
-document.querySelectorAll('[data-slide]').forEach(b=>b.addEventListener('click',()=>{go(active+Number(b.dataset.slide));auto()}));
+const auto=()=>{clearInterval(timer);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(()=>{if(!document.hidden&&!track.matches(':hover'))next()},4800)};
+// 最後まで行ったら先頭へ、先頭で戻ったら最後へ（1周する）
+const atEnd=()=>track.scrollLeft>=track.scrollWidth-track.clientWidth-5,atStart=()=>track.scrollLeft<=5;
+const next=()=>go(atEnd()?0:active+1),prev=()=>go(atStart()?cards.length-1:active-1);
+document.querySelectorAll('[data-slide]').forEach(b=>b.addEventListener('click',()=>{Number(b.dataset.slide)>0?next():prev();auto()}));
 dots.addEventListener('click',e=>{const d=e.target.closest('[data-dot]');if(d){go(Number(d.dataset.dot));auto()}});
 track.addEventListener('scroll',()=>requestAnimationFrame(update),{passive:true});
 track.addEventListener('mouseenter',()=>clearInterval(timer));track.addEventListener('mouseleave',auto);auto();
