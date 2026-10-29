@@ -160,6 +160,9 @@ const html = `<!DOCTYPE html>
     .sitemap-list { columns: 2 260px; column-gap: 24px; padding-left: 1.2em; }
     .sitemap-list li { break-inside: avoid; margin: 0.3em 0; line-height: 1.5; }
   </style>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9034047517729390"
+       crossorigin="anonymous"></script>
 </head>
 <body>
 

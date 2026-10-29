@@ -174,6 +174,18 @@ Claude Code は**該当箇所にプレースホルダーのコメントだけ残
 
 ---
 
+## Google AdSense のコード
+
+- **全ページの `<head>` に AdSense のコードを入れる**（サイト所有の確認用。クライアントIDは `ca-pub-9034047517729390` で固定、変更しない）。
+  ```html
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9034047517729390"
+       crossorigin="anonymous"></script>
+  ```
+- 記事テンプレート（`article/lure_template.html`）と `tools/make-sitemap.js` には入っている。新しいページを作るときも消さないこと。
+
+---
+
 ## IndexNow（Bing などへの更新通知）
 
 - 公開HTMLを変えて main に Push すると、`.github/workflows/indexnow.yml` が起動して GitHub Pages の公開（`pages build and deployment`）の成功を待ち、`tools/indexnow.js` が前回公開との差分から**追加・更新・削除された公開HTML**の URL を IndexNow に通知する。**Claude Code が手で送る必要はない。**

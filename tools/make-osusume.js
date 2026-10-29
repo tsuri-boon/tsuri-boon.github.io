@@ -25,6 +25,7 @@ const MAKER_PAGES = {
   goto9: 'goto9', ima: 'ima', pozidrivegarage: 'pozidrive garage', yamashita: 'yamashita',
   jackson: 'jackson', highrad: 'highrad',
   legare: 'レガーレ', breaden: 'breaden', popseacrew: 'pop sea crew', jackall: 'jackall', dstyle: 'dstyle',
+  shimano: 'shimano', daiwa: 'daiwa',
 };
 // 本文からメーカーを見つけるための表記（data-maker → 表記の候補）
 const MAKER_WORDS = {
