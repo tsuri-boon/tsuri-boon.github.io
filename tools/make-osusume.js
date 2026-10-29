@@ -24,12 +24,14 @@ const MAKER_PAGES = {
   apia: 'apia', blueblue: 'blueblue', coreman: 'coreman', duo: 'duo',
   goto9: 'goto9', ima: 'ima', pozidrivegarage: 'pozidrive garage', yamashita: 'yamashita',
   jackson: 'jackson', highrad: 'highrad',
+  legare: 'レガーレ', breaden: 'breaden', popseacrew: 'pop sea crew', jackall: 'jackall', dstyle: 'dstyle',
 };
 // 本文からメーカーを見つけるための表記（data-maker → 表記の候補）
 const MAKER_WORDS = {
   apia: ['アピア', 'APIA'], blueblue: ['ブルーブルー', 'BlueBlue', 'Blue Blue'], coreman: ['コアマン', 'COREMAN'],
   duo: ['デュオ', 'DUO'], goto9: ['GOTO9', 'ゴートゥーナイン'], ima: ['アイマ', 'ima'], 'pozidrive garage': ['ポジドライブガレージ', 'POZIDRIVE'],
   yamashita: ['ヤマシタ', 'YAMASHITA'], jackson: ['ジャクソン', 'Jackson'], highrad: ['ハイラッド', 'HIGH RAD'], daiwa: ['ダイワ', 'DAIWA'], shimano: ['シマノ', 'SHIMANO'], megabass: ['メガバス', 'Megabass'],
+  'レガーレ': ['レガーレ', 'LEGARE'], breaden: ['ブリーデン', 'BREADEN'], 'pop sea crew': ['ポップシークルー', 'POP SEA CREW'], jackall: ['ジャッカル', 'JACKALL'], dstyle: ['DSTYLE', 'ディスタイル'],
 };
 // タイトルから魚種を見つけるための語（図鑑の魚種 → 語）
 const CAT_WORDS = {
