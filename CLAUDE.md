@@ -174,6 +174,24 @@ Claude Code は**該当箇所にプレースホルダーのコメントだけ残
 
 ---
 
+## Google アナリティクス（GA4）のタグ
+
+- **全ページの `<head>` に GA4 のタグを入れる**（測定IDは `G-J1YGK5NJLT` で固定、変更しない）。置き場所は AdSense のコードの直前。
+  ```html
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YGK5NJLT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J1YGK5NJLT');
+  </script>
+  ```
+- 見本（`article/overdrive107s.html`）・記事テンプレート（`article/lure_template.html`）・`tools/make-sitemap.js`・`tools/make-maker-zukan.js` には入っている。新しいページを作るときも消さないこと。
+- テスト用ページ（`testindnx.html`・`top-test.html`）には入れない（計測にテストのアクセスが混ざるため）。
+
+---
+
 ## Google AdSense のコード
 
 - **全ページの `<head>` に AdSense のコードを入れる**（サイト所有の確認用。クライアントIDは `ca-pub-9034047517729390` で固定、変更しない）。
