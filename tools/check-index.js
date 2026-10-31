@@ -2,7 +2,9 @@
 //   使い方：リポジトリのルートで
 //     node tools/check-index.js --key <サービスアカウントの鍵JSON> --out <結果のJSON>
 //   - 対象は sitemap.xml の全URL（--url <URL> で1件だけ、--limit <数> で件数を絞れる）
-//   - 結果のJSONがすでにあれば、今日チェック済みのURLは飛ばす（--fresh で全部やり直す）
+//   - 結果のJSONがすでにあれば、未登録のページとまだ調べていないページだけを調べる
+//     （登録済みのページは前回から30日たったものだけ確認し直す。--fresh で全部やり直す）
+//   - 調べる順番は「まだ調べていないページ → 未登録のページ → 30日たった登録済みのページ」
 //   - 鍵ファイルと結果はリポジトリに置かない（鍵はパスワードと同じ）
 //   - API の上限は 1日2,000件・1分600件。念のため1件ずつ少し間を空けて送る
 const fs = require('fs');
@@ -62,7 +64,16 @@ async function inspect(tok, url) {
   let urls = arg('--url') ? [arg('--url')]
     : [...fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
   const out = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf8')) : {};
-  if (!process.argv.includes('--fresh')) urls = urls.filter(u => (out[u] || {}).checkedAt !== today);
+  if (!process.argv.includes('--fresh')) {
+    const days = d => (Date.parse(today) - Date.parse(d)) / 864e5;
+    const order = u => { const r = out[u]; return !r ? 0 : r.verdict !== 'PASS' ? 1 : 2; };
+    urls = urls.filter(u => {
+      const r = out[u];
+      if (!r) return true;
+      if (r.checkedAt === today) return false;
+      return r.verdict !== 'PASS' || days(r.checkedAt) >= 30;
+    }).sort((a, b) => order(a) - order(b));
+  }
   if (arg('--limit')) urls = urls.slice(0, Number(arg('--limit')));
   console.log(`チェックするURL: ${urls.length}件`);
   const tok = await token();

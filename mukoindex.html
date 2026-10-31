@@ -194,17 +194,6 @@ img{max-width:100%}
   font-weight:800;font-size:14px;padding:10px 22px;cursor:pointer;transition:.12s}
 .xshare:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(20,50,70,.9)}
 .xshare svg{width:15px;height:15px;fill:#fff}
-/* シェア用画像のプレビュー（PCなど画像付きで直接共有できない時） */
-.share-modal{position:fixed;inset:0;z-index:200;background:rgba(20,50,70,.55);display:none;align-items:center;justify-content:center;padding:16px}
-.share-modal.open{display:flex}
-.share-box{background:#fff;border:var(--line);border-radius:18px;box-shadow:var(--pop);max-width:560px;width:100%;padding:18px;text-align:center}
-.share-box img{width:100%;border:2px solid var(--c-ink);border-radius:12px;display:block}
-.share-box p{font-size:12px;color:var(--c-sub);font-weight:700;margin:12px 0}
-.share-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.share-actions a,.share-actions button{display:inline-flex;align-items:center;gap:6px;border:var(--line);border-radius:999px;box-shadow:var(--pop-sm);
-  font-family:var(--font-body);font-weight:800;font-size:13px;padding:9px 18px;cursor:pointer;text-decoration:none;color:var(--c-ink);background:var(--c-yellow)}
-.share-actions .to-x{background:var(--c-ink);color:#fff}
-.share-actions .close{background:#fff}
 </style>
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9034047517729390"
@@ -248,17 +237,6 @@ img{max-width:100%}
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.2h3.7l-8 9.1L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.4l8.5-9.7L0 1.2h7.6l5.2 6.9 5-6.9Zm-1.3 19.4h2L6.5 3.3H4.3l13.3 17.3Z"/></svg>
       いまの指数をXでシェア
     </button>
-  </div>
-  <div class="share-modal" id="shareModal" role="dialog" aria-modal="true" aria-label="シェア用の画像">
-    <div class="share-box">
-      <img id="shareImg" alt="武庫川一文字 青物指数のシェア用画像">
-      <p>画像を保存して、Xの投稿に添付してください。<br>本文にはURLとハッシュタグが入っています。</p>
-      <div class="share-actions">
-        <a id="shareSave" download="mukoindex.png">画像を保存</a>
-        <a id="shareToX" class="to-x" target="_blank" rel="noopener">Xで投稿する</a>
-        <button type="button" class="close" id="shareClose">閉じる</button>
-      </div>
-    </div>
   </div>
     
   <div class="block">
@@ -368,7 +346,7 @@ const CFG={
 let K='buri',cur=0;
 const WD=['日','月','火','水','木','金','土'];
 function rank(i){
-  if(i>=80)return['絶好','爆釣予報!この時期で最高の条件'];
+  if(i>=80)return['絶好釣','爆釣予報!この時期で最高の条件'];
   if(i>=60)return['狙い目','条件は整っている'];
   if(i>=40)return['ふつう','悪くはない'];
   if(i>=20)return['玄人向け','条件はいまひとつ'];
@@ -523,26 +501,20 @@ async function drawShare(r){
   c.textAlign='right';c.textBaseline='alphabetic';c.font=`800 26px ${F}`;c.fillStyle=ink;c.fillText('tsuri-boon.github.io/mukoindex.html',1116,540);
   return cv;
 }
+// 画像付きで共有できる端末（スマホ）かどうか
+const canShareImage=(()=>{try{return !!(navigator.canShare&&navigator.canShare({files:[new File([''],'x.png',{type:'image/png'})]}));}catch(e){return false;}})();
 document.getElementById('xshare').onclick=async()=>{
   const r=shareRow(),text=shareText(r),tags=SHARE_TAGS.map(t=>'#'+t).join(' ');
-  if(!r){window.open(xIntent(text),'_blank','noopener');return;}
+  // PCなど：押したらすぐ X の投稿画面（URL・ハッシュタグ入り）を開く
+  // ※画像を作るのを待つとポップアップがブロックされるので、待たずに開く
+  if(!r||!canShareImage){window.open(xIntent(text),'_blank','noopener');return;}
+  // スマホ：共有メニューから指数カードの画像付きで投稿（URLとハッシュタグは本文に入れる）
   const cv=await drawShare(r);
   const blob=await new Promise(res=>cv.toBlob(res,'image/png'));
   const file=new File([blob],'mukoindex.png',{type:'image/png'});
-  // スマホ：共有メニューから画像付きで投稿（URLとハッシュタグは本文に入れる）
-  if(navigator.canShare&&navigator.canShare({files:[file]})){
-    try{await navigator.share({files:[file],text:`${text}\n${SHARE_URL}\n${tags}`});return;}
-    catch(e){if(e&&e.name==='AbortError')return;}
-  }
-  // PCなど：画像を表示して保存してもらい、X の投稿画面（URL・ハッシュタグ入り）を開けるようにする
-  const src=cv.toDataURL('image/png');
-  document.getElementById('shareImg').src=src;
-  document.getElementById('shareSave').href=src;
-  document.getElementById('shareToX').href=xIntent(text);
-  document.getElementById('shareModal').classList.add('open');
+  try{await navigator.share({files:[file],text:`${text}\n${SHARE_URL}\n${tags}`});}
+  catch(e){if(!(e&&e.name==='AbortError'))location.href=xIntent(text);}
 };
-document.getElementById('shareClose').onclick=()=>document.getElementById('shareModal').classList.remove('open');
-document.getElementById('shareModal').onclick=e=>{if(e.target.id==='shareModal')e.currentTarget.classList.remove('open');};
 document.getElementById('prev').onclick=()=>{if(cur>0){cur--;card();}};
 document.getElementById('next').onclick=()=>{const rows=D[K],base=si(rows);if(cur<6&&rows[base+cur+1]){cur++;card();}};
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{K=b.dataset.k;render();});
