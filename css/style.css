@@ -938,6 +938,26 @@ input, textarea {
   line-height: 1.4;
 }
 
+/* スマホは2枚ずつ横に並べる */
+@media (max-width: 600px) {
+  .article-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+  }
+  .article-card h3 {
+    flex: 1;
+    font-size: 13px;
+    margin: 0;
+    padding: 10px 10px 12px;
+    line-height: 1.5;
+  }
+}
+
 /* ---------- オススメ記事（人気記事より小さい関連リンク） ---------- */
 .osusume {
   max-width: 1100px;
