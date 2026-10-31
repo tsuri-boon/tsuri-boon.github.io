@@ -1539,6 +1539,86 @@ input, textarea {
   font-size: 0.9rem;
   color: #555;
   font-weight: 600;
+  border-radius: 8px;
+}
+
+/* 絞り込む・クリアボタン */
+.encyclopedia-page .filter-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.encyclopedia-page .filter-apply,
+.encyclopedia-page .filter-clear {
+  margin-top: 0;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.encyclopedia-page .filter-apply {
+  flex: 1;
+  border: 2px solid #0099CC;
+  background: #0099CC;
+  color: #fff;
+}
+
+.encyclopedia-page .filter-apply:hover {
+  background: #007fab;
+}
+
+.encyclopedia-page .filter-apply.is-pending {
+  background: #FF6B35;
+  border-color: #FF6B35;
+  animation: filter-pulse 1.2s ease-in-out infinite;
+}
+
+.encyclopedia-page .filter-clear {
+  flex: 0 0 auto;
+  border: 2px solid #cfd6df;
+  background: #fff;
+  color: #4b5563;
+}
+
+.encyclopedia-page .filter-clear:hover {
+  border-color: #0099CC;
+  color: #006C99;
+}
+
+.encyclopedia-page .result-count.is-flash {
+  animation: filter-flash 1.2s ease-out;
+}
+
+body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
+  animation: filter-fadein .35s ease-out;
+}
+
+@keyframes filter-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, .45); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 107, 53, 0); }
+}
+
+@keyframes filter-flash {
+  0% { background: #ffe8a3; color: #143246; }
+  100% { background: transparent; }
+}
+
+@keyframes filter-fadein {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .encyclopedia-page .filter-apply.is-pending,
+  .encyclopedia-page .result-count.is-flash,
+  body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
+    animation: none;
+  }
 }
 
 @media (max-width: 768px) {

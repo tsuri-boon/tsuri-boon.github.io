@@ -80,7 +80,7 @@
   </section>
 
   <section class="filter-box">
-    <p class="filter-guide">メーカー名で検索、タグで絞り込みできます。魚種は、ルアー図鑑に掲載しているルアーから集計しています。</p>
+    <p class="filter-guide">メーカー名で検索、ジャンルを選んで「この条件で絞り込む」を押すと絞り込めます。魚種は、ルアー図鑑に掲載しているルアーから集計しています。</p>
 
     <div class="filter-box__search">
       <input
@@ -114,7 +114,12 @@
       </div>
     </div>
 
-    <p id="resultCount" class="result-count">該当件数: 0件</p>
+    <div class="filter-actions">
+      <button type="button" class="filter-apply" id="filterApply">この条件で絞り込む</button>
+      <button type="button" class="filter-clear" id="filterClear">クリア</button>
+    </div>
+
+    <p id="resultCount" class="result-count" aria-live="polite">該当件数: 0件</p>
   </section>
 
   <section class="lure-section">
@@ -1829,8 +1834,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const sections = document.querySelectorAll(".lure-section");
   const resultCount = document.getElementById("resultCount");
 
-  let activeFilter = "all";
-
   function matchesFilter(item, filter) {
     if (filter === "all") return true;
     if (filter === "ready") return (item.dataset.status || "").includes("ready");
@@ -1848,7 +1851,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let visibleCount = 0;
 
     items.forEach(item => {
-      const visible = matchesFilter(item, activeFilter) && matchesSearch(item, keyword);
+      const visible = activeFilters.every(filter => matchesFilter(item, filter)) && matchesSearch(item, keyword);
       item.classList.toggle("is-hidden", !visible);
       if (visible) visibleCount += 1;
     });
@@ -1865,13 +1868,77 @@ document.addEventListener("DOMContentLoaded", function () {
     resultCount.textContent = visibleCount === 0 ? "該当するメーカーはありません" : `該当件数: ${visibleCount}件`;
   }
 
+
+  // ジャンルは「選ぶ → 絞り込むボタン」で反映する（魚種などグループごとに1つ、グループ同士は掛け合わせ）
+  const applyButton = document.getElementById("filterApply");
+  const clearButton = document.getElementById("filterClear");
+  const listTop = document.querySelector(".lure-section");
+  let activeFilters = [];
+
+  function selectedFilters() {
+    return Array.from(document.querySelectorAll(".filter-chip.is-active"))
+      .map(btn => btn.dataset.filter)
+      .filter(f => f !== "all");
+  }
+
+  function selectedLabel() {
+    return Array.from(document.querySelectorAll(".filter-chip.is-active"))
+      .filter(btn => btn.dataset.filter !== "all")
+      .map(btn => btn.textContent.trim())
+      .join(" × ");
+  }
+
+  function refreshApplyButton() {
+    const pending = selectedFilters().join("|") !== activeFilters.join("|");
+    applyButton.classList.toggle("is-pending", pending);
+  }
+
   filterButtons.forEach(button => {
     button.addEventListener("click", function () {
-      filterButtons.forEach(btn => btn.classList.remove("is-active"));
-      this.classList.add("is-active");
-      activeFilter = this.dataset.filter;
-      updateList();
+      const group = this.closest(".filter-box__tags");
+      const wasActive = this.classList.contains("is-active");
+      group.querySelectorAll(".filter-chip").forEach(btn => btn.classList.remove("is-active"));
+      if (!wasActive || this.dataset.filter === "all") this.classList.add("is-active");
+      // 魚種で何も選んでいないときは「すべて」を点けておく
+      if (!group.querySelector(".filter-chip.is-active")) {
+        const all = group.querySelector('.filter-chip[data-filter="all"]');
+        if (all) all.classList.add("is-active");
+      }
+      refreshApplyButton();
     });
+  });
+
+  function showResult() {
+    // 結果が変わったことがわかるように、件数を光らせてカードをふわっと出し直す
+    resultCount.classList.remove("is-flash");
+    document.body.classList.remove("is-filtered");
+    void resultCount.offsetWidth;
+    resultCount.classList.add("is-flash");
+    document.body.classList.add("is-filtered");
+    const label = selectedLabel();
+    if (label && !resultCount.textContent.includes("ありません")) {
+      resultCount.textContent = label + "：" + resultCount.textContent.replace("該当件数: ", "");
+    }
+    if (listTop) {
+      const y = resultCount.getBoundingClientRect().top + window.scrollY - 12;
+      if (Math.abs(window.scrollY - y) > 40) window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }
+
+  applyButton.addEventListener("click", function () {
+    activeFilters = selectedFilters();
+    updateList();
+    refreshApplyButton();
+    showResult();
+  });
+
+  clearButton.addEventListener("click", function () {
+    filterButtons.forEach(btn => btn.classList.toggle("is-active", btn.dataset.filter === "all"));
+    searchInput.value = "";
+    activeFilters = [];
+    updateList();
+    refreshApplyButton();
+    showResult();
   });
 
   searchInput.addEventListener("input", updateList);
