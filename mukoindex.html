@@ -457,15 +457,19 @@ function render(){
 }
 // ---- Xでシェア：表示中の指数カードを画像にして、URL・ハッシュタグ付きで共有する ----
 const SHARE_URL='https://tsuri-boon.github.io/mukoindex.html';
-const SHARE_TAGS=['武庫川一文字','ムコイチ','青物'];
+// ハッシュタグは行ごとに並べる
+const SHARE_TAGS=[['武庫川一文字','ムコイチ','青物釣果'],['tsuriboon','ツリブーン']];
 function shareRow(){const rows=D&&D[K];return rows?rows[si(rows)+cur]:null;}
+// 投稿文の全体（改行・URL・ハッシュタグ込み）
 function shareText(r){
-  if(!r)return '武庫川一文字の青物が釣れる日をデータで先読み！';
+  const tags=SHARE_TAGS.map(l=>l.map(t=>'#'+t).join(' ')).join('\n');
+  if(!r)return `【武庫川一文字 青物指数】\n青物が釣れる日をデータで先読み！🎣\n▼明日以降の予想はこちら\n${SHARE_URL}\n\n${tags}`;
   const dt=new Date(r.d),nm=CFG[K].name.split('（')[0];
-  return `【武庫川一文字 青物指数】${dt.getMonth()+1}/${dt.getDate()}(${WD[dt.getDay()]})の${nm}は指数${r.i}「${rank(r.i)[0]}」🎣`;
+  return `【武庫川一文字 青物指数】\n${dt.getMonth()+1}/${dt.getDate()}(${WD[dt.getDay()]})の${nm}は指数${r.i}「${rank(r.i)[0]}」🎣\n▼明日以降の予想はこちら\n${SHARE_URL}\n\n${tags}`;
 }
+// URL・ハッシュタグの並びを崩さないよう、全部を本文（text）に入れて渡す
 function xIntent(text){
-  return 'https://x.com/intent/post?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(SHARE_URL)+'&hashtags='+encodeURIComponent(SHARE_TAGS.join(','));
+  return 'https://x.com/intent/post?text='+encodeURIComponent(text);
 }
 function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 // 1200×630 のシェア画像を描く（サイトのポップなデザインに合わせる）
@@ -506,7 +510,7 @@ async function drawShare(r){
 const isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1);
 const canShareImage=isMobile&&(()=>{try{return !!(navigator.canShare&&navigator.canShare({files:[new File([''],'x.png',{type:'image/png'})]}));}catch(e){return false;}})();
 document.getElementById('xshare').onclick=async()=>{
-  const r=shareRow(),text=shareText(r),tags=SHARE_TAGS.map(t=>'#'+t).join(' ');
+  const r=shareRow(),text=shareText(r);
   // PCなど：押したらすぐ X の投稿画面（URL・ハッシュタグ入り）を開く
   // ※画像を作るのを待つとポップアップがブロックされるので、待たずに開く
   if(!r||!canShareImage){window.open(xIntent(text),'_blank','noopener');return;}
@@ -514,7 +518,7 @@ document.getElementById('xshare').onclick=async()=>{
   const cv=await drawShare(r);
   const blob=await new Promise(res=>cv.toBlob(res,'image/png'));
   const file=new File([blob],'mukoindex.png',{type:'image/png'});
-  try{await navigator.share({files:[file],text:`${text}\n${SHARE_URL}\n${tags}`});}
+  try{await navigator.share({files:[file],text});}
   catch(e){if(!(e&&e.name==='AbortError'))location.href=xIntent(text);}
 };
 document.getElementById('prev').onclick=()=>{if(cur>0){cur--;card();}};
