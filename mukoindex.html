@@ -501,8 +501,10 @@ async function drawShare(r){
   c.textAlign='right';c.textBaseline='alphabetic';c.font=`800 26px ${F}`;c.fillStyle=ink;c.fillText('tsuri-boon.github.io/mukoindex.html',1116,540);
   return cv;
 }
-// 画像付きで共有できる端末（スマホ）かどうか
-const canShareImage=(()=>{try{return !!(navigator.canShare&&navigator.canShare({files:[new File([''],'x.png',{type:'image/png'})]}));}catch(e){return false;}})();
+// 画像付きで共有できるスマホかどうか
+// ※Windows の Chrome・Edge も画像付きの共有に対応しているため、スマホ（iPhone・iPad・Android）に限る
+const isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1);
+const canShareImage=isMobile&&(()=>{try{return !!(navigator.canShare&&navigator.canShare({files:[new File([''],'x.png',{type:'image/png'})]}));}catch(e){return false;}})();
 document.getElementById('xshare').onclick=async()=>{
   const r=shareRow(),text=shareText(r),tags=SHARE_TAGS.map(t=>'#'+t).join(' ');
   // PCなど：押したらすぐ X の投稿画面（URL・ハッシュタグ入り）を開く
