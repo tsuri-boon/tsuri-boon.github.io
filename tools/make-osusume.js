@@ -48,9 +48,10 @@ const strip = s => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const hash = s => { let h = 2166136261; for (const c of s) { h ^= c.codePointAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
 
 // カードの説明文：記事の <title> から「｜tsuri-boon」と先頭の【名前（英語表記）】を外したもの
+//   個別記事の決まり文句（｜特徴・使い方・シリーズ比較 など）はどのカードも同じになるので外す
 const pageTitle = f => {
   const t = strip(((read(f).match(/<title>([^<]*)<\/title>/) || [])[1] || '').replace(/\s*｜\s*tsuri-boon\s*$/, ''));
-  const rest = t.replace(/^【[^】]*】\s*/, '');
+  const rest = t.replace(/^【[^】]*】\s*/, '').replace(/｜特徴・(?:使い方|スペック)・[^｜]*比較$/, '');
   return rest || t;
 };
 
