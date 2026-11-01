@@ -54,6 +54,8 @@ const MAKERS = {
   'palms':            { name: 'PALMS', kana: 'パームス' },
   'zipbaits':         { name: 'ZIPBAITS', kana: 'ジップベイツ' },
   'shout':            { name: 'SHOUT!', kana: 'シャウト' },
+  'notomon':          { name: 'NOTOMON', kana: 'ノトモン' },
+  'obasslive':        { name: 'OBASSLIVE', kana: 'オーバスライブ' },
   // ルアー図鑑にまだルアーが無いメーカー（メーカー一覧に載っていたもの）
   'waterland':        { name: 'WATERLAND', kana: 'ウォーターランド' },
   'lucky craft':      { name: 'LUCKY CRAFT', kana: 'ラッキークラフト' },
