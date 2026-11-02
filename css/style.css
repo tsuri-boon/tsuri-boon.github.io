@@ -533,9 +533,10 @@ ul.features li p {
   .article-main {
     box-sizing: border-box;
     width: calc(100% - 40px);
-    max-width: 840px;
+    max-width: 1120px;
     margin: 24px auto 40px;
-    padding: 32px 50px 40px;
+    /* 本文の幅は約740pxのまま、カードの左右の余白を広くとる */
+    padding: 40px max(50px, calc((min(100vw - 40px, 1120px) - 740px) / 2)) 48px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
@@ -1813,4 +1814,29 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
 .shop-banners img[width="468"] {
   max-width: 100%;
   height: auto;
+}
+
+/* 記事本文の段落の行間と段落のあいだ（ZigZag!! に合わせて 1.85倍・約1.8字分） */
+.lure-article > p {
+  line-height: 1.85;
+  margin-bottom: 1.8em;
+}
+/* 「▼今すぐチェック」などアフィリンク枠の直前の1行は、枠と離れすぎないようにする */
+.lure-article > p:has(+ .affiliate-box) {
+  margin-bottom: 0.5em;
+}
+
+/* 蛍光ペン風のアンダーライン（本文の重要なところに使う）
+   ピンク：そのルアーの一番の強み・特徴（リード文・得意な状況）
+   緑　　：使い方のコツ・実践的なポイント（使い方・ワンポイント） */
+.marker-pink,
+.marker-green {
+  font-weight: bold;
+  padding: 0 1px;
+}
+.marker-pink {
+  background: linear-gradient(transparent 60%, #ffcce4 60%);
+}
+.marker-green {
+  background: linear-gradient(transparent 60%, #c6f2c0 60%);
 }
