@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tsuri-boon.github.io/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -2234,6 +2234,11 @@
     <loc>https://tsuri-boon.github.io/article/zigzagbait80s.html</loc>
     <lastmod>2026-11-03</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tsuri-boon.github.io/chouka-price.html</loc>
+    <lastmod>2026-11-03</lastmod>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://tsuri-boon.github.io/faq.html</loc>

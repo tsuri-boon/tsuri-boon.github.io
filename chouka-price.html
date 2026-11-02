@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>あなたの魚はいくら？釣果値段換算ツール｜tsuri-boon</title>
+<meta name="description" content="釣った魚の魚種とサイズを入れるだけで、お店で買うといくらになるかがすぐ分かる釣果値段換算ツール。アジ・サバ・ブリ・カンパチ・ヒラマサ・サワラ・真鯛・アマダイ・スズキ・カマス・イサキ・タチウオ・石鯛・ヒラメ・カサゴ・キジハタ・アオリイカの17魚種に対応。東京都中央卸売市場の2025年の取引データから算出。">
+<link rel="canonical" href="https://tsuri-boon.github.io/chouka-price.html">
+<link rel="icon" href="image/tsuriboon_favicon.png" type="image/png">
+<!-- OGP（Xなどで共有した時のカード表示） -->
+<meta property="og:title" content="あなたの魚はいくら？釣果値段換算ツール｜tsuri-boon">
+<meta property="og:description" content="釣った魚の魚種とサイズを入れるだけで、お店で買うといくらになるかがすぐ分かる。17魚種対応・東京都中央卸売市場の2025年の取引データから算出。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="tsuri-boon">
+<meta property="og:url" content="https://tsuri-boon.github.io/chouka-price.html">
+<!-- 画像：共有カード用の画像（横長 1200×630 推奨）を用意したら image/chouka-price.jpg に差し替え、twitter:card を summary_large_image にする -->
+<meta property="og:image" content="https://tsuri-boon.github.io/image/tsuriboon_logo7.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="あなたの魚はいくら？釣果値段換算ツール｜tsuri-boon">
+<meta name="twitter:description" content="釣った魚の魚種とサイズを入れるだけで、お店で買うといくらになるかがすぐ分かる。17魚種対応。">
+<meta name="twitter:image" content="https://tsuri-boon.github.io/image/tsuriboon_logo7.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"あなたの魚はいくら？釣果値段換算ツール","url":"https://tsuri-boon.github.io/chouka-price.html","description":"釣った魚の魚種とサイズから、お店で買うといくらになるかの目安を計算するツール。","applicationCategory":"UtilitiesApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"tsuri-boon"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YGK5NJLT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J1YGK5NJLT');
+</script>
+
+<style>
+:root{
+  --c-brand:#0099CC;--c-sky:#D9F1FA;--c-ink:#143246;--c-sub:#55707F;
+  --c-orange:#FF6B35;--c-yellow:#FFC53D;
+  --font-body:"M PLUS Rounded 1c","游ゴシック体",YuGothic,"メイリオ",Meiryo,sans-serif;
+  --line:2.5px solid var(--c-ink);
+  --pop:5px 5px 0 rgba(20,50,70,.9);--pop-sm:3px 3px 0 rgba(20,50,70,.9);
+  --acc:var(--c-brand);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{font-family:var(--font-body);font-weight:500;color:var(--c-ink);line-height:1.7;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,255,255,.7) 0 6px,transparent 7px),
+    radial-gradient(circle at 80% 40%,rgba(255,255,255,.6) 0 4px,transparent 5px),
+    radial-gradient(circle at 55% 75%,rgba(255,255,255,.55) 0 5px,transparent 6px),
+    var(--c-sky);
+  background-size:420px 420px,380px 380px,460px 460px,auto;overflow-x:hidden}
+.num{font-family:"Oswald",sans-serif;font-variant-numeric:tabular-nums}
+img{max-width:100%}
+.site-header{position:sticky;top:0;z-index:100;background:var(--c-brand);border-bottom:var(--line)}
+.site-header-inner{max-width:1060px;margin:0 auto;padding:6px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo img{height:48px;width:auto;display:block}
+.global-nav{display:flex;gap:8px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding:4px 0}
+.global-nav::-webkit-scrollbar{display:none}
+.global-nav a{color:var(--c-ink);background:#fff;border:2px solid var(--c-ink);border-radius:999px;
+  text-decoration:none;font-weight:700;font-size:13px;padding:6px 14px;box-shadow:2px 2px 0 rgba(20,50,70,.9);transition:.12s}
+.global-nav a:hover{background:var(--c-yellow);transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(20,50,70,.9)}
+@media(max-width:640px){.site-header-inner{flex-direction:column;align-items:flex-start;gap:0;padding:6px 12px 4px}
+  .logo img{height:42px}.global-nav{width:100%;padding:4px 2px 8px}.global-nav a{font-size:12.5px;padding:5px 12px}}
+
+.wrap{max-width:680px;margin:0 auto;padding:28px 16px 72px}
+.hero{text-align:center;margin-bottom:20px}
+.hero-badge{display:inline-block;background:var(--c-yellow);border:var(--line);border-radius:999px;box-shadow:var(--pop-sm);
+  font-size:12px;font-weight:800;padding:5px 18px;margin-bottom:14px;transform:rotate(-2deg)}
+.hero h1{font-size:clamp(24px,6vw,34px);font-weight:800;line-height:1.2;
+  text-shadow:2px 2px 0 #fff,-2px 2px 0 #fff,2px -2px 0 #fff,-2px -2px 0 #fff,4px 4px 0 rgba(0,153,204,.3)}
+.hero .lede{font-size:12.5px;font-weight:700;color:var(--c-sub);margin-top:8px}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:22px 0}
+.tab{background:#fff;border:var(--line);border-radius:999px;box-shadow:var(--pop-sm);
+  font-family:var(--font-body);font-weight:800;font-size:13px;padding:7px 14px;cursor:pointer;color:var(--c-ink);transition:.12s}
+.tab.sel{background:var(--acc);color:#fff;transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(20,50,70,.9)}
+
+.card{background:#fff;border:var(--line);border-radius:22px;box-shadow:var(--pop);overflow:hidden;position:relative}
+
+.l1{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:16px 20px 0}
+.l1 .fn{font-size:20px;font-weight:800;line-height:1.3}
+.l1 .when{background:var(--c-orange);color:#fff;border:2px solid var(--c-ink);border-radius:999px;white-space:nowrap;
+  font-size:10px;font-weight:800;padding:3px 12px;letter-spacing:.08em;transform:rotate(-2deg)}
+
+.size{padding:12px 20px 4px}
+.size .k,.cnt .k{font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--c-sub);margin-bottom:6px}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper button{width:44px;height:44px;flex-shrink:0;border:var(--line);border-radius:12px;background:var(--c-yellow);box-shadow:var(--pop-sm);
+  font-family:"Oswald";font-size:24px;font-weight:700;color:var(--c-ink);cursor:pointer;line-height:1}
+.stepper button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(20,50,70,.9)}
+.stepper .val{flex:1;display:flex;align-items:baseline;justify-content:center;gap:4px;background:var(--c-sky);border:2px solid var(--c-ink);border-radius:12px;padding:2px 8px}
+.stepper input{width:100%;min-width:0;border:none;background:transparent;text-align:center;font-family:"Oswald";font-size:30px;font-weight:700;color:var(--c-ink);outline:none;-moz-appearance:textfield}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.stepper .u{font-size:13px;font-weight:800;color:var(--c-sub)}
+.range{width:100%;margin-top:12px;accent-color:var(--acc)}
+
+.l2{display:flex;align-items:center;gap:16px;padding:14px 20px 18px}
+.price{flex-shrink:0;min-width:130px;text-align:center}
+.price .k{font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--c-sub)}
+.price .big{font-family:"Oswald";font-weight:700;font-size:44px;line-height:1.1;color:var(--acc)}
+.price .big small{font-size:20px;margin-left:2px}
+.l2 .rk{flex:1}
+.l2 .rk .word{display:inline-block;background:var(--c-yellow);border:2px solid var(--c-ink);border-radius:999px;
+  font-size:17px;font-weight:800;padding:4px 16px;box-shadow:var(--pop-sm)}
+.l2 .rk .sub{font-size:12px;color:var(--c-sub);font-weight:700;margin-top:8px;line-height:1.5}
+.l2 .rk .scale{font-size:11px;font-weight:700;color:var(--c-sub);margin-top:6px;line-height:1.5}
+@media(max-width:420px){.l2{flex-direction:column;gap:10px}.l2 .rk{text-align:center}}
+
+.l3{display:flex;gap:8px;padding:0 20px 16px}
+.l3 .it{flex:1;text-align:center;background:var(--c-sky);border:2px solid var(--c-ink);border-radius:12px;padding:8px 4px}
+.l3 .it .k{font-size:9px;color:var(--c-sub);font-weight:700;letter-spacing:.08em}
+.l3 .it .v{font-family:"Oswald";font-size:16px;font-weight:700;margin-top:2px;white-space:nowrap}
+.l3 .it .v small{font-size:10px}
+
+.cnt{padding:0 20px 16px}
+.cnt .stepper button{width:38px;height:38px;font-size:20px}
+.cnt .stepper input{font-size:22px}
+.cnt .total{margin-top:8px;text-align:center;font-size:13px;font-weight:800}
+.cnt .total b{font-family:"Oswald";font-size:20px;color:var(--c-orange)}
+
+.l4{padding:0 20px 20px}
+.l4 .rk2{font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--c-sub);margin-bottom:6px}
+.bars{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-items:end;height:96px;border-bottom:2px solid var(--c-ink);padding:0 2px}
+.bars button{border:2px solid var(--c-ink);border-bottom:none;border-radius:5px 5px 0 0;background:#fff;cursor:pointer;padding:0;min-height:6px}
+.bars button.hi{background:color-mix(in srgb,var(--acc) 45%,#fff)}
+.bars button.on{background:var(--c-orange)}
+.blab{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:4px;padding:0 2px}
+.blab span{text-align:center;font-family:"Oswald";font-size:10px;font-weight:700;color:var(--c-sub)}
+.blab span.on{color:var(--c-orange)}
+.mixleg{display:flex;gap:10px;margin-top:8px;font-size:10px;font-weight:700;color:var(--c-sub);flex-wrap:wrap}
+.mixleg i{width:8px;height:8px;display:inline-block;margin-right:4px;border:1px solid var(--c-ink);border-radius:1px}
+.hint{text-align:center;font-size:10px;font-weight:700;color:var(--c-sub);letter-spacing:.12em;margin-top:10px;opacity:.7}
+
+.block{margin-top:28px}
+.blockHead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.blockIcon{width:32px;height:32px;border:var(--line);border-radius:10px;background:#fff;box-shadow:var(--pop-sm);display:grid;place-items:center;font-size:16px}
+.blockTitle{font-size:16px;font-weight:800}
+.rank{background:#fff;border:var(--line);border-radius:18px;box-shadow:var(--pop);padding:14px 16px}
+.rrow{display:grid;grid-template-columns:22px 64px 1fr 72px;align-items:center;gap:8px;padding:5px 0;cursor:pointer}
+.rrow .no{font-family:"Oswald";font-size:14px;font-weight:700;color:var(--c-sub);text-align:center}
+.rrow .nm{font-size:13px;font-weight:800;white-space:nowrap}
+.rrow .bar{height:14px;border:2px solid var(--c-ink);border-radius:4px;background:var(--c-sky);overflow:hidden}
+.rrow .bar i{display:block;height:100%;background:var(--c-brand)}
+.rrow.on .bar i{background:var(--c-orange)}
+.rrow .yen{font-family:"Oswald";font-size:14px;font-weight:700;text-align:right;white-space:nowrap}
+.rrow .yen small{font-size:9px;color:var(--c-sub)}
+
+.foot{background:#fff;border:var(--line);border-radius:18px;box-shadow:var(--pop);padding:18px 20px;margin-top:28px;font-size:12px;font-weight:500;line-height:1.85;color:var(--c-sub)}
+.foot b{color:var(--c-ink);font-weight:800}
+.foot a{color:var(--c-brand);font-weight:800}
+.site-footer{margin-top:48px;background:var(--c-ink);border-top:var(--line);color:#fff;text-align:center;padding:28px 16px 22px}
+.footer-nav a{color:rgba(255,255,255,.85);font-size:12.5px;font-weight:700;margin:0 10px;text-decoration:none}
+.footer-nav a:hover{color:var(--c-yellow);text-decoration:underline}
+.copyright{font-size:11.5px;color:rgba(255,255,255,.5);margin-top:12px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* おすすめ記事 */
+.recBlock{margin-top:32px}
+.article-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.article-card{position:relative;display:block;text-decoration:none;color:var(--c-ink);background:#fff;
+  border:var(--line);border-radius:16px;box-shadow:var(--pop-sm);overflow:hidden;transition:transform .12s,box-shadow .12s}
+.article-card:hover,.article-card:focus-visible{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(20,50,70,.9)}
+.article-card .thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-bottom:2px solid var(--c-ink);background:var(--c-sky)}
+.article-card .thumb--logo{object-fit:contain;padding:18%}
+.article-tag{position:absolute;top:8px;left:8px;background:var(--c-yellow);border:2px solid var(--c-ink);
+  font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:999px;transform:rotate(-2deg)}
+.article-card h3{font-size:12.5px;font-weight:800;line-height:1.5;margin:0;padding:10px 12px 13px}
+
+/* 解説ガイド（囲いなし・読み物） */
+.guide{margin-top:40px;padding:0 4px}
+.guide-lead-h{font-size:19px;font-weight:800;color:var(--c-ink);line-height:1.5;margin-bottom:14px;
+  text-shadow:1px 1px 0 #fff}
+.guide-lead{font-size:14.5px;font-weight:500;line-height:2;margin:12px 0}
+.guide h2{font-size:18px;font-weight:800;color:var(--c-ink);margin:32px 0 12px;padding-left:12px;
+  border-left:5px solid var(--c-brand);line-height:1.5}
+.guide p{font-size:14px;font-weight:500;line-height:2;margin:12px 0;color:var(--c-ink)}
+.guide b{font-weight:800;color:var(--c-ink)}
+.guide-spec{margin:16px 0;padding:0;list-style:none;background:#fff;border:2px solid var(--c-ink);
+  border-radius:12px;box-shadow:var(--pop-sm);overflow:hidden}
+.guide-spec li{font-size:13px;font-weight:500;line-height:1.75;padding:11px 14px 11px 38px;position:relative;
+  border-bottom:1px dashed #d9e6ec}
+.guide-spec li::before{content:"✓";position:absolute;left:13px;top:11px;font-weight:800;color:var(--c-brand)}
+.guide-spec li:last-child{border-bottom:none}
+.guide-cta{margin-top:22px;padding:14px 16px;background:var(--c-sky);border:2px solid var(--c-ink);
+  border-radius:12px;font-size:13px!important;font-weight:700!important}
+.guide-cta a{color:var(--c-brand);font-weight:800;text-decoration:underline}
+
+/* Xでシェア */
+.share-row{text-align:center;margin-top:16px}
+.xshare{display:inline-flex;align-items:center;gap:8px;background:var(--c-ink);color:#fff;
+  border:var(--line);border-radius:999px;box-shadow:var(--pop-sm);font-family:var(--font-body);
+  font-weight:800;font-size:14px;padding:10px 22px;cursor:pointer;transition:.12s}
+.xshare:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(20,50,70,.9)}
+.xshare svg{width:15px;height:15px;fill:#fff}
+</style>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9034047517729390"
+       crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="logo"><img src="image/tsuriboon_logo7.png" alt="tsuri-boon ロゴ"></a>
+    <nav class="global-nav" aria-label="メインメニュー">
+      <a href="lure-gatya.html">ルアーガチャ</a>
+      <a href="lure-zukan.html">ルアー図鑑</a>
+      <a href="maker-zukan.html">メーカー図鑑</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <span class="hero-badge">2025年の市場データから算出！</span>
+    <h1>あなたの魚はいくら？<br>釣果値段換算ツール</h1>
+    <div class="lede">魚種とサイズを入れるだけで、お店で買ったらいくらかが分かる</div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="card" id="card">
+    <div class="l1"><div class="fn" id="fn"></div><div class="when" id="when"></div></div>
+    <div class="size">
+      <div class="k" id="sizeK">サイズ</div>
+      <div class="stepper">
+        <button type="button" id="cmDown" aria-label="1cm小さく">−</button>
+        <label class="val"><input type="number" id="cm" inputmode="numeric" step="1" aria-labelledby="sizeK"><span class="u">cm</span></label>
+        <button type="button" id="cmUp" aria-label="1cm大きく">＋</button>
+      </div>
+      <input type="range" class="range" id="range" step="1" aria-labelledby="sizeK">
+    </div>
+    <div class="l2">
+      <div class="price"><div class="k" id="priceK">1尾の値段の目安</div><div class="big" id="price"></div></div>
+      <div class="rk"><div class="word" id="word"></div><div class="sub" id="wsub"></div><div class="scale" id="wscale"></div></div>
+    </div>
+    <div class="l3" id="l3"></div>
+    <div class="cnt">
+      <div class="k" id="cntK">釣れた数</div>
+      <div class="stepper">
+        <button type="button" id="nDown" aria-label="1つへらす">−</button>
+        <label class="val"><input type="number" id="n" inputmode="numeric" min="1" step="1" value="1" aria-labelledby="cntK"><span class="u" id="nU">尾</span></label>
+        <button type="button" id="nUp" aria-label="1つふやす">＋</button>
+      </div>
+      <div class="total" id="total"></div>
+    </div>
+    <div class="l4">
+      <div class="rk2">月ごとの値段（バーを押すと月を切り替え）</div>
+      <div class="bars" id="bars"></div>
+      <div class="blab" id="blab"></div>
+      <div class="mixleg"><span><i style="background:var(--c-orange)"></i>選んでいる月</span><span><i style="background:color-mix(in srgb,var(--acc) 45%,#fff)"></i>値段が高い2か月</span></div>
+    </div>
+  </div>
+  <div class="hint">魚種・サイズ・月を変えると、すぐに計算し直します</div>
+
+  <div class="share-row">
+    <button class="xshare" id="xshare" type="button" aria-label="Xでシェア">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.2h3.7l-8 9.1L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.4l8.5-9.7L0 1.2h7.6l5.2 6.9 5-6.9Zm-1.3 19.4h2L6.5 3.3H4.3l13.3 17.3Z"/></svg>
+      釣果の値段をXでシェア
+    </button>
+  </div>
+
+  <div class="block">
+    <div class="blockHead"><span class="blockIcon">🏆</span><span class="blockTitle">1kgあたりの値段ランキング（2025年平均）</span></div>
+    <div class="rank" id="rank"></div>
+  </div>
+
+  <div class="foot">
+    <b>値段の読み方</b><br>
+    東京都中央卸売市場（豊洲市場など）の<b>卸売価格</b>をもとにした目安です。スーパーや鮮魚店の店頭では、流通・加工の費用が乗るのでもう少し高くなります。重さはサイズから出した標準的な体形での目安で、季節や個体によって2割ほど上下します。
+  </div>
+
+  <div class="block recBlock">
+    <div class="blockHead"><span class="blockIcon">📖</span><span class="blockTitle">魚の値段をもっと詳しく</span></div>
+    <div class="article-cards">
+      <a href="article/fish-price.html" class="article-card">
+        <img class="thumb thumb--logo" src="image/tsuriboon_logo7.png" alt="釣った魚の値段の相場まとめ" loading="lazy">
+        <span class="article-tag">まとめ</span>
+        <h3>釣った魚の値段はいくら？魚種・サイズ別の相場まとめ</h3>
+      </a>
+      <a href="article/2026-new-lure.html" class="article-card">
+        <img class="thumb" src="image/2026-new-lure.jpg" alt="2026年新作ルアーまとめ" loading="lazy">
+        <span class="article-tag">まとめ</span>
+        <h3>2026年新作ルアーまとめ＜メーカー別一覧＞</h3>
+      </a>
+    </div>
+  </div>
+</div>
+
+ <section class="guide">
+    <h2 class="guide-lead-h">「この魚、お店ならいくら？」を市場データで答えます</h2>
+    <p class="guide-lead">釣れた魚の大きさは測っても、値段まで知っている人は多くありません。このツールは、<b>東京都中央卸売市場が公開している2025年の水産物の取引データ</b>から、魚種ごとの1kgあたりの値段と、月ごとの値段の動きを集計して作りました。</p>
+    <ul class="guide-spec">
+      <li>品目ごとの<b>年間の取引金額を取引量で割って</b>、1kgあたりの値段（kg単価）を算出</li>
+      <li>サイズ（cm）から、その魚の標準的な体形での<b>重さの目安</b>を出して、kg単価をかけて1尾の値段に</li>
+      <li>ブリはイナダ・ワラサ・ブリ、サワラはサゴシ・サワラと、<b>市場で呼び名と値段が分かれる魚はサイズで切り替え</b></li>
+      <li>月ごとの値段も集計しているので、<b>釣った月で値段がどう変わるか</b>まで分かる</li>
+    </ul>
+    <p>値段は「その品目の平均」です。市場では同じ魚でも、サイズ・鮮度・産地・締め方で値段が大きく変わるので、ピンポイントの査定ではなく<b>だいたいの目安</b>として楽しんでください。</p>
+
+    <h2>大きい魚ほど、1kgあたりの値段も上がる</h2>
+    <p>市場データを見ると、出世魚のブリは<b>イナダ475円→ワラサ542円→ブリ984円</b>（いずれも1kgあたりの年平均）と、大きくなるほどkg単価も上がります。サワラもサゴシの912円に対し、サワラは1,669円と2倍近くの差がありました。重さが増えるうえにkg単価も上がるので、<b>大物ほど値段が一気に跳ね上がる</b>のです。</p>
+
+    <h2>同じ魚でも、季節で値段は倍ちがう</h2>
+    <p>寒ブリの季節の12月、ブリは1kgあたり2,383円と<b>年平均の2.4倍</b>になりました。サバも脂がのる12月に値段が上がり、スズキやカマスは夏、石鯛は秋に高くなります。<b>値段が上がる月は、その魚が美味しい時期と重なることが多い</b>ので、釣行計画の参考にもなります。</p>
+
+    <h2>「生きたまま」と「すぐ締めた魚」は高い</h2>
+    <p>ヒラメは生きたままの活けヒラメが1kgあたり3,067円、締めたものが1,543円と、<b>約2倍の差</b>がありました。釣った魚もすぐに締めて血抜きし、氷でしっかり冷やせば、市場で高い値段がつく魚と同じ鮮度で持ち帰れます。</p>
+
+    <h2>釣った魚を売りたいときの注意</h2>
+    <p>このツールの値段は、あくまで「お店で買うとこれくらい」の目安です。釣り人が釣った魚を売ることは、<b>都道府県の漁業調整規則や漁業権のルール、食品衛生法の営業許可</b>などが関係し、地域や売り方によっては認められていません。釣った魚は、自分や家族、友人と美味しく食べるのがいちばんです。</p>
+
+    <p class="guide-cta">魚種ごとのサイズ別の値段の一覧は、<a href="article/fish-price.html">釣った魚の値段の相場まとめ</a>で紹介しています。<br>出典：<a href="https://www.shijou.metro.tokyo.lg.jp/torihiki/geppo" target="_blank" rel="noopener">東京都中央卸売市場 市場統計情報</a>（水産物 2025年 年間明細）をもとにtsuri-boonで集計。</p>
+  </section>
+
+
+<footer class="site-footer">
+  <nav class="footer-nav">
+    <a href="index.html">トップ</a>
+    <a href="article/privacy.html">プライバシーポリシー</a>
+    <a href="form.html">お問い合わせ</a>
+    <a href="sitemap.html">サイトマップ</a>
+  </nav>
+  <p class="copyright">© 2025 tsuri-boon</p>
+</footer>
+
+<script>
+// 単価：東京都中央卸売市場 市場統計情報（水産物・2025年 年間明細）から集計した 円/kg（年平均と1〜12月）
+const MARKET={
+  'まあじ':[744,[824,787,894,752,774,686,753,763,727,685,663,714]],
+  'さば':[601,[613,660,614,512,519,451,567,598,617,708,651,872]],
+  'いなだ':[475,[531,706,594,606,451,501,513,437,370,405,474,592]],
+  'わらさ':[542,[705,945,712,558,502,508,422,443,458,506,591,864]],
+  'ぶり':[984,[1438,1707,775,688,656,473,634,755,802,812,1493,2383]],
+  'さごち':[912,[931,1230,988,841,845,1214,1142,1179,1228,770,645,711]],
+  'さわら':[1669,[1570,2222,2040,1288,1325,1847,1825,1775,1951,2002,1724,1566]],
+  'またい（天然）':[1014,[1207,1484,1185,982,809,787,926,1014,1023,1150,1013,1137]],
+  'すずき':[1203,[861,1266,1141,983,1010,1316,1663,1600,1521,1489,961,928]],
+  'かます':[1349,[1267,1433,1422,1271,1091,1318,1732,1629,1541,1294,1241,1300]],
+  'いしたい':[2094,[2261,2694,2239,2056,1847,1747,2143,2620,3181,3218,1482,2418]],
+  'ひらめ（国内）':[1543,[1473,2133,2100,1507,1238,1021,1146,2015,1816,1844,1654,1905]],
+  '活ひらめ':[3067,[3448,3448,3318,2832,2470,2108,2278,3196,3348,3566,3054,3577]],
+  'かさご':[1443,[1399,1613,1345,1466,1316,1340,1644,1685,1343,1539,1505,1497]],
+  'はた':[3228,[3719,4352,4027,3508,2868,2622,2638,3309,3002,3421,3113,3406]],
+  'あまたい':[5120,[5943,6030,5994,4711,4264,3941,3976,4627,4725,5901,5511,6073]],
+  'かんぱち（天然）':[1230,[1383,1852,1474,1458,1346,1360,1650,1406,1176,1132,982,1292]],
+  'ひらまさ':[1056,[921,1433,1102,884,964,1222,1167,1265,989,1259,855,976]],
+  'いさき':[1389,[1525,1822,1654,1811,1342,1123,1404,1883,1429,1532,1249,1125]],
+  'たちうお（国内）':[2044,[1501,2020,2290,2047,2571,3083,2852,2840,1606,1412,1464,1670]],
+  'あおりいか':[3775,[3323,3889,4238,4117,3359,4202,5504,6123,4634,3041,3022,3669]]
+};
+// sizes: [cm, g]（重さの目安）、items: [この cm 未満なら, 市場の品目, 呼び名]
+const FISH=[
+  {id:'aji',tab:'アジ',name:'アジ（マアジ）',unit:'全長',c:'#0099CC',min:10,max:50,def:25,sizes:[[15,40],[20,100],[25,180],[30,300],[35,450],[40,700]],items:[[Infinity,'まあじ','マアジ']]},
+  {id:'saba',tab:'サバ',name:'サバ（マサバ）',unit:'尾叉長',c:'#2E7DB5',min:20,max:55,def:35,sizes:[[25,200],[30,350],[35,500],[40,750],[45,1000]],items:[[Infinity,'さば','サバ']]},
+  {id:'buri',tab:'ブリ',name:'ブリ（ツバス・ハマチ・メジロ）',unit:'尾叉長',c:'#1FA9A0',min:30,max:120,def:60,sizes:[[40,800],[50,1500],[60,2500],[70,4000],[80,6000],[90,8000],[100,10000]],items:[[55,'いなだ','イナダ（ツバス・ハマチ）'],[75,'わらさ','ワラサ（メジロ）'],[Infinity,'ぶり','ブリ']]},
+  {id:'kanpachi',tab:'カンパチ',name:'カンパチ（ショゴ）',unit:'尾叉長',c:'#2A9D6F',min:30,max:120,def:60,sizes:[[40,900],[50,1700],[60,3000],[70,4500],[80,7000],[90,9500],[100,13000]],items:[[Infinity,'かんぱち（天然）','カンパチ（天然）']]},
+  {id:'hiramasa',tab:'ヒラマサ',name:'ヒラマサ',unit:'尾叉長',c:'#16808A',min:40,max:130,def:80,sizes:[[50,1500],[60,2500],[70,4000],[80,6000],[90,8500],[100,11000],[110,14000]],items:[[Infinity,'ひらまさ','ヒラマサ']]},
+  {id:'sawara',tab:'サワラ',name:'サワラ（サゴシ）',unit:'尾叉長',c:'#4A90C2',min:40,max:110,def:70,sizes:[[50,700],[60,1300],[70,2000],[80,3000],[90,4500],[100,6000]],items:[[65,'さごち','サゴシ'],[Infinity,'さわら','サワラ']]},
+  {id:'madai',tab:'真鯛',name:'真鯛（天然）',unit:'全長',c:'#E2506B',min:20,max:100,def:45,sizes:[[30,500],[40,1100],[50,2000],[60,3500],[70,5500],[80,8000]],items:[[Infinity,'またい（天然）','真鯛（天然）']]},
+  {id:'amadai',tab:'アマダイ',name:'アマダイ（グジ）',unit:'全長',c:'#E07A5F',min:20,max:60,def:35,sizes:[[30,350],[35,550],[40,800],[45,1100],[50,1500]],items:[[Infinity,'あまたい','アマダイ']]},
+  {id:'suzuki',tab:'スズキ',name:'スズキ（シーバス）',unit:'全長',c:'#5B6FB5',min:30,max:100,def:60,sizes:[[40,600],[50,1200],[60,2000],[70,3200],[80,5000],[90,7000]],items:[[Infinity,'すずき','スズキ']]},
+  {id:'kamasu',tab:'カマス',name:'カマス',unit:'全長',c:'#C08A2E',min:15,max:50,def:30,sizes:[[20,60],[25,100],[30,180],[35,280],[40,400]],items:[[Infinity,'かます','カマス']]},
+  {id:'isaki',tab:'イサキ',name:'イサキ',unit:'全長',c:'#7A8B3A',min:15,max:50,def:30,sizes:[[20,130],[25,250],[30,400],[35,650],[40,900]],items:[[Infinity,'いさき','イサキ']]},
+  {id:'tachiuo',tab:'タチウオ',name:'タチウオ（指2本＝約70cm〜指5本＝約115cm）',unit:'全長',c:'#7C8A99',min:50,max:150,def:90,sizes:[[70,150],[85,300],[100,550],[115,900],[125,1200]],items:[[Infinity,'たちうお（国内）','タチウオ']]},
+  {id:'ishidai',tab:'石鯛',name:'石鯛（サンバソウ）',unit:'全長',c:'#3D4F5C',min:15,max:70,def:35,sizes:[[25,400],[30,700],[40,1500],[50,3000],[60,5000]],items:[[Infinity,'いしたい','石鯛']]},
+  {id:'hirame',tab:'ヒラメ',name:'ヒラメ',unit:'全長',c:'#8A6D3B',min:30,max:100,def:55,sizes:[[40,700],[50,1400],[60,2500],[70,4000],[80,6000]],items:[[Infinity,'ひらめ（国内）','ヒラメ（締めたもの）']],live:'活ひらめ'},
+  {id:'kasago',tab:'カサゴ',name:'カサゴ（ガシラ）',unit:'全長',c:'#D2553A',min:10,max:40,def:20,sizes:[[15,70],[20,150],[25,300],[30,500]],items:[[Infinity,'かさご','カサゴ']]},
+  {id:'kijihata',tab:'キジハタ',name:'キジハタ（アコウ）',unit:'全長',c:'#D9822B',min:15,max:60,def:35,sizes:[[25,250],[30,400],[35,650],[40,1000],[45,1400],[50,1900]],items:[[Infinity,'はた','ハタ類（キジハタを含む）']]},
+  {id:'aori',tab:'アオリイカ',name:'アオリイカ',unit:'胴長',c:'#9B5DE5',cnt:'杯',min:8,max:50,def:22,sizes:[[10,80],[15,250],[20,650],[25,1200],[30,2000],[35,3000],[40,4000]],items:[[Infinity,'あおりいか','アオリイカ']]}
+];
+// 表の点のあいだは対数で補間し、表の外は「重さは長さの3乗に比例」で延ばす
+function weight(f,cm){
+  const s=f.sizes;
+  if(cm<=s[0][0])return s[0][1]*Math.pow(cm/s[0][0],3);
+  const last=s[s.length-1];
+  if(cm>=last[0])return last[1]*Math.pow(cm/last[0],3);
+  for(let i=0;i<s.length-1;i++){
+    const [c1,g1]=s[i],[c2,g2]=s[i+1];
+    if(cm<=c2)return g1*Math.pow(cm/c1,Math.log(g2/g1)/Math.log(c2/c1));
+  }
+}
+const itemOf=(f,cm)=>f.items.find(([lt])=>cm<lt);
+const round=n=>n>=1000?Math.round(n/50)*50:Math.round(n/10)*10;
+const yen=n=>round(n).toLocaleString('ja-JP');
+const fmtW=g=>g>=1000?(g/1000).toFixed(1)+'<small>kg</small>':Math.round(g/10)*10+'<small>g</small>';
+function rank(p){
+  if(p>=10000)return['お宝級','1万円超え！自慢していい釣果'];
+  if(p>=5000)return['料亭級','料亭のお品書きに並ぶクラス'];
+  if(p>=2000)return['高級魚級','お店なら特別な日の一尾'];
+  if(p>=500)return['ごちそう級','家族で囲めるごちそう'];
+  return['おかず級','晩ごはんのうれしい一品'];
+}
+function monthJST(){const now=new Date();return new Date(now.getTime()+(now.getTimezoneOffset()+540)*60000).getMonth()+1;}
+
+const $=id=>document.getElementById(id);
+let F=FISH[0],M=monthJST(),CM=F.def,N=1;
+
+function calc(){
+  const g=weight(F,CM),[,item,label]=itemOf(F,CM),[avg,mon]=MARKET[item],unit=mon[M-1];
+  return {g,item,label,avg,mon,unit,price:g/1000*unit};
+}
+function render(){
+  document.documentElement.style.setProperty('--acc',F.c);
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('sel',b.dataset.k===F.id));
+  const r=calc(),[w,ws]=rank(r.price*N),U=F.cnt||'尾';
+  $('priceK').textContent=`1${U}の値段の目安`;$('nU').textContent=U;
+  $('fn').textContent=F.name;
+  $('when').textContent=M===monthJST()?'THIS MONTH':M+'月に釣ったら';
+  $('sizeK').textContent=`サイズ（${F.unit}）`;
+  $('cm').value=CM;$('range').value=CM;
+  $('price').innerHTML=`${yen(r.price)}<small>円</small>`;
+  $('word').textContent=w;$('wsub').textContent=ws;
+  const min=Math.min(...r.mon),max=Math.max(...r.mon);
+  let sc=`市場での呼び名：${r.label}<br>1年の幅：${yen(r.g/1000*min)}〜${yen(r.g/1000*max)}円`;
+  if(F.live){const [la,lm]=MARKET[F.live];sc+=`<br>生きたまま（活け）なら：約${yen(r.g/1000*lm[M-1])}円`;}
+  $('wscale').innerHTML=sc;
+  $('l3').innerHTML=`<div class="it"><div class="k">重さの目安</div><div class="v">約${fmtW(r.g)}</div></div>
+    <div class="it"><div class="k">${M}月のkg単価</div><div class="v">${r.unit.toLocaleString('ja-JP')}<small>円</small></div></div>
+    <div class="it"><div class="k">年平均のkg単価</div><div class="v">${r.avg.toLocaleString('ja-JP')}<small>円</small></div></div>`;
+  $('n').value=N;
+  $('total').innerHTML=N>1?`${N}${U}で 約<b>${yen(r.price*N)}</b>円分`:'';
+  const highs=[...r.mon].sort((a,b)=>b-a).slice(0,2);
+  $('bars').innerHTML=r.mon.map((v,i)=>`<button type="button" data-m="${i+1}" class="${i+1===M?'on':highs.includes(v)?'hi':''}" style="height:${Math.round(v/max*100)}%" title="${i+1}月：約${yen(r.g/1000*v)}円" aria-label="${i+1}月：約${yen(r.g/1000*v)}円"></button>`).join('');
+  $('blab').innerHTML=r.mon.map((_,i)=>`<span class="${i+1===M?'on':''}">${i+1}</span>`).join('');
+  document.querySelectorAll('#bars button').forEach(b=>b.onclick=()=>{M=+b.dataset.m;render();});
+  renderRank();
+}
+function renderRank(){
+  // 魚種ごとの代表の品目（ブリ・サワラは大きいほう）で年平均のkg単価を並べる
+  const rows=FISH.map(f=>({f,v:MARKET[f.items[f.items.length-1][1]][0]})).sort((a,b)=>b.v-a.v);
+  const top=rows[0].v;
+  $('rank').innerHTML=rows.map((x,i)=>`<div class="rrow ${x.f.id===F.id?'on':''}" data-k="${x.f.id}">
+    <span class="no">${i+1}</span><span class="nm">${x.f.tab}</span><span class="bar"><i style="width:${Math.round(x.v/top*100)}%"></i></span>
+    <span class="yen">${x.v.toLocaleString('ja-JP')}<small>円/kg</small></span></div>`).join('');
+  document.querySelectorAll('.rrow').forEach(r=>r.onclick=()=>{setFish(r.dataset.k);$('card').scrollIntoView({behavior:'smooth',block:'center'});});
+}
+function setFish(id){
+  F=FISH.find(f=>f.id===id);CM=F.def;
+  $('range').min=F.min;$('range').max=F.max;
+  render();
+}
+function setCm(v){
+  v=Math.round(Number(v));
+  if(!v||v<1)return;
+  CM=Math.min(v,200);render();
+}
+$('tabs').innerHTML=FISH.map(f=>`<button class="tab" type="button" data-k="${f.id}">${f.tab}</button>`).join('');
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setFish(b.dataset.k));
+$('cm').addEventListener('change',e=>setCm(e.target.value));
+$('range').addEventListener('input',e=>setCm(e.target.value));
+$('cmDown').onclick=()=>setCm(CM-1);
+$('cmUp').onclick=()=>setCm(CM+1);
+$('n').addEventListener('change',e=>{N=Math.max(1,Math.min(999,Math.floor(Number(e.target.value))||1));render();});
+$('nDown').onclick=()=>{if(N>1){N--;render();}};
+$('nUp').onclick=()=>{if(N<999){N++;render();}};
+
+// ---- Xでシェア：表示中の結果を画像にして、URL・ハッシュタグ付きで共有する ----
+const SHARE_URL='https://tsuri-boon.github.io/chouka-price.html';
+const SHARE_TAGS=[['釣果','釣った魚の値段'],['tsuriboon','ツリブーン']];
+function shareText(){
+  const r=calc(),tags=SHARE_TAGS.map(l=>l.map(t=>'#'+t).join(' ')).join('\n');
+  const U=F.cnt||'尾',total=N>1?`×${N}${U}で約${yen(r.price*N)}円分`:`は約${yen(r.price)}円`;
+  return `【あなたの魚はいくら？】\n${F.tab}${CM}cm${total}「${rank(r.price*N)[0]}」🎣\n▼あなたの釣果も換算してみる\n${SHARE_URL}\n\n${tags}`;
+}
+function xIntent(text){return 'https://x.com/intent/post?text='+encodeURIComponent(text);}
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+// 1200×630 のシェア画像を描く
+async function drawShare(){
+  try{await document.fonts.ready;}catch(e){}
+  const W=1200,H=630,cv=document.createElement('canvas');cv.width=W;cv.height=H;
+  const c=cv.getContext('2d'),ink='#143246',sub='#55707F',acc=F.c,FT='"M PLUS Rounded 1c","Yu Gothic",Meiryo,sans-serif';
+  const r=calc(),[w,ws]=rank(r.price*N);
+  c.fillStyle='#D9F1FA';c.fillRect(0,0,W,H);
+  rr(c,54,54,1100,520,32);c.fillStyle=ink;c.fill();
+  rr(c,44,44,1100,520,32);c.fillStyle='#fff';c.fill();c.lineWidth=5;c.strokeStyle=ink;c.stroke();
+  rr(c,84,80,420,58,29);c.fillStyle='#FFC53D';c.fill();c.lineWidth=3;c.stroke();
+  c.fillStyle=ink;c.font=`800 28px ${FT}`;c.textBaseline='middle';c.fillText('あなたの魚はいくら？',112,110);
+  c.textBaseline='alphabetic';c.font=`800 64px ${FT}`;c.fillStyle=ink;c.fillText(`${F.tab} ${CM}cm`+(N>1?` ×${N}${F.cnt||'尾'}`:''),84,232);
+  c.font=`800 40px ${FT}`;c.fillStyle=acc;c.fillText(`約${yen(N>1?r.price*N:r.price)}円${N>1?'分':''}`,84,300);
+  c.font=`800 92px ${FT}`;c.fillStyle=ink;c.fillText(w,84,412);
+  c.font=`700 30px ${FT}`;c.fillStyle=sub;c.fillText(ws,84,462);
+  c.font=`700 24px ${FT}`;c.fillText(`${M}月・東京都中央卸売市場の2025年データから算出`,84,512);
+  c.textAlign='center';c.font=`150px ${FT}`;c.textBaseline='middle';c.fillText('🐟',920,290);
+  c.textAlign='right';c.textBaseline='alphabetic';c.font=`800 26px ${FT}`;c.fillStyle=ink;c.fillText('tsuri-boon.github.io/chouka-price.html',1116,540);
+  return cv;
+}
+// 画像付きで共有できるスマホかどうか（mukoindex.html と同じ判定）
+const isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1);
+const canShareImage=isMobile&&(()=>{try{return !!(navigator.canShare&&navigator.canShare({files:[new File([''],'x.png',{type:'image/png'})]}));}catch(e){return false;}})();
+$('xshare').onclick=async()=>{
+  const text=shareText();
+  if(!canShareImage){window.open(xIntent(text),'_blank','noopener');return;}
+  const cv=await drawShare();
+  const blob=await new Promise(res=>cv.toBlob(res,'image/png'));
+  const file=new File([blob],'chouka-price.png',{type:'image/png'});
+  try{await navigator.share({files:[file],text});}
+  catch(e){if(!(e&&e.name==='AbortError'))location.href=xIntent(text);}
+};
+setFish(FISH[0].id);
+</script>
+</body>
+</html>
