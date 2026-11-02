@@ -15,6 +15,7 @@ const ROOT = path.resolve(__dirname, '..');
 const ART = path.join(ROOT, 'article');
 const COUNT = 12;
 const EXCLUDE = new Set(['privacy', 'lure_template']);
+const HIDE = new Set(['fish-price', 'fish-price-calc']); // ほかの記事のオススメ欄には出さない記事（自分のオススメ欄は作る）
 const SHORT = { 'フラットフィッシュ': 'フラット', 'ライトゲーム': 'ライト' }; // ラベルが長いものは短くする
 const START = '<!-- オススメ記事 start -->';
 const END = '<!-- オススメ記事 end -->';
@@ -110,7 +111,7 @@ function pick(self, h) {
   if (s >= 0 && e > s) { const again = new Set([self]); const body = h.slice(0, s) + h.slice(e); for (const x of body.matchAll(/href="(?:\.\.\/article\/|\/article\/)?([a-zA-Z0-9_-]+)\.html"/g)) again.add(x[1]); used.clear(); again.forEach(v => used.add(v)); }
   const out = [];
   const add = (list, n, label) => {
-    const sorted = list.filter(x => x && !used.has(x.file) && x.img && fs.existsSync(path.join(ROOT, 'image', x.img))); // 画像が無い記事は出さない
+    const sorted = list.filter(x => x && !used.has(x.file) && !HIDE.has(x.file) && x.img && fs.existsSync(path.join(ROOT, 'image', x.img))); // 画像が無い記事は出さない
     for (const x of sorted.slice(0, n)) { used.add(x.file); const lb = typeof label === 'function' ? label(x) : label; out.push({ ...x, label: SHORT[lb] || lb }); }
   };
   const spread = (arr, key) => arr.slice().sort((a, b) => hash(key + a.file) - hash(key + b.file));
