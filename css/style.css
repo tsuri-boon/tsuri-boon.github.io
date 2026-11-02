@@ -525,6 +525,23 @@ ul.features li p {
  padding: 10px 10px;
 }
 
+/* PCでは記事の本文を読みやすい幅にまとめ、背景の上に白いカードとして置く（スマホは今まで通り全幅） */
+@media (min-width: 769px) {
+  body:has(.article-main) {
+    background: #eef2f5;
+  }
+  .article-main {
+    box-sizing: border-box;
+    width: calc(100% - 40px);
+    max-width: 840px;
+    margin: 24px auto 40px;
+    padding: 32px 50px 40px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+  }
+}
+
 .howto-main {
   text-align: center;  /* 文字中央揃え */
   max-width: 800px;    /* 読みやすい幅 */
