@@ -1848,7 +1848,7 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
   font-size: 0.8rem;
 }
 
-/* 記事の後ろの著者プロフィール（カードはオススメ記事、色は見出しとそろえる） */
+/* ページのいちばん下の著者プロフィール（カードはオススメ記事、色は見出しとそろえる） */
 .author-box {
   position: relative;
   display: flex;

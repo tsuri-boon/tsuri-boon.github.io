@@ -1,7 +1,7 @@
-// 各記事に「更新日」の行（H1の下）と「著者プロフィールの枠」（本文の後ろ）を入れる
+// 各記事に「更新日」の行（H1の下）と「著者プロフィールの枠」（ページのいちばん下）を入れる
 //   使い方：リポジトリのルートで `node tools/make-byline.js`
 //   - 更新日は構造化データの dateModified（無ければ datePublished）。どちらも無ければ更新日の行は出さない
-//   - 著者の枠の置き場所：個別記事・まとめ記事は </article> の直後、メーカー記事などはオススメ記事の直前
+//   - 著者の枠の置き場所：</main> の直前（「本日のオススメルアーはこちら」のボタンの下）。make-osusume.js のあとに実行する
 //   - 記事内の <!-- 更新日 start --> 〜 end と <!-- 著者 start --> 〜 end の範囲だけを書き換える。手で編集しない
 //   - 枠の文章やアイコンを変えるときは、下の AUTHOR を直して実行する
 const fs = require('fs');
@@ -49,19 +49,13 @@ for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.
   const nl = before.includes('\r\n') ? '\r\n' : '\n';
   let html = before;
 
-  // 著者の枠
-  const box = authorBox(nl);
-  const oldBox = new RegExp(`${START}[\\s\\S]*?${END}`);
-  if (oldBox.test(html)) {
-    html = html.replace(oldBox, () => box);
-  } else if (html.includes('class="lure-article"') && html.includes('</article>')) {
-    const i = html.lastIndexOf('</article>') + '</article>'.length;
-    html = `${html.slice(0, i)}${nl}${nl}  ${box}${html.slice(i)}`;
-  } else if (html.includes('<!-- オススメ記事 start -->')) {
-    html = html.replace('<!-- オススメ記事 start -->', () => `${box}${nl}${nl}  <!-- オススメ記事 start -->`);
-  } else {
-    continue;
-  }
+  // 著者の枠（いったん消して、</main> の直前＝ページのいちばん下に置く）
+  if (!html.includes('</main>')) continue;
+  const oldBox = new RegExp(`[ \\t]*${START}[\\s\\S]*?${END}(\\r?\\n)*`, 'g');
+  html = html.replace(oldBox, '');
+  const i = html.lastIndexOf('</main>');
+  const head = html.slice(0, i).replace(/\s*$/, '');
+  html = `${head}${nl}${nl}  ${authorBox(nl)}${nl}${html.slice(i)}`;
 
   // 更新日
   const date = dateOf(html);
