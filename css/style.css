@@ -1841,9 +1841,74 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
   background: linear-gradient(transparent 60%, #c6f2c0 60%);
 }
 
-/* 記事の最後の著者・更新日 */
-.article-byline {
-  margin: 16px 0;
+/* 記事の更新日（H1の下） */
+.article-date {
+  margin: 4px 0 12px;
   color: #666;
   font-size: 0.8rem;
+}
+
+/* 記事の後ろの著者プロフィール（カードはオススメ記事、色は見出しとそろえる） */
+.author-box {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin: 36px 0 28px;
+  padding: 24px 20px 20px;
+  background: #fff;
+  border: 1px solid #e3e8ef;
+  border-top: 4px solid #0099CC;
+  border-radius: 12px;
+}
+.author-box__label {
+  position: absolute;
+  top: -4px;
+  right: 16px;
+  padding: 4px 12px;
+  background: #0099CC;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  border-radius: 0 0 6px 6px;
+}
+.author-box__icon {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #E6F7FB;
+  border: 2px solid #E6F7FB;
+}
+.author-box__body { min-width: 0; }
+.author-box__name {
+  margin: 0;
+  color: #1F2F54;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.author-box__role {
+  margin: 2px 0 10px;
+  color: #006C99;
+  font-size: 0.78rem;
+}
+.author-box__bio {
+  margin: 0 0 10px;
+  color: #555;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.author-box__more {
+  color: #0099cc;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.author-box__more::after { content: " ＞"; }
+.author-box__more:hover { text-decoration: underline; }
+@media (max-width: 480px) {
+  .author-box { gap: 12px; padding: 30px 14px 16px; }
+  .author-box__icon { flex-basis: 56px; width: 56px; height: 56px; }
 }
