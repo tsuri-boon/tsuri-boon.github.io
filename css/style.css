@@ -1840,3 +1840,10 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
 .marker-green {
   background: linear-gradient(transparent 60%, #c6f2c0 60%);
 }
+
+/* 記事の最後の著者・更新日 */
+.article-byline {
+  margin: 16px 0;
+  color: #666;
+  font-size: 0.8rem;
+}

@@ -195,7 +195,7 @@ const html = `<!DOCTYPE html>
   <title>${TITLE}</title>
   <meta name="description" content="${DESC}">
   <meta name="robots" content="index, follow">
-  <meta name="author" content="tsuri-boon開発チーム">
+  <meta name="author" content="こすけ">
   <meta name="application-name" content="tsuri-boon">
   <link rel="canonical" href="https://tsuri-boon.github.io/maker-zukan.html">
 

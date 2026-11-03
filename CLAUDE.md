@@ -194,6 +194,17 @@ Claude Code は**該当箇所にプレースホルダーのコメントだけ残
 
 ---
 
+## 記事作成後：著者・更新日の行
+
+記事を追加・更新したら、コミット前に **`node tools/make-byline.js`** を実行して、記事の後ろに「著者：こすけ（更新日：〇年〇月〇日）」の1行を入れる。
+
+- 更新日は構造化データの `dateModified`（無ければ `datePublished`）から作る。内容を変えた記事は `dateModified` を更新してから実行する。全ページ一括の機械的な変更では `dateModified` を変えない。
+- 記事内の `<!-- 著者 start -->` 〜 `<!-- 著者 end -->` の範囲だけをスクリプトが書き換える。**この範囲は手で編集しない。**
+- 著者は `meta author`・構造化データの `author` とも「こすけ」（Person。`url` は `tsuri-boon.html`）。プロフィールは `tsuri-boon.html` の `#author`。
+- 身を守るため、サイトに「個人で運営」のような表現は書かない。
+
+---
+
 ## 記事作成後：サイトマップ（sitemap.xml）の更新
 
 記事（個別記事・まとめ記事とも）を追加・更新したら、コミット前に **`node tools/make-sitemap.js`** を実行して `sitemap.xml` と **HTMLのサイトマップ `sitemap.html`** を作り直し、記事と一緒にコミットする。
