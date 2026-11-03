@@ -16,6 +16,7 @@ const EXCLUDE = new Set([
   'top-test.html',               // トップページのデザイン案（テスト用）
   'article/lure_template.html',  // 記事テンプレート
   'makers.html',                 // maker-zukan.html への転送ページ
+  'article/shop-links.html',     // ショップリンク専用ページ（noindex）
 ]);
 
 const today = new Date();
