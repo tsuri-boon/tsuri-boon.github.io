@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 <title>あなたの魚はいくら？釣果値段換算ツール｜tsuri-boon</title>
-<meta name="description" content="釣った魚の魚種とサイズを入れるだけで、お店で買うといくらになるかがすぐ分かる釣果値段換算ツール。アジ・サバ・ブリ・カンパチ・ヒラマサ・サワラ・真鯛・アマダイ・スズキ・カマス・イサキ・タチウオ・石鯛・ヒラメ・カサゴ・キジハタ・アオリイカの17魚種に対応。東京都中央卸売市場の2025年の取引データから算出。">
+<meta name="description" content="釣った魚の魚種とサイズを入れるだけで、お店で買うといくらになるかがすぐ分かる釣果値段換算ツール。アジ・サバ・ブリ・カンパチ・ヒラマサ・サワラ・真鯛・アマダイ・クロダイ・スズキ・イサキ・石鯛・ヒラメ・マゴチ・カマス・タチウオ・キス・カワハギ・カサゴ・メバル・キジハタ・アイナメ・アオリイカ・ヤリイカ・タコの25魚種に対応。東京都中央卸売市場の2025年の取引データから算出。">
 <link rel="canonical" href="https://tsuri-boon.github.io/chouka-price.html">
 <link rel="icon" href="image/tsuriboon_favicon.png" type="image/png">
 <!-- OGP（Xなどで共有した時のカード表示） -->
 <meta property="og:title" content="あなたの魚はいくら？釣果値段換算ツール｜tsuri-boon">
-<meta property="og:description" content="釣った魚の魚種とサイズを入れるだけで、お店で買うといくらになるかがすぐ分かる。17魚種対応・東京都中央卸売市場の2025年の取引データから算出。">
+<meta property="og:description" content="釣った魚の魚種とサイズを入れるだけで、お店で買うといくらになるかがすぐ分かる。25魚種対応・東京都中央卸売市場の2025年の取引データから算出。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tsuri-boon">
 <meta property="og:url" content="https://tsuri-boon.github.io/chouka-price.html">
@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://tsuri-boon.github.io/image/tsuriboon_logo7.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="あなたの魚はいくら？釣果値段換算ツール｜tsuri-boon">
-<meta name="twitter:description" content="釣った魚の魚種とサイズを入れるだけで、お店で買うといくらになるかがすぐ分かる。17魚種対応。">
+<meta name="twitter:description" content="釣った魚の魚種とサイズを入れるだけで、お店で買うといくらになるかがすぐ分かる。25魚種対応。">
 <meta name="twitter:image" content="https://tsuri-boon.github.io/image/tsuriboon_logo7.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"あなたの魚はいくら？釣果値段換算ツール","url":"https://tsuri-boon.github.io/chouka-price.html","description":"釣った魚の魚種とサイズから、お店で買うといくらになるかの目安を計算するツール。","applicationCategory":"UtilitiesApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"tsuri-boon"}}
@@ -228,9 +228,9 @@ img{max-width:100%}
     <div class="size">
       <div class="k" id="sizeK">サイズ</div>
       <div class="stepper">
-        <button type="button" id="cmDown" aria-label="1cm小さく">−</button>
-        <label class="val"><input type="number" id="cm" inputmode="numeric" step="1" aria-labelledby="sizeK"><span class="u">cm</span></label>
-        <button type="button" id="cmUp" aria-label="1cm大きく">＋</button>
+        <button type="button" id="cmDown" aria-label="小さく">−</button>
+        <label class="val"><input type="number" id="cm" inputmode="numeric" step="1" aria-labelledby="sizeK"><span class="u" id="cmU">cm</span></label>
+        <button type="button" id="cmUp" aria-label="大きく">＋</button>
       </div>
       <input type="range" class="range" id="range" step="1" aria-labelledby="sizeK">
     </div>
@@ -345,6 +345,14 @@ const MARKET={
   'ひらめ（国内）':[1543,[1473,2133,2100,1507,1238,1021,1146,2015,1816,1844,1654,1905]],
   '活ひらめ':[3067,[3448,3448,3318,2832,2470,2108,2278,3196,3348,3566,3054,3577]],
   'かさご':[1443,[1399,1613,1345,1466,1316,1340,1644,1685,1343,1539,1505,1497]],
+  'めばる':[1442,[1365,1628,1649,1463,1294,1160,1526,1857,1550,1583,1355,1243]],
+  'あいなめ':[1773,[1374,1982,2533,2433,1838,1413,1523,1862,1693,1597,1252,1477]],
+  'くろたい':[560,[640,785,750,563,374,478,461,510,597,615,566,561]],
+  'かわはぎ':[1264,[1334,1875,1498,1155,988,904,928,1024,1116,1186,1319,1275]],
+  'きす':[3086,[3273,3067,2851,3387,3378,3295,3863,3303,2702,2435,2712,2818]],
+  'こち':[1158,[1116,1298,1217,1231,1243,1147,1067,1376,1316,1158,1047,962]],
+  'やりいか':[1544,[1438,1712,1721,1630,1877,2192,2491,2361,1172,1173,1248,1136]],
+  'たこ':[2936,[2853,2934,2976,2918,2782,2777,2910,2985,2838,3055,3050,3121]],
   'はた':[3228,[3719,4352,4027,3508,2868,2622,2638,3309,3002,3421,3113,3406]],
   'あまたい':[5120,[5943,6030,5994,4711,4264,3941,3976,4627,4725,5901,5511,6073]],
   'かんぱち（天然）':[1230,[1383,1852,1474,1458,1346,1360,1650,1406,1176,1132,982,1292]],
@@ -371,10 +379,22 @@ const FISH=[
   {id:'hirame',tab:'ヒラメ',name:'ヒラメ',unit:'全長',c:'#8A6D3B',min:30,max:100,def:55,sizes:[[40,700],[50,1400],[60,2500],[70,4000],[80,6000]],items:[[Infinity,'ひらめ（国内）','ヒラメ（締めたもの）']],live:'活ひらめ'},
   {id:'kasago',tab:'カサゴ',name:'カサゴ（ガシラ）',unit:'全長',c:'#D2553A',min:10,max:40,def:20,sizes:[[15,70],[20,150],[25,300],[30,500]],items:[[Infinity,'かさご','カサゴ']]},
   {id:'kijihata',tab:'キジハタ',name:'キジハタ（アコウ）',unit:'全長',c:'#D9822B',min:15,max:60,def:35,sizes:[[25,250],[30,400],[35,650],[40,1000],[45,1400],[50,1900]],items:[[Infinity,'はた','ハタ類（キジハタを含む）']]},
-  {id:'aori',tab:'アオリイカ',name:'アオリイカ',unit:'胴長',c:'#9B5DE5',cnt:'杯',min:8,max:50,def:22,sizes:[[10,80],[15,250],[20,650],[25,1200],[30,2000],[35,3000],[40,4000]],items:[[Infinity,'あおりいか','アオリイカ']]}
+  {id:'aori',tab:'アオリイカ',name:'アオリイカ',unit:'胴長',c:'#9B5DE5',cnt:'杯',min:8,max:50,def:22,sizes:[[10,80],[15,250],[20,650],[25,1200],[30,2000],[35,3000],[40,4000]],items:[[Infinity,'あおりいか','アオリイカ']]},
+  {id:'mebaru',tab:'メバル',name:'メバル',unit:'全長',c:'#6C5B7B',min:10,max:35,def:22,sizes:[[15,60],[20,130],[25,250],[30,450]],items:[[Infinity,'めばる','メバル']]},
+  {id:'ainame',tab:'アイナメ',name:'アイナメ（アブラコ）',unit:'全長',c:'#A0703C',min:15,max:60,def:35,sizes:[[25,200],[30,350],[35,550],[40,850],[45,1200],[50,1600]],items:[[Infinity,'あいなめ','アイナメ']]},
+  {id:'kurodai',tab:'クロダイ',name:'クロダイ（チヌ）',unit:'全長',c:'#44505C',min:20,max:65,def:40,sizes:[[30,450],[35,700],[40,1100],[45,1500],[50,2000],[55,2700]],items:[[Infinity,'くろたい','クロダイ']]},
+  {id:'kawahagi',tab:'カワハギ',name:'カワハギ',unit:'全長',c:'#B39B3A',min:10,max:35,def:22,sizes:[[15,80],[20,180],[25,350],[30,600]],items:[[Infinity,'かわはぎ','カワハギ']]},
+  {id:'kisu',tab:'キス',name:'キス（シロギス）',unit:'全長',c:'#4FA3C7',min:10,max:32,def:20,sizes:[[15,30],[20,70],[25,130],[30,220]],items:[[Infinity,'きす','キス']]},
+  {id:'magochi',tab:'マゴチ',name:'マゴチ',unit:'全長',c:'#8C7B5A',min:30,max:80,def:55,sizes:[[40,500],[50,1000],[60,1800],[70,3000]],items:[[Infinity,'こち','マゴチ']]},
+  {id:'yariika',tab:'ヤリイカ',name:'ヤリイカ',unit:'胴長',c:'#C25B8E',cnt:'杯',min:10,max:45,def:25,sizes:[[15,80],[20,150],[25,250],[30,350],[35,450]],items:[[Infinity,'やりいか','ヤリイカ']]},
+  {id:'tako',tab:'タコ',name:'タコ（マダコ）',unit:'重さ',c:'#C0392B',cnt:'杯',byWeight:true,step:100,min:200,max:5000,def:1000,sizes:[],items:[[Infinity,'たこ','マダコ']]}
 ];
+// 似た魚が並ぶように並べ替える
+const ORDER=['aji','saba','buri','kanpachi','hiramasa','sawara','madai','amadai','kurodai','suzuki','isaki','ishidai','hirame','magochi','kamasu','tachiuo','kisu','kawahagi','kasago','mebaru','kijihata','ainame','aori','yariika','tako'];
+FISH.sort((a,b)=>ORDER.indexOf(a.id)-ORDER.indexOf(b.id));
 // 表の点のあいだは対数で補間し、表の外は「重さは長さの3乗に比例」で延ばす
 function weight(f,cm){
+  if(f.byWeight)return cm;
   const s=f.sizes;
   if(cm<=s[0][0])return s[0][1]*Math.pow(cm/s[0][0],3);
   const last=s[s.length-1];
@@ -411,7 +431,7 @@ function render(){
   $('priceK').textContent=`1${U}の値段の目安`;$('nU').textContent=U;
   $('fn').textContent=F.name;
   $('when').textContent=M===monthJST()?'THIS MONTH':M+'月に釣ったら';
-  $('sizeK').textContent=`サイズ（${F.unit}）`;
+  $('sizeK').textContent=F.byWeight?'重さ':`サイズ（${F.unit}）`;$('cmU').textContent=F.byWeight?'g':'cm';
   $('cm').value=CM;$('range').value=CM;
   $('price').innerHTML=`${yen(r.price)}<small>円</small>`;
   $('word').textContent=w;$('wsub').textContent=ws;
@@ -441,20 +461,21 @@ function renderRank(){
 }
 function setFish(id){
   F=FISH.find(f=>f.id===id);CM=F.def;
-  $('range').min=F.min;$('range').max=F.max;
+  $('range').min=F.min;$('range').max=F.max;$('range').step=F.step||1;$('cm').step=F.step||1;
   render();
 }
 function setCm(v){
   v=Math.round(Number(v));
   if(!v||v<1)return;
-  CM=Math.min(v,200);render();
+  CM=Math.min(v,F.byWeight?10000:200);render();
 }
 $('tabs').innerHTML=FISH.map(f=>`<button class="tab" type="button" data-k="${f.id}">${f.tab}</button>`).join('');
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setFish(b.dataset.k));
 $('cm').addEventListener('change',e=>setCm(e.target.value));
 $('range').addEventListener('input',e=>setCm(e.target.value));
-$('cmDown').onclick=()=>setCm(CM-1);
-$('cmUp').onclick=()=>setCm(CM+1);
+$('cmDown').onclick=()=>setCm(CM-(F.step||1));
+$('cmUp').onclick=()=>setCm(CM+(F.step||1));
+const sizeTxt=()=>F.byWeight?(CM>=1000?(CM/1000)+'kg':CM+'g'):CM+'cm';
 $('n').addEventListener('change',e=>{N=Math.max(1,Math.min(999,Math.floor(Number(e.target.value))||1));render();});
 $('nDown').onclick=()=>{if(N>1){N--;render();}};
 $('nUp').onclick=()=>{if(N<999){N++;render();}};
@@ -465,7 +486,7 @@ const SHARE_TAGS=[['釣果','釣った魚の値段'],['tsuriboon','ツリブー�
 function shareText(){
   const r=calc(),tags=SHARE_TAGS.map(l=>l.map(t=>'#'+t).join(' ')).join('\n');
   const U=F.cnt||'尾',total=N>1?`×${N}${U}で約${yen(r.price*N)}円分`:`は約${yen(r.price)}円`;
-  return `【あなたの魚はいくら？】\n${F.tab}${CM}cm${total}「${rank(r.price*N)[0]}」🎣\n▼あなたの釣果も換算してみる\n${SHARE_URL}\n\n${tags}`;
+  return `【あなたの魚はいくら？】\n${F.tab}${sizeTxt()}${total}「${rank(r.price*N)[0]}」🎣\n▼あなたの釣果も換算してみる\n${SHARE_URL}\n\n${tags}`;
 }
 function xIntent(text){return 'https://x.com/intent/post?text='+encodeURIComponent(text);}
 function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
@@ -480,7 +501,7 @@ async function drawShare(){
   rr(c,44,44,1100,520,32);c.fillStyle='#fff';c.fill();c.lineWidth=5;c.strokeStyle=ink;c.stroke();
   rr(c,84,80,420,58,29);c.fillStyle='#FFC53D';c.fill();c.lineWidth=3;c.stroke();
   c.fillStyle=ink;c.font=`800 28px ${FT}`;c.textBaseline='middle';c.fillText('あなたの魚はいくら？',112,110);
-  c.textBaseline='alphabetic';c.font=`800 64px ${FT}`;c.fillStyle=ink;c.fillText(`${F.tab} ${CM}cm`+(N>1?` ×${N}${F.cnt||'尾'}`:''),84,232);
+  c.textBaseline='alphabetic';c.font=`800 64px ${FT}`;c.fillStyle=ink;c.fillText(`${F.tab} ${sizeTxt()}`+(N>1?` ×${N}${F.cnt||'尾'}`:''),84,232);
   c.font=`800 40px ${FT}`;c.fillStyle=acc;c.fillText(`約${yen(N>1?r.price*N:r.price)}円${N>1?'分':''}`,84,300);
   c.font=`800 92px ${FT}`;c.fillStyle=ink;c.fillText(w,84,412);
   c.font=`700 30px ${FT}`;c.fillStyle=sub;c.fillText(ws,84,462);
