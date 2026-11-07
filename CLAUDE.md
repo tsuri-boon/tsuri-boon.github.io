@@ -195,12 +195,13 @@ Claude Code は**該当箇所にプレースホルダーのコメントだけ残
 
 ---
 
-## 記事作成後：更新日と著者プロフィールの枠
+## 記事作成後：パンくずリスト・更新日・著者プロフィールの枠
 
-記事を追加・更新したら、コミット前に **`node tools/make-byline.js`** を実行して、H1の下に「更新日」の行、ページのいちばん下（`</main>` の直前）に著者プロフィールの枠（ABOUT ME）を入れる。`tools/make-osusume.js` のあとに実行する。
+記事を追加・更新したら、コミット前に **`node tools/make-byline.js`** を実行して、ページの上（`<main>` のすぐ下）にパンくずリストと「PR表記（左）・更新日（右）」の行、ページのいちばん下（`</main>` の直前）に著者プロフィールの枠（ABOUT ME）を入れる。`tools/make-osusume.js` のあとに実行する（図鑑にカードを足してから実行すると、パンくずに正しい魚種が入る）。
 
+- パンくずは、ルアー記事が「トップ › ルアー図鑑 › 魚種 › 記事名」（魚種は図鑑の `data-category`、リンク先は `lure-zukan.html?cat=魚種`）、メーカー記事（`maker-zukan.html` か `tools/make-osusume.js` の `MAKER_PAGES`）が「トップ › メーカー図鑑 › 記事名」、それ以外が「トップ › 記事一覧（sitemap.html） › 記事名」。構造化データの `BreadcrumbList` もスクリプトが同じ内容で作り直すので、記事に手で書かない（記事名を変えたいときは `BreadcrumbList` の最後の `name` を直して実行する）。
 - 更新日は構造化データの `dateModified`（無ければ `datePublished`）から作る。内容を変えた記事は `dateModified` を更新してから実行する。全ページ一括の機械的な変更では `dateModified` を変えない。
-- 記事内の `<!-- 更新日 start -->` 〜 end と `<!-- 著者 start -->` 〜 end の範囲だけをスクリプトが書き換える。**この範囲は手で編集しない。** 枠の文章やアイコンは `tools/make-byline.js` の `AUTHOR` で変える。
+- 記事内の `<!-- パンくず start -->`・`<!-- パンくず構造化データ start -->`・`<!-- 更新日 start -->`・`<!-- 著者 start -->` 〜 end の範囲だけをスクリプトが書き換える。**この範囲は手で編集しない。** 枠の文章やアイコンは `tools/make-byline.js` の `AUTHOR` で変える。
 - 著者は `meta author`・構造化データの `author` とも「こすけ」（Person。`url` は `tsuri-boon.html`）。プロフィールは `tsuri-boon.html` の `#author`。
 - 身を守るため、サイトに「個人で運営」のような表現は書かない。
 

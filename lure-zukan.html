@@ -16711,6 +16711,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const q = new URLSearchParams(location.search).get("q");
   if (q) searchInput.value = q;
 
+  // 記事のパンくずリストから ?cat=魚種 付きで開いたときは、その魚種で絞り込んだ状態にする
+  const cat = new URLSearchParams(location.search).get("cat");
+  const catButton = cat && Array.from(filterButtons).find(btn => btn.dataset.filter === cat);
+  if (catButton) {
+    catButton.click();
+    activeFilters = selectedFilters();
+    refreshApplyButton();
+  }
+
   updateList();
 });
 </script>

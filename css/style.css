@@ -1841,9 +1841,52 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
   background: linear-gradient(transparent 60%, #c6f2c0 60%);
 }
 
-/* 記事の更新日（H1の下） */
+/* 記事のいちばん上：パンくずリスト */
+.breadcrumb {
+  margin: 10px 0 0;
+  font-size: 0.75rem;
+  color: #666;
+  line-height: 1.6;
+}
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.breadcrumb li + li::before {
+  content: "›";
+  margin: 0 6px;
+  color: #aaa;
+}
+.breadcrumb a {               /* ヘッダーメニュー用の nav a（白文字・余白・16px）を打ち消す */
+  margin: 0;
+  color: #0099CC;
+  font-size: inherit;
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+.breadcrumb li[aria-current] {
+  color: #666;
+}
+
+/* PR表記（左）と更新日（右）の行 */
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin: 8px 0 0;
+}
+.article-meta .pr-note {
+  margin: 0;
+}
 .article-date {
-  margin: 4px 0 12px;
+  margin: 0 0 0 auto;
   color: #666;
   font-size: 0.8rem;
 }
