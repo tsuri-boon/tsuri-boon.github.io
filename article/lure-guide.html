@@ -245,9 +245,19 @@ html{scroll-behavior:smooth}
   .cat-desc{margin-left:0}
 }
 </style>
+  <!-- パンくず構造化データ start -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"トップ","item":"https://tsuri-boon.github.io/index.html"},{"@type":"ListItem","position":2,"name":"【図解】プラグの種類まとめ 見るだけでわかる初心者ガイド","item":"https://tsuri-boon.github.io/article/lure-guide.html"}]}
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "トップ", "item": "https://tsuri-boon.github.io/"},
+      {"@type": "ListItem", "position": 2, "name": "記事一覧", "item": "https://tsuri-boon.github.io/sitemap.html"},
+      {"@type": "ListItem", "position": 3, "name": "【図解】プラグの種類まとめ 見るだけでわかる初心者ガイド", "item": "https://tsuri-boon.github.io/article/lure-guide.html"}
+    ]
+  }
   </script>
+  <!-- パンくず構造化データ end -->
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YGK5NJLT"></script>
   <script>
@@ -265,11 +275,12 @@ html{scroll-behavior:smooth}
 <!-- 手動編集エリア: 共通ヘッダーをここに挿入 -->
 
 <main class="guide-wrap">
+  <!-- パンくず start --><nav class="breadcrumb" aria-label="パンくずリスト"><ol><li><a href="../index.html">トップ</a></li><li><a href="../sitemap.html">記事一覧</a></li><li aria-current="page">【図解】プラグの種類まとめ 見るだけでわかる初心者ガイド</li></ol></nav><!-- パンくず end -->
+  <!-- 更新日 start --><div class="article-meta"><p class="article-date">更新日：2026年7月8日</p></div><!-- 更新日 end -->
 
 <header class="hero">
   <span class="eyebrow">TSURI-BOON LURE GUIDE</span>
   <h1 class="disp">【図解】プラグの種類まとめ<br><span class="accent">見るだけでわかる</span>初心者ガイド</h1>
-    <!-- 更新日 start --><p class="article-date">更新日：2026年7月8日</p><!-- 更新日 end -->
   <p class="hero-sub">ミノー?ペンシル?ポッパー?——似た形だらけのプラグを、分類ツリーと海の断面図でまるごと整理します。</p>
   <div class="hero-chips"><span>図解たっぷり</span><span>初心者OK</span><span>保存版</span></div>
   <svg class="hero-lure" viewBox="0 0 200 64" aria-hidden="true"><path d="M30 30 Q70 16 130 22 Q165 26 175 32 Q165 38 130 40 Q70 44 30 34 Z" fill="rgba(255,255,255,.85)"/><circle cx="150" cy="29" r="3" fill="#14344f"/><path d="M38 34 Q30 46 40 48 Q44 40 46 36 Z" fill="rgba(255,255,255,.6)"/></svg>
