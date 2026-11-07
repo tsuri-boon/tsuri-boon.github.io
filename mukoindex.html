@@ -157,6 +157,19 @@ img{max-width:100%}
 .wkMain b{font-weight:800;color:var(--c-brand);font-size:16px}
 .wkSrc{font-size:9.5px;color:var(--c-sub);font-weight:700;margin-top:6px}
 
+/* 直近3日の釣果 */
+.rcTbl{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:var(--line);border-radius:14px;box-shadow:var(--pop-sm);overflow:hidden;font-size:12.5px}
+.rcTbl th,.rcTbl td{padding:7px 8px;text-align:center;border-bottom:1.5px solid #dfeef4}
+.rcTbl tr:last-child td{border-bottom:none}
+.rcTbl th{background:var(--c-ink);color:#fff;font-size:11px;font-weight:800}
+.rcTbl td:first-child{font-family:"Oswald";font-weight:700;white-space:nowrap}
+.rcTbl .n{font-family:"Oswald";font-size:15px;font-weight:700}
+.rcTbl .mx{color:var(--c-orange);font-weight:800}
+.rcTbl .ix{display:block;font-size:9.5px;font-weight:700;color:var(--c-sub)}
+.rcTbl .zero{color:var(--c-sub)}
+.rcSrc{font-size:10px;font-weight:700;color:var(--c-sub);line-height:1.6;margin-top:8px}
+.rcSrc a{color:var(--c-sub)}
+
 /* おすすめ記事 */
 .recBlock{margin-top:32px}
 .article-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
@@ -239,6 +252,11 @@ img{max-width:100%}
     </button>
   </div>
     
+  <div class="block" id="recentBlock" hidden>
+    <div class="blockHead"><span class="blockIcon">🎣</span><span class="blockTitle">直近3日の青物釣果</span></div>
+    <div id="recent"></div>
+  </div>
+
   <div class="block">
     <div class="blockHead"><span class="blockIcon">📅</span><span class="blockTitle">釣れる日はいつ？ 釣果指数カレンダー</span></div>
     <div id="cal"></div>
@@ -385,6 +403,19 @@ function weeklyHtml(){
     <div class="wkSrc">直近7日の渡船釣果より・${WEEKLY.updated}更新</div>
   </div>`;
 }
+function recent(){
+  // 武庫川渡船の釣果報告のあった直近3日（predict.py の recent）。データが無ければ枠ごと出さない
+  const rs=D.recent;
+  if(!rs||!rs.length)return;
+  const td=(r,k)=>{
+    const x=r[k],ix=(D[k].find(y=>y.d===r.d)||{}).i;
+    return `<td class="${x.n?'':'zero'}"><span class="n">${x.n}</span>匹${x.max?` <span class="mx">最大${x.max}cm</span>`:''}${ix!=null?`<span class="ix">指数 ${ix}</span>`:''}</td>`;};
+  document.getElementById('recent').innerHTML=`<table class="rcTbl">
+    <tr><th>日付</th><th>ブリ系</th><th>サワラ系</th></tr>`
+    +rs.map(r=>{const dt=new Date(r.d);return `<tr><td>${dt.getMonth()+1}/${dt.getDate()}(${r.w})</td>${td(r,'buri')}${td(r,'sawara')}</tr>`;}).join('')
+    +`</table><div class="rcSrc">※<a href="https://www.amagyo.com/choukax.php" target="_blank" rel="noopener">武庫川渡船</a>の釣果報告をもとに集計（釣果報告のあった日のみ）。</div>`;
+  document.getElementById('recentBlock').hidden=false;
+}
 function trackHtml(i){
   // 指数の帯ごとの過去の実績（predict.py が直近5年を答えを見ずに予測して集計）
   const b=D.track&&D.track[K]&&D.track[K].find(x=>i>=x.lo&&i<=x.hi);
@@ -530,7 +561,7 @@ dk.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches
   if(Math.abs(dx)>40){dx<0?document.getElementById('next').click():document.getElementById('prev').click();}x0=null;});
 fetch('data/mukoindex.json',{cache:'no-cache'}).then(r=>r.json()).then(j=>{
   D=j;WEEKLY=j.weekly;
-  render();loadWeather();
+  render();recent();loadWeather();
 });
 </script>
 </body>
