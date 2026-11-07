@@ -76,11 +76,17 @@ async function inspect(tok, url) {
   }
   if (arg('--limit')) urls = urls.slice(0, Number(arg('--limit')));
   console.log(`チェックするURL: ${urls.length}件`);
-  const tok = await token();
+  let tok = await token();
   let n = 0;
   for (const u of urls) {
     try {
-      out[u] = { ...(await inspect(tok, u)), checkedAt: today };
+      try {
+        out[u] = { ...(await inspect(tok, u)), checkedAt: today };
+      } catch (e) {
+        if (!/^401 /.test(e.message)) throw e;
+        tok = await token(); // アクセストークンは1時間で切れるので、切れたら取り直してもう一度
+        out[u] = { ...(await inspect(tok, u)), checkedAt: today };
+      }
     } catch (e) {
       console.error('失敗:', u, e.message);
       if (/429|RESOURCE_EXHAUSTED/.test(e.message)) { console.error('APIの上限に達したので止めます。明日また実行してください。'); break; }
