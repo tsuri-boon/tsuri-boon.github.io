@@ -1,4 +1,4 @@
-// sitemap.xml（検索エンジン用）と sitemap.html（人が見る用のサイトマップページ）を生成する
+// sitemap.xml・sitemap.txt（検索エンジン用）と sitemap.html（人が見る用のサイトマップページ）を生成する
 //   使い方：リポジトリのルートで `node tools/make-sitemap.js`
 //   - トップ階層の主要ページと article/ 内の全記事（.html）を載せる
 //   - sitemap.html は、ルアー記事を lure-zukan.html の魚種ごとに、メーカー記事を maker-zukan.html のリンクから分け、
@@ -57,6 +57,11 @@ const xml = [
 
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml);
 console.log(`sitemap.xml を作成しました（${pages.length} ページ）`);
+
+// ---- sitemap.txt（テキスト形式のサイトマップ。1行に1URL、sitemap.xml と同じページ・同じ順番）----
+const txt = pages.map(p => BASE + (p === 'index.html' ? '' : p)).join('\n') + '\n';
+fs.writeFileSync(path.join(ROOT, 'sitemap.txt'), txt);
+console.log(`sitemap.txt を作成しました（${pages.length} ページ）`);
 
 // ---- sitemap.html ----
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
