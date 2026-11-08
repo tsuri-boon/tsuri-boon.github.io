@@ -116,6 +116,35 @@ const authorBox = nl => [
   `  ${END}`,
 ].join(nl);
 
+// 「人気記事はこちら」のカード：今あるカードは残し、POPULAR の順に足りない記事を足して4枚にそろえる（そのページ自身は入れない）
+const POPULAR_MAX = 4;
+const POPULAR = [
+  ['tungsten-price.html', '../image/tungsten-price.jpg', 'タングステン高騰はいつまで？', 'TGベイトもシンカーも値上げ…タングステン高騰はいつまで？'],
+  ['2026-new-egi.html', '../image/2026-new-egi.jpg', '2026年新作エギまとめ', '2026年新作エギまとめ｜注目の9種をメーカー別に紹介'],
+  ['2026-new-lure.html', '../image/2026-new-lure.jpg', '2026年発売新作ルアー', '2026年新作ルアーまとめ＜メーカー別一覧＞'],
+  ['mukogawa-kakushi-lure.html', '../image/mukogawa-kakushi-lure.jpg', '武庫川隠れた名作ルアー', '武庫川一文字で釣れてる人が使っている隠れた名作ルアー4選'],
+  ['dress2025_bestbuyrank.html', '../image/dress2025_bestbuyrank.jpg', '2025年買ってよかったルアーランキング', '2025年買ってよかったルアーランキング'],
+];
+function fillPopular(html, f, nl) {
+  const p = html.indexOf('<p>人気記事はこちら</p>');
+  if (p < 0) return html;
+  const open = html.indexOf('<div class="article-cards">', p);
+  if (open < 0) return html;
+  const close = html.indexOf('</div>', open);
+  const block = html.slice(open, close);
+  const have = [...block.matchAll(/<a href="([^"]+)" class="article-card">/g)].map(m => m[1]);
+  const add = POPULAR.filter(([href]) => href !== f && !have.includes(href)).slice(0, Math.max(0, POPULAR_MAX - have.length));
+  if (!add.length) return html;
+  const cards = add.map(([href, img, alt, title]) => [
+    `      <a href="${href}" class="article-card">`,
+    `        <img src="${img}" alt="${alt}">`,
+    `        <h3>${title}</h3>`,
+    '      </a>',
+  ].join(nl)).join(nl);
+  const ls = html.lastIndexOf('\n', close) + 1;  // 閉じタグの行の頭に入れる
+  return html.slice(0, ls) + cards + nl + html.slice(ls);
+}
+
 let count = 0;
 for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.has(x))) {
   const p = path.join(DIR, f);
@@ -125,6 +154,7 @@ for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.
 
   // 著者の枠（いったん消して、</main> の直前＝ページのいちばん下に置く）
   if (!html.includes('</main>')) continue;
+  html = fillPopular(html, f, nl);
   const oldBox = new RegExp(`[ \\t]*${START}[\\s\\S]*?${END}(\\r?\\n)*`, 'g');
   html = html.replace(oldBox, '');
   const i = html.lastIndexOf('</main>');
