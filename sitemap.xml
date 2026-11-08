@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tsuri-boon.github.io/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -1276,6 +1276,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://tsuri-boon.github.io/article/kansai-release-size.html</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://tsuri-boon.github.io/article/katakuchijohnny125s.html</loc>
     <lastmod>2026-11-03</lastmod>
     <priority>0.7</priority>
@@ -1443,6 +1448,11 @@
   <url>
     <loc>https://tsuri-boon.github.io/article/ls450xd.html</loc>
     <lastmod>2026-11-03</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tsuri-boon.github.io/article/lunker-size.html</loc>
+    <lastmod>2026-11-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
