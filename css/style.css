@@ -54,6 +54,16 @@ h2 {
   margin: 40px 0 20px;
 }
 
+/* 記事のあとの「関連リンク」は、本文の見出し・文字より小さめにする */
+.article-main > article.lure-article + h2 {
+  font-size: 16px;
+  margin: 32px 0 10px;
+}
+.article-main > article.lure-article + h2 + ul {
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
 /* h3: サブセクション用 */
 h3 {
   font-size: 18px;
