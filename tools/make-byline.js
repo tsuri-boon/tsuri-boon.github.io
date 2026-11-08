@@ -183,6 +183,28 @@ const toolsBlock = (f, nl) => [
   `  ${TOOLS_END}`,
 ].join(nl);
 
+// サワラ向けのブレードジグの記事：「ワンポイント」の段落のあとに、ワイヤーリーダーをすすめる欄（アフィリンク付き）を入れる
+//   対象は WIRE_TARGETS。リンクは tools/parts/wire-leader-link.html（差し替えるときはこのファイルを直して実行する）
+const WIRE_START = '<!-- ワイヤーリーダー start -->';
+const WIRE_END = '<!-- ワイヤーリーダー end -->';
+const WIRE_TARGETS = new Set([
+  'bladeshotel', 'bladelance', 'bomberspin', 'corojigblade', 'corojigbladeslim', 'dragmetalbletch', 'dragmetalssblade',
+  'edgeblade', 'jackeyemakimaki', 'jigparahighspin', 'metalmagicslim', 'metalmagictg', 'pboyblade', 'rayzaa',
+  'samuraijigrspin', 'slowmark', 'tgstrike', 'zblade', 'bigbacker-eblade', 'bigbacker-eblade-w',
+].map(x => x + '.html'));
+const wireLink = fs.readFileSync(path.join(__dirname, 'parts', 'wire-leader-link.html'), 'utf8').trim().split(/\r?\n/);
+const wireBlock = nl => [
+  `    ${WIRE_START}`,
+  '    <h3>サワラ狙いならワイヤーリーダーも</h3>',
+  '    <p>',
+  '      サワラ・サゴシの鋭い歯でリーダーごとジグを切られないように、<span class="marker-green">ジグの前に30cm以内の短いワイヤーリーダーを付けておく</span>と安心です。カッターが少ない日は外して、状況に合わせて使い分けましょう。くわしくは<a href="sawara-bladejigging.html#wire">サワラのブレードジギング完全ガイド</a>で紹介しています。',
+  '    </p>',
+  '    <div class="affiliate-box">',
+  ...wireLink.map(l => (l.trim() ? '      ' + l : l)),
+  '    </div>',
+  `    ${WIRE_END}`,
+].join(nl);
+
 let count = 0;
 for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.has(x))) {
   const p = path.join(DIR, f);
@@ -198,6 +220,16 @@ for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.
   const i = html.lastIndexOf('</main>');
   const head = html.slice(0, i).replace(/\s*$/, '');
   html = `${head}${nl}${nl}  ${authorBox(nl)}${nl}${html.slice(i)}`;
+
+  // ワイヤーリーダーの欄（対象の記事だけ。いったん消して、ワンポイントの段落のあとに入れる）
+  html = html.replace(new RegExp(`(\\r?\\n)*[ \\t]*${WIRE_START}[\\s\\S]*?${WIRE_END}`, 'g'), '');
+  if (WIRE_TARGETS.has(f)) {
+    const w = html.indexOf('<h3>ワンポイント</h3>');
+    if (w >= 0) {
+      const e = html.indexOf('</p>', w) + 4;
+      html = html.slice(0, e) + nl + nl + wireBlock(nl) + html.slice(e);
+    }
+  }
 
   // 便利ツール（いったん消して、オススメ記事の下＝無ければ著者の枠の上に入れる）
   html = html.replace(new RegExp(`[ \\t]*${TOOLS_START}[\\s\\S]*?${TOOLS_END}(\\r?\\n)*`, 'g'), '');

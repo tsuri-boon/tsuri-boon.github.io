@@ -3,7 +3,7 @@
 //   - トップ階層の主要ページと article/ 内の全記事（.html）を載せる
 //   - sitemap.html は、ルアー記事を lure-zukan.html の魚種ごとに、メーカー記事を maker-zukan.html のリンクから分け、
 //     残りの記事を「まとめ・ガイド記事」にする
-//   - lastmod は各ファイルの最終コミット日。未コミットの変更があるファイルは今日の日付
+//   - lastmod は構造化データの dateModified（無ければ datePublished）。どちらも無いページは最終コミット日（未コミットの変更があれば今日）
 //   - 載せたくないページは EXCLUDE に追加する
 const fs = require('fs');
 const path = require('path');
@@ -26,6 +26,11 @@ const git = (cmd) => execSync(cmd, { cwd: ROOT, encoding: 'utf8' }).trim();
 const changed = new Set(execSync('git status --porcelain', { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean).map(l => l.slice(3).replace(/"/g, '')));
 
 function lastmod(rel) {
+  // 構造化データの dateModified（無ければ datePublished）があればそれを使う。画面の「更新日」と同じで、
+  // 本文を変えていない一括変更（オススメ記事・人気記事・便利ツールなど）では日付が変わらない
+  const h = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  const m = h.match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})/) || h.match(/"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})/);
+  if (m) return m[1];
   if (changed.has(rel)) return todayStr;
   const d = git(`git log -1 --format=%cs -- "${rel}"`);
   return d || todayStr;
