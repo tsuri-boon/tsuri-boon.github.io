@@ -118,7 +118,7 @@ const authorBox = nl => [
 
 // 「人気記事はこちら」のカード：今あるカードは残し、POPULAR の順に足りない記事を足して4枚にそろえる（そのページ自身は入れない）
 //   エギングのページ（図鑑の魚種がエギング、またはファイル名に egi/eging を含むまとめ）は POPULAR_EGI、それ以外は POPULAR を使う。
-//   エギング以外のページに付いている「2026年新作エギまとめ」のカードは外す
+//   エギング以外のページからは「2026年新作エギまとめ」、エギングのページからは「サワラのブレードジギング」のカードを外す
 const POPULAR_MAX = 4;
 const CARD = {
   tungsten: ['tungsten-price.html', '../image/tungsten-price.jpg', 'タングステン高騰はいつまで？', 'TGベイトもシンカーも値上げ…タングステン高騰はいつまで？'],
@@ -137,9 +137,11 @@ function fillPopular(html, f, nl) {
   const open = html.indexOf('<div class="article-cards">', p);
   if (open < 0) return html;
   const egiPage = isEgiPage(f);
-  if (!egiPage) {
+  {
+    // エギング以外のページからは新作エギ、エギングのページからはサワラのカードを外す（見本の記事から写したカードも直す）
+    const drop = egiPage ? 'sawara-bladejigging\\.html' : '2026-new-egi\\.html';
     const end = html.indexOf('</div>', open);
-    const block = html.slice(open, end).replace(/[ \t]*<a href="2026-new-egi\.html" class="article-card">[\s\S]*?<\/a>\r?\n/, '');
+    const block = html.slice(open, end).replace(new RegExp(`[ \\t]*<a href="${drop}" class="article-card">[\\s\\S]*?<\\/a>\\r?\\n`), '');
     html = html.slice(0, open) + block + html.slice(end);
   }
   const close = html.indexOf('</div>', open);
