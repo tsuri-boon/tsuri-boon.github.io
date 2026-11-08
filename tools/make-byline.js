@@ -185,6 +185,32 @@ const toolsBlock = (f, nl) => [
   `  ${TOOLS_END}`,
 ].join(nl);
 
+// 「定番記事はこちら」：便利ツールの下に、人気記事と同じカードで並べる（そのページ自身は入れない）
+//   ここに入れる記事は tools/make-osusume.js の HIDE にも入れて、オススメ記事には出さない
+const BASICS_START = '<!-- 定番記事 start -->';
+const BASICS_END = '<!-- 定番記事 end -->';
+const BASICS = [
+  ['kansai-fishing-calendar.html', '../image/kansai-fishing-calendar.jpg', '関西の釣れる魚カレンダー', '関西の釣れる魚カレンダー｜大阪湾・播磨灘の釣れる時期'],
+  ['fishing-calendar-zenkoku.html', '../image/fishing-calendar-zenkoku.jpg', '釣れる魚カレンダー【全国版】', '釣れる魚カレンダー【全国版】｜魚ごとの釣れる時期と適水温'],
+  ['kansai-release-size.html', '../image/kansai-release-size.jpg', '関西のリリースサイズと抱卵時期', '関西のリリースサイズと抱卵時期まとめ'],
+  ['lunker-size.html', '../image/lunker-size.jpg', 'ランカーサイズの目安一覧', 'ランカーサイズの目安一覧｜尺メバル・座布団ヒラメは何cmから？'],
+];
+const basicsBlock = (f, nl) => [
+  BASICS_START,
+  '  <div>',
+  '    <p>定番記事はこちら</p>',
+  '    <div class="article-cards">',
+  ...BASICS.filter(([href]) => href !== f).map(([href, img, alt, title]) => [
+    `      <a href="${href}" class="article-card">`,
+    `        <img src="${img}" alt="${alt}" loading="lazy">`,
+    `        <h3>${title}</h3>`,
+    '      </a>',
+  ].join(nl)),
+  '    </div>',
+  '  </div>',
+  `  ${BASICS_END}`,
+].join(nl);
+
 // サワラ向けのブレードジグの記事：「ワンポイント」の段落のあとに、ワイヤーリーダーをすすめる欄（アフィリンク付き）を入れる
 //   対象は WIRE_TARGETS。リンクは tools/parts/wire-leader-link.html（差し替えるときはこのファイルを直して実行する）
 const WIRE_START = '<!-- ワイヤーリーダー start -->';
@@ -244,6 +270,13 @@ for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.
       const at = html.lastIndexOf('\n', html.indexOf(START)) + 1;
       html = html.slice(0, at) + '  ' + toolsBlock(f, nl) + nl + nl + html.slice(at);
     }
+  }
+
+  // 定番記事（いったん消して、便利ツールのすぐ下に入れる）
+  html = html.replace(new RegExp(`[ \\t]*${BASICS_START}[\\s\\S]*?${BASICS_END}(\\r?\\n)*`, 'g'), '');
+  if (f !== 'lure_template.html' && html.includes(TOOLS_END)) {
+    const at = html.indexOf('\n', html.indexOf(TOOLS_END)) + 1;
+    html = html.slice(0, at) + nl + '  ' + basicsBlock(f, nl) + nl + html.slice(at);
   }
 
   // 更新日（PR表記と同じ行の右）。前に入れた行はいったん消し、PR表記は元に戻す

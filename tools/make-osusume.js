@@ -15,7 +15,8 @@ const ROOT = path.resolve(__dirname, '..');
 const ART = path.join(ROOT, 'article');
 const COUNT = 12;
 const EXCLUDE = new Set(['privacy', 'lure_template', 'shop-links']); // shop-links はショップリンク専用ページ（noindex）
-const HIDE = new Set(['fish-price', 'fish-price-calc']); // ほかの記事のオススメ欄には出さない記事（自分のオススメ欄は作る）
+// ほかの記事のオススメ欄には出さない記事（自分のオススメ欄は作る）。定番記事は make-byline.js の「定番記事はこちら」に出すのでここでは外す
+const HIDE = new Set(['fish-price', 'fish-price-calc', 'kansai-fishing-calendar', 'fishing-calendar-zenkoku', 'kansai-release-size', 'lunker-size']);
 const SHORT = { 'フラットフィッシュ': 'フラット', 'ライトゲーム': 'ライト' }; // ラベルが長いものは短くする
 const START = '<!-- オススメ記事 start -->';
 const END = '<!-- オススメ記事 end -->';
