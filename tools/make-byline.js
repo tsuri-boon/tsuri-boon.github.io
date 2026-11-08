@@ -117,23 +117,35 @@ const authorBox = nl => [
 ].join(nl);
 
 // 「人気記事はこちら」のカード：今あるカードは残し、POPULAR の順に足りない記事を足して4枚にそろえる（そのページ自身は入れない）
+//   エギングのページ（図鑑の魚種がエギング、またはファイル名に egi/eging を含むまとめ）は POPULAR_EGI、それ以外は POPULAR を使う。
+//   エギング以外のページに付いている「2026年新作エギまとめ」のカードは外す
 const POPULAR_MAX = 4;
-const POPULAR = [
-  ['tungsten-price.html', '../image/tungsten-price.jpg', 'タングステン高騰はいつまで？', 'TGベイトもシンカーも値上げ…タングステン高騰はいつまで？'],
-  ['2026-new-egi.html', '../image/2026-new-egi.jpg', '2026年新作エギまとめ', '2026年新作エギまとめ｜注目の9種をメーカー別に紹介'],
-  ['2026-new-lure.html', '../image/2026-new-lure.jpg', '2026年発売新作ルアー', '2026年新作ルアーまとめ＜メーカー別一覧＞'],
-  ['mukogawa-kakushi-lure.html', '../image/mukogawa-kakushi-lure.jpg', '武庫川隠れた名作ルアー', '武庫川一文字で釣れてる人が使っている隠れた名作ルアー4選'],
-  ['dress2025_bestbuyrank.html', '../image/dress2025_bestbuyrank.jpg', '2025年買ってよかったルアーランキング', '2025年買ってよかったルアーランキング'],
-];
+const CARD = {
+  tungsten: ['tungsten-price.html', '../image/tungsten-price.jpg', 'タングステン高騰はいつまで？', 'TGベイトもシンカーも値上げ…タングステン高騰はいつまで？'],
+  sawara: ['sawara-bladejigging.html', '../image/sawara-bladejigging.jpg', 'サワラのブレードジギング完全ガイド', 'サワラのブレードジギング完全ガイド｜釣り方、ジグの選び方、おすすめルアー紹介'],
+  egi: ['2026-new-egi.html', '../image/2026-new-egi.jpg', '2026年新作エギまとめ', '2026年新作エギまとめ｜注目の9種をメーカー別に紹介'],
+  lure: ['2026-new-lure.html', '../image/2026-new-lure.jpg', '2026年発売新作ルアー', '2026年新作ルアーまとめ＜メーカー別一覧＞'],
+  muko: ['mukogawa-kakushi-lure.html', '../image/mukogawa-kakushi-lure.jpg', '武庫川隠れた名作ルアー', '武庫川一文字で釣れてる人が使っている隠れた名作ルアー4選'],
+  rank: ['dress2025_bestbuyrank.html', '../image/dress2025_bestbuyrank.jpg', '2025年買ってよかったルアーランキング', '2025年買ってよかったルアーランキング'],
+};
+const POPULAR = [CARD.tungsten, CARD.sawara, CARD.lure, CARD.muko, CARD.rank];
+const POPULAR_EGI = [CARD.tungsten, CARD.egi, CARD.lure, CARD.muko, CARD.rank];
+const isEgiPage = f => fishOf[f] === 'エギング' || /egi|eging/.test(f);
 function fillPopular(html, f, nl) {
   const p = html.indexOf('<p>人気記事はこちら</p>');
   if (p < 0) return html;
   const open = html.indexOf('<div class="article-cards">', p);
   if (open < 0) return html;
+  const egiPage = isEgiPage(f);
+  if (!egiPage) {
+    const end = html.indexOf('</div>', open);
+    const block = html.slice(open, end).replace(/[ \t]*<a href="2026-new-egi\.html" class="article-card">[\s\S]*?<\/a>\r?\n/, '');
+    html = html.slice(0, open) + block + html.slice(end);
+  }
   const close = html.indexOf('</div>', open);
   const block = html.slice(open, close);
   const have = [...block.matchAll(/<a href="([^"]+)" class="article-card">/g)].map(m => m[1]);
-  const add = POPULAR.filter(([href]) => href !== f && !have.includes(href)).slice(0, Math.max(0, POPULAR_MAX - have.length));
+  const add = (egiPage ? POPULAR_EGI : POPULAR).filter(([href]) => href !== f && !have.includes(href)).slice(0, Math.max(0, POPULAR_MAX - have.length));
   if (!add.length) return html;
   const cards = add.map(([href, img, alt, title]) => [
     `      <a href="${href}" class="article-card">`,
@@ -144,6 +156,32 @@ function fillPopular(html, f, nl) {
   const ls = html.lastIndexOf('\n', close) + 1;  // 閉じタグの行の頭に入れる
   return html.slice(0, ls) + cards + nl + html.slice(ls);
 }
+
+// 「便利ツールはこちら」：オススメ記事の下（無ければ著者の枠の上）に、人気記事と同じカードで4枚並べる（そのページ自身は入れない）
+const TOOLS_START = '<!-- 便利ツール start -->';
+const TOOLS_END = '<!-- 便利ツール end -->';
+const TOOLS = [
+  ['../mukoindex.html', '../image/mukoindex-card.jpg', '武庫川一文字 青物指数', '武庫川一文字 青物指数｜ブリ・サワラが釣れる日を先読み'],
+  ['../chouka-price.html', '../image/chouka-price-card.jpg', '釣果値段換算ツール', '釣果値段換算ツール｜釣った魚はいくら？'],
+  ['egi-sink-checker.html', '../image/egi-sink-checker.jpg', 'エギ沈下速度計算', 'エギ沈下速度計算｜水深ごとのフォール時間を計算'],
+  ['../lure-gatya.html', '../image/home_gacha.jpg', 'ルアーガチャ', 'ルアーガチャ｜今日投げるルアーをガチャで決めよう'],
+  ['../lure-zukan.html', '../image/home_zukan.jpg', 'ルアー図鑑', 'ルアー図鑑｜魚種・ジャンルからルアーを探す'],
+];
+const toolsBlock = (f, nl) => [
+  TOOLS_START,
+  '  <div>',
+  '    <p>便利ツールはこちら</p>',
+  '    <div class="article-cards">',
+  ...TOOLS.filter(([href]) => href !== f).slice(0, 4).map(([href, img, alt, title]) => [
+    `      <a href="${href}" class="article-card">`,
+    `        <img src="${img}" alt="${alt}" loading="lazy">`,
+    `        <h3>${title}</h3>`,
+    '      </a>',
+  ].join(nl)),
+  '    </div>',
+  '  </div>',
+  `  ${TOOLS_END}`,
+].join(nl);
 
 let count = 0;
 for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.has(x))) {
@@ -160,6 +198,19 @@ for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.
   const i = html.lastIndexOf('</main>');
   const head = html.slice(0, i).replace(/\s*$/, '');
   html = `${head}${nl}${nl}  ${authorBox(nl)}${nl}${html.slice(i)}`;
+
+  // 便利ツール（いったん消して、オススメ記事の下＝無ければ著者の枠の上に入れる）
+  html = html.replace(new RegExp(`[ \\t]*${TOOLS_START}[\\s\\S]*?${TOOLS_END}(\\r?\\n)*`, 'g'), '');
+  if (f !== 'lure_template.html') {
+    const osuEnd = html.indexOf('<!-- オススメ記事 end -->');
+    if (osuEnd >= 0) {
+      const at = html.indexOf('\n', osuEnd) + 1;
+      html = html.slice(0, at) + nl + '  ' + toolsBlock(f, nl) + nl + html.slice(at);
+    } else {
+      const at = html.lastIndexOf('\n', html.indexOf(START)) + 1;
+      html = html.slice(0, at) + '  ' + toolsBlock(f, nl) + nl + nl + html.slice(at);
+    }
+  }
 
   // 更新日（PR表記と同じ行の右）。前に入れた行はいったん消し、PR表記は元に戻す
   const date = dateOf(html);
