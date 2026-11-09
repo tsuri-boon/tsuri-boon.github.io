@@ -1984,3 +1984,37 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
   border-left: 4px solid #0099cc;
   line-height: 1.4;
 }
+
+/* ---------- 釣れる魚カレンダーの月別の表（.cal。ほかの表には影響しない） ---------- */
+.cal-note { font-size: 0.8rem; color: #667; margin: 0.6em 0 0.3em; }
+.cal-wrap { overflow-x: auto; margin: 0 0 0.6em; }
+.cal { width: 100%; border-collapse: collapse; table-layout: auto; font-size: 0.82rem; }
+.cal th, .cal td { border: 1px solid #d5dde8; text-align: center; padding: 6px 2px; line-height: 1.2; }
+.cal thead th { position: sticky; top: 0; z-index: 2; background: #1a4a7a; color: #fff; font-weight: 700; }
+.cal th[scope="row"], .cal thead th:first-child { position: sticky; left: 0; z-index: 1; text-align: left; padding: 6px 4px; white-space: nowrap; background: #fff; }
+.cal thead th:first-child { z-index: 3; background: #1a4a7a; }
+.cal th[scope="row"] a { font-weight: 700; }
+.cal td { font-weight: 700; font-family: sans-serif; }
+.cal .lv3 { background: #0b5ea8; color: #fff; }
+.cal .lv2 { background: #5aa9e6; color: #fff; }
+.cal .lv1 { background: #d3e8fa; color: #2a5f8f; }
+.cal .lv0 { background: #f1f3f5; color: #a5abb3; }
+.cal .cal-water th, .cal .cal-water td { font-size: 0.72rem; font-weight: 400; background: #eef6fc; color: #1a4a7a; }
+.cal .now { outline: 2px solid #ff6b35; outline-offset: -2px; }
+.cal thead th.now { background: #ff6b35; }
+.cal-legend { font-size: 0.85rem; line-height: 2; }
+.cal-legend span { display: inline-block; min-width: 1.6em; text-align: center; border-radius: 4px; font-weight: 700; margin-right: 2px; }
+.cal-legend .lv3 { background: #0b5ea8; color: #fff; }
+.cal-legend .lv2 { background: #5aa9e6; color: #fff; }
+.cal-legend .lv1 { background: #d3e8fa; color: #2a5f8f; }
+.cal-legend .lv0 { background: #f1f3f5; color: #a5abb3; }
+@media (max-width: 480px) {
+  .cal .sub { display: none; }
+  .cal { font-size: 0.72rem; }
+  .cal th, .cal td { padding: 5px 0; }
+  .cal th[scope="row"], .cal thead th:first-child { padding: 5px 3px; font-size: 0.7rem; }
+  .cal .cal-water th, .cal .cal-water td { font-size: 0.56rem; letter-spacing: -0.03em; }
+}
+
+/* YouTube 埋め込みの出典（.video-wrap の下） */
+.yt-cap { font-size: 12px; color: #888; text-align: right; margin-top: -12px; }
