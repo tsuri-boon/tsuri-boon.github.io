@@ -2024,8 +2024,8 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
   list-style: none;
   margin: 1em 0;
   padding: 12px 14px;
-  background: #f4f9fc;
-  border: 1px solid #dceaf3;
+  background: #fafaf8;
+  border: 1px solid #ebe8e2;
   border-radius: 10px;
 }
 .lure-article > ul:not([class]) > li {
@@ -2033,7 +2033,7 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
   margin: 0;
   padding: 8px 0 8px 1.2em;
   line-height: 1.8;
-  border-bottom: 1px dashed #d5e3ec;
+  border-bottom: 1px dashed #e6e2da;
 }
 .lure-article > ul:not([class]) > li:last-child {
   border-bottom: none;
@@ -2046,7 +2046,7 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
   width: 0.45em;
   height: 0.45em;
   border-radius: 50%;
-  background: #0099cc;
+  background: #f0a36b;
 }
 @media (max-width: 600px) {
   .lure-article > ul:not([class]) {
