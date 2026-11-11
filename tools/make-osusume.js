@@ -207,6 +207,8 @@ for (const f of targets) {
     } else at = h.lastIndexOf('</main>');
     h = h.slice(0, at) + '\n\n  ' + b + '\n' + h.slice(at);
   }
+  // 改行は CRLF にそろえる（LF が混ざると、中身が同じでも git で「変更あり」に見えてしまうため）
+  h = h.replace(/\r?\n/g, '\r\n');
   // 中身が変わらない記事は書き込まない（書き込み回数を減らしてロックのエラーを避ける）
   if (h !== before) { writeWithRetry(path.join(ART, f + '.html'), h); changed++; }
   n++;

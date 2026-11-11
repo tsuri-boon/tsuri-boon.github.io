@@ -313,6 +313,8 @@ for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.
     html = html.replace(/(<main[^>]*>)\r?\n?/, (m, tag) => `${tag}${nl}  ${crumbNav(list)}${nl}`);
   }
 
+  // 改行は CRLF にそろえる（LF が混ざると、中身が同じでも git で「変更あり」に見えてしまうため）
+  html = html.replace(/\r?\n/g, '\r\n');
   if (html !== before) { fs.writeFileSync(p, html); count++; }
 }
 console.log(`更新日と著者の枠を ${count} 記事に反映しました`);
