@@ -217,7 +217,7 @@ const WIRE_START = '<!-- ワイヤーリーダー start -->';
 const WIRE_END = '<!-- ワイヤーリーダー end -->';
 const WIRE_TARGETS = new Set([
   'bladeshotel', 'bladelance', 'bomberspin', 'corojigblade', 'corojigbladeslim', 'dragmetalbletch', 'dragmetalssblade',
-  'edgeblade', 'jackeyemakimaki', 'jigparahighspin', 'metalmagicslim', 'metalmagictg', 'pboyblade', 'rayzaa',
+  'edgeblade', 'jackeyemakimaki', 'jigparahighspin', 'metalmagicshore', 'metalmagicslim', 'metalmagictg', 'pboyblade', 'rayzaa',
   'samuraijigrspin', 'slowmark', 'tgstrike', 'zblade', 'bigbacker-eblade', 'bigbacker-eblade-w', 'tgbaitblj', 'bcustomheadbladejig',
 ].map(x => x + '.html'));
 const wireLink = fs.readFileSync(path.join(__dirname, 'parts', 'wire-leader-link.html'), 'utf8').trim().split(/\r?\n/);
