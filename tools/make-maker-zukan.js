@@ -39,6 +39,7 @@ const MAKERS = {
   'smith':            { name: 'SMITH', kana: 'スミス' },
   'rapala':           { name: 'Rapala', kana: 'ラパラ' },
   'pickup':           { name: 'PICKUP', kana: 'ピックアップ' },
+  'marujin':          { name: 'marujin', kana: 'マルジン' },
   'osp':              { name: 'O.S.P', kana: 'オーエスピー' },
   'north craft':      { name: 'NORTH CRAFT', kana: 'ノースクラフト' },
   'madotachi':        { name: 'Madotachi', kana: 'マドタチ' },
