@@ -40,7 +40,8 @@ const top = fs.readdirSync(ROOT).filter(f => f.endsWith('.html'));
 const articles = fs.readdirSync(path.join(ROOT, 'article')).filter(f => f.endsWith('.html')).map(f => 'article/' + f);
 const pages = [...top, ...articles].filter(p => !EXCLUDE.has(p));
 
-const priority = (p) => (p === 'index.html' ? '1.0' : p === 'lure-zukan.html' || p === 'maker-zukan.html' || p === 'lure-gatya.html' ? '0.9' : p.startsWith('article/') ? '0.7' : '0.5');
+const ZUKAN_PAGES = ['lure-zukan.html', 'rod-zukan.html', 'accessory-zukan.html', 'maker-zukan.html', 'lure-gatya.html'];
+const priority = (p) => (p === 'index.html' ? '1.0' : ZUKAN_PAGES.includes(p) ? '0.9' : p.startsWith('article/') ? '0.7' : '0.5');
 
 const urls = pages
   .sort((a, b) => (a === 'index.html' ? -1 : b === 'index.html' ? 1 : a.localeCompare(b)))
@@ -97,8 +98,21 @@ for (const m of zukan.matchAll(/<li class="lure-item"([^>]*)>([\s\S]*?)<\/li>/g)
   lureByFish[cat].push(rel);
 }
 
+// ロッド記事・アクセサリー記事：rod-zukan.html / accessory-zukan.html のカードの並び順（tools/make-gear-zukan.js が作る）
+const gearOf = (page) => {
+  const list = [];
+  if (!fs.existsSync(path.join(ROOT, page))) return list;
+  for (const m of read(page).matchAll(/<li class="lure-item"[^>]*>[\s\S]*?href="\/article\/([^"]+\.html)"/g)) {
+    const rel = 'article/' + m[1];
+    if (pages.includes(rel) && !used.has(rel)) { used.add(rel); list.push(rel); }
+  }
+  return list;
+};
+const rods = gearOf('rod-zukan.html');
+const accessories = gearOf('accessory-zukan.html');
+
 // 主要ページ
-const TOP_ORDER = ['index.html', 'lure-zukan.html', 'maker-zukan.html', 'lure-gatya.html', 'howto.html', 'faq.html', 'tsuri-boon.html', 'form.html', 'article/privacy.html'];
+const TOP_ORDER = ['index.html', 'lure-zukan.html', 'rod-zukan.html', 'accessory-zukan.html', 'maker-zukan.html', 'lure-gatya.html', 'howto.html', 'faq.html', 'tsuri-boon.html', 'form.html', 'article/privacy.html'];
 const mainPages = [...TOP_ORDER, ...top.sort()].filter((r, i, a) => pages.includes(r) && a.indexOf(r) === i && r !== 'sitemap.html');
 mainPages.forEach(r => used.add(r));
 
@@ -115,6 +129,8 @@ const others = pages.filter(r => r.startsWith('article/') && !used.has(r))
 const LABEL = {
   'index.html': 'トップページ',
   'lure-zukan.html': 'ルアー図鑑',
+  'rod-zukan.html': 'ロッド図鑑',
+  'accessory-zukan.html': 'アクセサリー図鑑',
   'maker-zukan.html': 'メーカー図鑑',
   'lure-gatya.html': 'ルアーガチャ',
   'howto.html': 'ルアーガチャについて',
@@ -130,6 +146,8 @@ const item = (rel, useH1) => {
 const sections = [
   ['main', '主要ページ', mainPages, false],
   ...fishOrder.map((f, i) => [`lure-${i + 1}`, `ルアー記事：${f}`, lureByFish[f], true]),
+  ['rod', 'ロッド記事', rods, true],
+  ['accessory', 'アクセサリー記事', accessories, true],
   ['maker', 'メーカー記事', makers, false],
   ['guide', 'まとめ・ガイド記事', others, false],
 ].filter(s => s[2].length);

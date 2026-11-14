@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>アクセサリー図鑑｜ウェア・タモ・収納・フックなど釣り道具を探せる!!随時更新中。｜tsuri-boon</title>
+  <meta name="description" content="ウェアやライフジャケット、タモ、収納ボックス、フックまで、釣りを快適にするアクセサリー・道具を探せる図鑑です。随時更新中。">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="こすけ">
+  <meta name="application-name" content="tsuri-boon">
+  <link rel="canonical" href="https://tsuri-boon.github.io/accessory-zukan.html">
+
+  <link rel="icon" href="./image/tsuriboon_favicon.png" type="image/png">
+
+  <meta property="og:title" content="アクセサリー図鑑｜ウェア・タモ・収納・フックなど釣り道具を探せる!!随時更新中。｜tsuri-boon">
+  <meta property="og:description" content="ウェアやライフジャケット、タモ、収納ボックス、フックまで、釣りを快適にするアクセサリー・道具を探せる図鑑です。随時更新中。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="tsuri-boon">
+  <meta property="og:url" content="https://tsuri-boon.github.io/accessory-zukan.html">
+  <meta property="og:image" content="https://tsuri-boon.github.io/image/tsuriboon_logo7.png">
+  <meta property="og:locale" content="ja_JP">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="アクセサリー図鑑｜tsuri-boon">
+  <meta name="twitter:description" content="ウェアやライフジャケット、タモ、収納ボックス、フックまで、釣りを快適にするアクセサリー・道具を探せる図鑑です。随時更新中。">
+  <meta name="twitter:image" content="https://tsuri-boon.github.io/image/tsuriboon_logo7.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "アクセサリー図鑑",
+    "description": "ウェアやライフジャケット、タモ、収納ボックス、フックまで、釣りを快適にするアクセサリー・道具を探せる図鑑です。随時更新中。",
+    "url": "https://tsuri-boon.github.io/accessory-zukan.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "tsuri-boon"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YGK5NJLT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J1YGK5NJLT');
+  </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9034047517729390"
+       crossorigin="anonymous"></script>
+</head>
+
+<body>
+<header>
+  <a href="index.html" class="logo">
+    <img src="./image/tsuriboon_logo7.png" alt="tsuri-boon ロゴ">
+  </a>
+</header>
+
+<div class="sub-nav">
+  <nav class="sub-nav-inner">
+    <a href="lure-gatya.html">ガチャページ</a>
+    <a href="tsuri-boon.html">tsuri-boonとは</a>
+    <a href="maker-zukan.html">メーカー図鑑</a>
+    <a href="lure-zukan.html">ルアー図鑑</a>
+  </nav>
+</div>
+
+<main class="encyclopedia-page">
+  <section class="encyclopedia-hero">
+    <h1>アクセサリー図鑑</h1>
+    <p class="page-description">
+      ウェアやライフジャケット、タモ、収納ボックス、フックまで、釣りを快適にするアクセサリー・道具を探せる図鑑です。随時更新中。
+    </p>
+  </section>
+
+  <section class="filter-box">
+    <p class="filter-guide">名前・メーカー名で検索、条件を選んで「この条件で絞り込む」を押すと絞り込めます。</p>
+
+    <div class="filter-box__search">
+      <input
+        type="text"
+        id="lureSearch"
+        placeholder="アクセサリー名・メーカー名で探す"
+        aria-label="アクセサリー検索"
+      >
+    </div>
+
+    <div class="filter-group">
+      <p class="filter-group__label">種類</p>
+      <div class="filter-box__tags">
+        <button type="button" class="filter-chip is-active" data-filter="all">すべて</button>
+        <button type="button" class="filter-chip" data-filter="ウェア・ライフジャケット">ウェア・ライフジャケット</button>
+        <button type="button" class="filter-chip" data-filter="ランディング・ウェーディング">ランディング・ウェーディング</button>
+        <button type="button" class="filter-chip" data-filter="収納">収納</button>
+        <button type="button" class="filter-chip" data-filter="フック・スナップ">フック・スナップ</button>
+        <button type="button" class="filter-chip" data-filter="エサ">エサ</button>
+        <button type="button" class="filter-chip" data-filter="リール">リール</button>
+      </div>
+    </div>
+
+    <div class="filter-actions">
+      <button type="button" class="filter-apply" id="filterApply">この条件で絞り込む</button>
+      <button type="button" class="filter-clear" id="filterClear">クリア</button>
+    </div>
+
+    <p id="resultCount" class="result-count" aria-live="polite">該当件数: 0件</p>
+  </section>
+
+  <section class="lure-section">
+    <h2 class="lure-section__title">ウェア・ライフジャケット</h2>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">防寒ウェア</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="サーモフォース エクストリームジャケット THERMO FORCE XTREME JACKET ジャッカル ウェア・ライフジャケット 防寒ウェア"
+            data-maker="ジャッカル"
+            data-category="ウェア・ライフジャケット"
+            data-type="防寒ウェア"
+            data-status="ready">
+          <a href="/article/thermoforcextremejacket.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">サーモフォース エクストリームジャケット</h4>
+                <p class="lure-card__kana">THERMO FORCE XTREME JACKET</p>
+                <p class="lure-card__maker">ジャッカル</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/thermoforcextremejacket.jpg" alt="サーモフォース エクストリームジャケットの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              最大クラスの中綿量でシリーズ最高峰の保温性能。極寒対応のフラッグシップ防寒ジャケット。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ウェア・ライフジャケット</span>
+            </div>
+
+          </a>
+        </li>
+
+        <li class="lure-item"
+            data-name="サーモフォース アクティブジャケット Thermo Force Active Jacket ジャッカル ウェア・ライフジャケット 防寒ウェア"
+            data-maker="ジャッカル"
+            data-category="ウェア・ライフジャケット"
+            data-type="防寒ウェア"
+            data-status="ready">
+          <a href="/article/thermoforceactivejacket.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">サーモフォース アクティブジャケット</h4>
+                <p class="lure-card__kana">Thermo Force Active Jacket</p>
+                <p class="lure-card__maker">ジャッカル</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/thermoforceactivejacket.jpg" alt="サーモフォース アクティブジャケットの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              冬の釣りに必要な暖かさと動きやすさを両立した、万能の防寒ジャケット。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ウェア・ライフジャケット</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">グローブ</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="タイタニュームフィットグローブ ima TITANIUM FIT GLOVES ima ウェア・ライフジャケット グローブ"
+            data-maker="ima"
+            data-category="ウェア・ライフジャケット"
+            data-type="グローブ"
+            data-status="ready">
+          <a href="/article/titaniumfitgloves.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">タイタニュームフィットグローブ</h4>
+                <p class="lure-card__kana">ima TITANIUM FIT GLOVES</p>
+                <p class="lure-card__maker">ima</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/titaniumfitgloves.png" alt="タイタニュームフィットグローブの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              保温力の高い「タイタニュームα」素材を使った、imaの防寒フィッシンググローブ。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ウェア・ライフジャケット</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">ライフジャケット</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="ブルーストーム Reカリフウエスト（BSJ-7300RS） ブルーストーム ウェア・ライフジャケット ライフジャケット"
+            data-maker="ブルーストーム"
+            data-category="ウェア・ライフジャケット"
+            data-type="ライフジャケット"
+            data-status="ready">
+          <a href="/article/bluestorm-calif-west.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ブルーストーム Reカリフウエスト（BSJ-7300RS）</h4>
+                <p class="lure-card__maker">ブルーストーム</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/bluestorm-calif-west.jpg" alt="ブルーストーム Reカリフウエスト（BSJ-7300RS）の画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              業界最小・最軽量クラスの腰巻きライフジャケット。桜マークTypeA取得。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ウェア・ライフジャケット</span>
+            </div>
+
+          </a>
+        </li>
+
+        <li class="lure-item"
+            data-name="フローティングベスト X-0III ima ORIGINAL FLOATING VEST X-0III ima ウェア・ライフジャケット ライフジャケット"
+            data-maker="ima"
+            data-category="ウェア・ライフジャケット"
+            data-type="ライフジャケット"
+            data-status="ready">
+          <a href="/article/floatingvestx0iii.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">フローティングベスト X-0III</h4>
+                <p class="lure-card__kana">ima ORIGINAL FLOATING VEST X-0III</p>
+                <p class="lure-card__maker">ima</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/floatingvestx0iii.png" alt="フローティングベスト X-0IIIの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              重さを体の中心に集めて疲れにくい、X型のフローティングベスト。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ウェア・ライフジャケット</span>
+            </div>
+
+          </a>
+        </li>
+
+        <li class="lure-item"
+            data-name="ガネット Ver.2 GANNET Ver.2 アピア ウェア・ライフジャケット ライフジャケット"
+            data-maker="アピア"
+            data-category="ウェア・ライフジャケット"
+            data-type="ライフジャケット"
+            data-status="ready">
+          <a href="/article/gannet.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ガネット Ver.2</h4>
+                <p class="lure-card__kana">GANNET Ver.2</p>
+                <p class="lure-card__maker">アピア</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/gannet.png" alt="ガネット Ver.2の画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              浮力7.5kg/24h。アピアのシーバス向けフローティングベスト。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ウェア・ライフジャケット</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </section>
+
+  <section class="lure-section">
+    <h2 class="lure-section__title">ランディング・ウェーディング</h2>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">ランディングネット</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="ヘキサネットXL メジャークラフト ランディング・ウェーディング ランディングネット"
+            data-maker="メジャークラフト"
+            data-category="ランディング・ウェーディング"
+            data-type="ランディングネット"
+            data-status="ready">
+          <a href="/article/hexanetxl.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ヘキサネットXL</h4>
+                <p class="lure-card__maker">メジャークラフト</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/hexanetxl.png" alt="ヘキサネットXLの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              メータークラスのサワラ・ブリにも対応する、四つ折りの大型ランディングネット。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ランディング・ウェーディング</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">タモの柄</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="ランディングシャフト LS-450XD LANDING SHAFT LS-450XD アピア ランディング・ウェーディング タモの柄"
+            data-maker="アピア"
+            data-category="ランディング・ウェーディング"
+            data-type="タモの柄"
+            data-status="ready">
+          <a href="/article/ls450xd.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ランディングシャフト LS-450XD</h4>
+                <p class="lure-card__kana">LANDING SHAFT LS-450XD</p>
+                <p class="lure-card__maker">アピア</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/ls450xd.jpg" alt="ランディングシャフト LS-450XDの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              全長4.5m・仕舞寸法162.5cmの小継振出式のタモの柄。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ランディング・ウェーディング</span>
+            </div>
+
+          </a>
+        </li>
+
+        <li class="lure-item"
+            data-name="ザ・グランドシャフト450 THE GRAND SHAFT 450 アピア ランディング・ウェーディング タモの柄"
+            data-maker="アピア"
+            data-category="ランディング・ウェーディング"
+            data-type="タモの柄"
+            data-status="ready">
+          <a href="/article/thegrandshaft450.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ザ・グランドシャフト450</h4>
+                <p class="lure-card__kana">THE GRAND SHAFT 450</p>
+                <p class="lure-card__maker">アピア</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/thegrandshaft450.png" alt="ザ・グランドシャフト450の画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              全長4.5m・カーボン含有率95%の、大物用ランディングシャフト。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ランディング・ウェーディング</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">ウェーディング</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="ワンピース イージー ウェーディングスタッフ ima ONE PIECE EASY WADING STAFF ima ランディング・ウェーディング ウェーディング"
+            data-maker="ima"
+            data-category="ランディング・ウェーディング"
+            data-type="ウェーディング"
+            data-status="ready">
+          <a href="/article/wadingstaff.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ワンピース イージー ウェーディングスタッフ</h4>
+                <p class="lure-card__kana">ima ONE PIECE EASY WADING STAFF</p>
+                <p class="lure-card__maker">ima</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/wadingstaff.png" alt="ワンピース イージー ウェーディングスタッフの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              軽くて丈夫なワンピースのウェーディングスタッフ。川や干潟で足元を探りながら歩ける。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">ランディング・ウェーディング</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </section>
+
+  <section class="lure-section">
+    <h2 class="lure-section__title">収納</h2>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">タックルボックス</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="VARIVAS ツールボックス VAAC-85 VARIVAS ToolBox VAAC-85 バリバス 収納 タックルボックス"
+            data-maker="バリバス"
+            data-category="収納"
+            data-type="タックルボックス"
+            data-status="ready">
+          <a href="/article/vaac85.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">VARIVAS ツールボックス VAAC-85</h4>
+                <p class="lure-card__kana">VARIVAS ToolBox VAAC-85</p>
+                <p class="lure-card__maker">バリバス</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/vaac85.jpg" alt="VARIVAS ツールボックス VAAC-85の画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              ショックリーダーやルアーなどの小物をまとめて収納できる、バリバスのツールボックス。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">収納</span>
+            </div>
+
+          </a>
+        </li>
+
+        <li class="lure-item"
+            data-name="HDタックルコンテナ HD TACKLE CONTAINER ジャッカル 収納 タックルボックス"
+            data-maker="ジャッカル"
+            data-category="収納"
+            data-type="タックルボックス"
+            data-status="ready">
+          <a href="/article/hdtacklecontainer.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">HDタックルコンテナ</h4>
+                <p class="lure-card__kana">HD TACKLE CONTAINER</p>
+                <p class="lure-card__maker">ジャッカル</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/hdtacklecontainer.jpg" alt="HDタックルコンテナの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              本体・蓋・ベルトの接続部まで強度を見直した、ジャッカルのハードユース対応コンテナ。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">収納</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">ルアーケース</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="ルアーケース リバーシブル140 ima LURECASE REVERSIBLE140 ima 収納 ルアーケース"
+            data-maker="ima"
+            data-category="収納"
+            data-type="ルアーケース"
+            data-status="ready">
+          <a href="/article/lurecasereversible140.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ルアーケース リバーシブル140</h4>
+                <p class="lure-card__kana">ima LURECASE REVERSIBLE140</p>
+                <p class="lure-card__maker">ima</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/lurecasereversible140.png" alt="ルアーケース リバーシブル140の画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              140mmクラスのルアーを両面に収納できる、imaのルアーケース。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">収納</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </section>
+
+  <section class="lure-section">
+    <h2 class="lure-section__title">フック・スナップ</h2>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">フック</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="ブースターシステム BOOSTER SYSTEM コアマン フック・スナップ フック"
+            data-maker="コアマン"
+            data-category="フック・スナップ"
+            data-type="フック"
+            data-status="ready">
+          <a href="/article/boostersystem.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ブースターシステム</h4>
+                <p class="lure-card__kana">BOOSTER SYSTEM</p>
+                <p class="lure-card__maker">コアマン</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/boostersystem.jpg" alt="ブースターシステムの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              トレブルフックとブレードが一体になった、コアマンのフックシステム。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">フック・スナップ</span>
+            </div>
+
+          </a>
+        </li>
+
+        <li class="lure-item"
+            data-name="シルバークロー SILVER CLAW コアマン フック・スナップ フック"
+            data-maker="コアマン"
+            data-category="フック・スナップ"
+            data-type="フック"
+            data-status="ready">
+          <a href="/article/silverclaw.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">シルバークロー</h4>
+                <p class="lure-card__kana">SILVER CLAW</p>
+                <p class="lure-card__maker">コアマン</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/silverclaw.jpg" alt="シルバークローの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              魚の口に吸い込まれやすい鋭いカーブを持つ、シーバス専用シングルフック。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">フック・スナップ</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">スナップ</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="ラグゼ Ti スナップワイド LUXXE Ti SNAP WIDE がまかつ フック・スナップ スナップ"
+            data-maker="がまかつ"
+            data-category="フック・スナップ"
+            data-type="スナップ"
+            data-status="ready">
+          <a href="/article/tisnapwide.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ラグゼ Ti スナップワイド</h4>
+                <p class="lure-card__kana">LUXXE Ti SNAP WIDE</p>
+                <p class="lure-card__maker">がまかつ</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/tisnapwide.jpg" alt="ラグゼ Ti スナップワイドの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              チタン形状記憶合金で、開け閉めしてもヘタりにくく錆びにくいスナップ。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">フック・スナップ</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </section>
+
+  <section class="lure-section">
+    <h2 class="lure-section__title">エサ</h2>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">エサ</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="ハイブリッド クロス HYBRID CROSS マルキユー エサ エサ"
+            data-maker="マルキユー"
+            data-category="エサ"
+            data-type="エサ"
+            data-status="ready">
+          <a href="/article/hybridcross.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">ハイブリッド クロス</h4>
+                <p class="lure-card__kana">HYBRID CROSS</p>
+                <p class="lure-card__maker">マルキユー</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/hybridcross.jpg" alt="ハイブリッド クロスの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              生のオキアミやイワシを使い、食いのよさとエサ持ちを両立した人工くわせエサ。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">エサ</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </section>
+
+  <section class="lure-section">
+    <h2 class="lure-section__title">リール</h2>
+
+    <section class="lure-group">
+      <h3 class="lure-group__title">スピニングリール</h3>
+      <ul class="lure-list">
+        <li class="lure-item"
+            data-name="25 ベンチュラ LT4000-CXH 25 VENTURA LT4000-CXH アピア リール スピニングリール"
+            data-maker="アピア"
+            data-category="リール"
+            data-type="スピニングリール"
+            data-status="ready">
+          <a href="/article/ventura.html" class="lure-card">
+            <div class="lure-card__header">
+              <div class="lure-card__title-wrap">
+                <h4 class="lure-card__name">25 ベンチュラ LT4000-CXH</h4>
+                <p class="lure-card__kana">25 VENTURA LT4000-CXH</p>
+                <p class="lure-card__maker">アピア</p>
+              </div>
+
+              <div class="lure-card__image-wrap">
+                <img src="/image/ventura.png" alt="25 ベンチュラ LT4000-CXHの画像" class="lure-card__image">
+              </div>
+            </div>
+
+            <div class="lure-card__badges">
+              <span class="badge badge--ready">記事あり</span>
+            </div>
+
+            <p class="lure-card__desc">
+              アピアのシーバス用スピニングリール。自重240g・最大ドラグ12kgの4000番。
+            </p>
+
+            <div class="lure-card__meta">
+              <span class="meta-tag">リール</span>
+            </div>
+
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </section>
+
+</main>
+
+<footer>
+  <nav class="footer-nav">
+    <a href="index.html">トップ</a>
+    <a href="article/privacy.html">プライバシーポリシー</a>
+    <a href="form.html">お問い合わせ</a>
+    <a href="sitemap.html">サイトマップ</a>
+  </nav>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("lureSearch");
+  const filterButtons = document.querySelectorAll(".filter-chip");
+  const lureItems = document.querySelectorAll(".lure-item");
+  const lureGroups = document.querySelectorAll(".lure-group");
+  const lureSections = document.querySelectorAll(".lure-section");
+  const resultCount = document.getElementById("resultCount");
+
+  // 新作バッジ：data-year が今年以降なら「新作」、それ以外は外す（年が変わると自動で切り替わる）
+  const thisYear = new Date().getFullYear();
+  lureItems.forEach(item => {
+    const year = parseInt(item.dataset.year, 10);
+    if (!year) return;
+    const isNew = year >= thisYear;
+    const status = (item.dataset.status || "").split(/\s+/).filter(s => s && s !== "new");
+    if (isNew) status.push("new");
+    item.dataset.status = status.join(" ");
+    const badges = item.querySelector(".lure-card__badges");
+    let badge = badges && badges.querySelector(".badge--new");
+    if (isNew && !badge && badges) {
+      badge = document.createElement("span");
+      badge.className = "badge badge--new";
+      badge.textContent = "新作";
+      badges.prepend(badge);
+    }
+    if (!isNew && badge) badge.remove();
+  });
+
+  function matchesFilter(item, filter) {
+    if (filter === "all") return true;
+
+    const category = item.dataset.category || "";
+    const type = item.dataset.type || "";
+    const status = item.dataset.status || "";
+
+    if (filter === "新作") return status.includes("new");
+    if (filter === "ready") return status.includes("ready");
+
+    if (filter === "トップ") return type.startsWith("トップ");
+    return category === filter || type === filter;
+  }
+
+  function matchesSearch(item, keyword) {
+    if (!keyword) return true;
+
+    const text = [
+      item.dataset.name || "",
+      item.dataset.maker || "",
+      item.dataset.category || "",
+      item.dataset.type || "",
+      item.dataset.status || "",
+      item.textContent || ""
+    ].join(" ").toLowerCase();
+
+    return text.includes(keyword.toLowerCase());
+  }
+
+  function updateList() {
+    const keyword = searchInput.value.trim();
+    let visibleCount = 0;
+
+    lureItems.forEach(item => {
+      const visible = activeFilters.every(filter => matchesFilter(item, filter)) && matchesSearch(item, keyword);
+      item.classList.toggle("is-hidden", !visible);
+      if (visible) visibleCount += 1;
+    });
+
+    lureGroups.forEach(group => {
+      const visibleItems = group.querySelectorAll(".lure-item:not(.is-hidden)");
+      group.style.display = visibleItems.length ? "" : "none";
+    });
+
+    lureSections.forEach(section => {
+      const hasVisibleGroup = Array.from(section.querySelectorAll(".lure-group"))
+        .some(group => group.style.display !== "none");
+
+      section.style.display = hasVisibleGroup ? "" : "none";
+    });
+
+    if (visibleCount === 0) {
+      resultCount.textContent = "該当するルアーはありません";
+    } else {
+      resultCount.textContent = `該当件数: ${visibleCount}件`;
+    }
+  }
+
+
+  // ジャンルは「選ぶ → 絞り込むボタン」で反映する（魚種などグループごとに1つ、グループ同士は掛け合わせ）
+  const applyButton = document.getElementById("filterApply");
+  const clearButton = document.getElementById("filterClear");
+  const listTop = document.querySelector(".lure-section");
+  let activeFilters = [];
+
+  function selectedFilters() {
+    return Array.from(document.querySelectorAll(".filter-chip.is-active"))
+      .map(btn => btn.dataset.filter)
+      .filter(f => f !== "all");
+  }
+
+  function selectedLabel() {
+    return Array.from(document.querySelectorAll(".filter-chip.is-active"))
+      .filter(btn => btn.dataset.filter !== "all")
+      .map(btn => btn.textContent.trim())
+      .join(" × ");
+  }
+
+  function refreshApplyButton() {
+    const pending = selectedFilters().join("|") !== activeFilters.join("|");
+    applyButton.classList.toggle("is-pending", pending);
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      const group = this.closest(".filter-box__tags");
+      const wasActive = this.classList.contains("is-active");
+      group.querySelectorAll(".filter-chip").forEach(btn => btn.classList.remove("is-active"));
+      if (!wasActive || this.dataset.filter === "all") this.classList.add("is-active");
+      // 魚種で何も選んでいないときは「すべて」を点けておく
+      if (!group.querySelector(".filter-chip.is-active")) {
+        const all = group.querySelector('.filter-chip[data-filter="all"]');
+        if (all) all.classList.add("is-active");
+      }
+      refreshApplyButton();
+    });
+  });
+
+  function showResult() {
+    // 結果が変わったことがわかるように、件数を光らせてカードをふわっと出し直す
+    resultCount.classList.remove("is-flash");
+    document.body.classList.remove("is-filtered");
+    void resultCount.offsetWidth;
+    resultCount.classList.add("is-flash");
+    document.body.classList.add("is-filtered");
+    const label = selectedLabel();
+    if (label && !resultCount.textContent.includes("ありません")) {
+      resultCount.textContent = label + "：" + resultCount.textContent.replace("該当件数: ", "");
+    }
+    if (listTop) {
+      const y = resultCount.getBoundingClientRect().top + window.scrollY - 12;
+      if (Math.abs(window.scrollY - y) > 40) window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }
+
+  applyButton.addEventListener("click", function () {
+    activeFilters = selectedFilters();
+    updateList();
+    refreshApplyButton();
+    showResult();
+  });
+
+  clearButton.addEventListener("click", function () {
+    filterButtons.forEach(btn => btn.classList.toggle("is-active", btn.dataset.filter === "all"));
+    searchInput.value = "";
+    activeFilters = [];
+    updateList();
+    refreshApplyButton();
+    showResult();
+  });
+
+  searchInput.addEventListener("input", updateList);
+
+  // メーカー図鑑などから ?q=キーワード 付きで開いたときは、その言葉で検索した状態にする
+  const q = new URLSearchParams(location.search).get("q");
+  if (q) searchInput.value = q;
+
+  // 記事のパンくずリストから ?cat=魚種 付きで開いたときは、その魚種で絞り込んだ状態にする
+  const cat = new URLSearchParams(location.search).get("cat");
+  const catButton = cat && Array.from(filterButtons).find(btn => btn.dataset.filter === cat);
+  if (catButton) {
+    catButton.click();
+    activeFilters = selectedFilters();
+    refreshApplyButton();
+  }
+
+  updateList();
+});
+</script>
+</body>
+</html>

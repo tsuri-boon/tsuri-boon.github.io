@@ -1,8 +1,12 @@
 // 各記事に「パンくずリスト」「PR表記と更新日の行」（どちらもページの上）と「著者プロフィールの枠」（ページのいちばん下）を入れる
 //   使い方：リポジトリのルートで `node tools/make-byline.js`
-//   - パンくず：ルアー記事は「トップ › ルアー図鑑 › 魚種 › 記事名」（魚種は lure-zukan.html の data-category。
-//     リンク先は lure-zukan.html?cat=魚種）、メーカー記事（maker-zukan.html からリンク）は「トップ › メーカー図鑑 › 記事名」、
-//     それ以外（まとめ・ロッド・道具など）は「トップ › 記事一覧（sitemap.html） › 記事名」。構造化データの BreadcrumbList も同じ内容で作り直す
+//   - パンくずは6つに分ける。構造化データの BreadcrumbList も同じ内容で作り直す
+//       ルアー        「トップ › ルアー図鑑 › 魚種 › 記事名」（lure-zukan.html の data-category。リンク先は ?cat=魚種）
+//       ロッド        「トップ › ロッド図鑑 › 釣り方 › 記事名」（rod-zukan.html。tools/make-gear-zukan.js が作る）
+//       アクセサリー  「トップ › アクセサリー図鑑 › 種類 › 記事名」（accessory-zukan.html。同上）
+//       メーカー      「トップ › メーカー図鑑 › 記事名」（maker-zukan.html からリンク、または make-osusume.js の MAKER_PAGES）
+//       便利ツール    「トップ › 便利ツール（トップページの #tools） › ツール名」（下の TOOL_PAGES）
+//       記事（それ以外のまとめ・ガイド）「トップ › 記事一覧（sitemap.html） › 記事名」
 //   - 記事名は、すでにある BreadcrumbList の最後の名前（無ければ H1）。名前を変えたいときは BreadcrumbList の最後の name を直して実行する
 //   - 更新日は構造化データの dateModified（無ければ datePublished）。PR表記と同じ行の右に出す。どちらも無ければ更新日は出さない
 //   - 著者の枠の置き場所：</main> の直前（「本日のオススメルアーはこちら」のボタンの下）。make-osusume.js のあとに実行する
@@ -28,12 +32,22 @@ const BASE = 'https://tsuri-boon.github.io/';
 
 // ルアー記事の魚種（図鑑の data-category）と、メーカー記事
 const read = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
-const fishOf = {};
-for (const m of read('lure-zukan.html').matchAll(/<li class="lure-item"([^>]*)>([\s\S]*?)<\/li>/g)) {
-  const f = (m[2].match(/href="\/article\/([^"]+\.html)"/) || [])[1];
-  const cat = (m[1].match(/data-category="([^"]*)"/) || [])[1];
-  if (f && cat && !fishOf[f]) fishOf[f] = cat;
+// 図鑑ページのカード（記事 → data-category）。ロッド図鑑・アクセサリー図鑑は tools/make-gear-zukan.js が作る
+function categoriesOf(page) {
+  const out = {};
+  if (!fs.existsSync(path.join(ROOT, page))) return out;
+  for (const m of read(page).matchAll(/<li class="lure-item"([^>]*)>([\s\S]*?)<\/li>/g)) {
+    const f = (m[2].match(/href="\/article\/([^"]+\.html)"/) || [])[1];
+    const cat = (m[1].match(/data-category="([^"]*)"/) || [])[1];
+    if (f && cat && !out[f]) out[f] = cat;
+  }
+  return out;
 }
+const fishOf = categoriesOf('lure-zukan.html');
+const rodOf = categoriesOf('rod-zukan.html');
+const accOf = categoriesOf('accessory-zukan.html');
+// 便利ツール（article/ 内にあるもの）。パンくずは「トップ › 便利ツール（トップページの便利ツール欄） › ツール名」
+const TOOL_PAGES = new Set(['egi-sink-checker.html']);
 // メーカー記事：maker-zukan.html からリンクしているものと、make-osusume.js の MAKER_PAGES
 const makerPages = new Set([...read('maker-zukan.html').matchAll(/href="\/?article\/([^"#?]+\.html)"/g)].map(m => m[1]));
 const makerTable = (read('tools/make-osusume.js').match(/const MAKER_PAGES = \{([\s\S]*?)\};/) || [])[1] || '';
@@ -59,12 +73,20 @@ function crumbsOf(f, html, oldName) {
   const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
   const name = oldName || (h1 ? strip(h1[1]) : f);
   const list = [['トップ', '../index.html', BASE]];
+  const zukan = (page, label, cat) => {
+    list.push([label, `../${page}`, BASE + page]);
+    list.push([cat, `../${page}?cat=${encodeURIComponent(cat)}`, `${BASE}${page}?cat=${encodeURIComponent(cat)}`]);
+  };
   if (fishOf[f]) {
-    const cat = fishOf[f];
-    list.push(['ルアー図鑑', '../lure-zukan.html', BASE + 'lure-zukan.html']);
-    list.push([cat, `../lure-zukan.html?cat=${encodeURIComponent(cat)}`, `${BASE}lure-zukan.html?cat=${encodeURIComponent(cat)}`]);
+    zukan('lure-zukan.html', 'ルアー図鑑', fishOf[f]);
+  } else if (rodOf[f]) {
+    zukan('rod-zukan.html', 'ロッド図鑑', rodOf[f]);
+  } else if (accOf[f]) {
+    zukan('accessory-zukan.html', 'アクセサリー図鑑', accOf[f]);
   } else if (makerPages.has(f)) {
     list.push(['メーカー図鑑', '../maker-zukan.html', BASE + 'maker-zukan.html']);
+  } else if (TOOL_PAGES.has(f)) {
+    list.push(['便利ツール', '../index.html#tools', BASE + '#tools']);
   } else {
     list.push(['記事一覧', '../sitemap.html', BASE + 'sitemap.html']);
   }
