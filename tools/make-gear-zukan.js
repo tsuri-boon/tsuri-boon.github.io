@@ -45,6 +45,7 @@ const ROD = {
     { f: 'grftr711pe', sec: 'ライトゲーム', desc: 'GRFシリーズのPEスペシャルを受け継ぐ、ブリーデンの7ft11inライトゲームロッド。', fish: ['メバル・アジ'], len: [7 + 11 / 12, 7 + 11 / 12], lure: [1.5, 20], pcs: [2], packed: [125, 125] },
     { f: 'firstcastlightgame', sec: 'ライトゲーム', desc: 'ソリッドとチューブラーの全2モデル。7,150円からの入門ライトゲームロッド。', fish: ['メバル・アジ'], len: [7.25, 7.5], lure: [0.5, 10], pcs: [2], packed: null, year: 2026 },
     { f: 'firstcastajing', sec: 'ライトゲーム', desc: 'ソリッドティップの全2モデル。6,600円からの入門アジングロッド。', fish: ['メバル・アジ'], len: [6 + 1 / 12, 6 + 5 / 12], lure: [0.2, 3], pcs: [2], packed: null, year: 2026, tags: ['アジング'] },
+    { f: 'galupa86b', sec: 'ショアジギング・ロックショア', pack: true, desc: '8.6ftと9.6ftに組み替えられる、ハタを根から引き剥がすロックショア用のベイトパックロッド。', fish: ['ロックフィッシュ', 'シーバス'], len: [8.5, 9.5], lure: [18, 100], pcs: [5, 6], packed: [58, 58], tags: ['ベイト', 'ハタ', '可変レングス'] },
     { f: 'arcflexrs', sec: 'ショアジギング・ロックショア', desc: '「軽く、強く、しなる」を追求した、がまかつのロックショアロッド。', fish: ['青物'], len: [9.5, 10.5], lure: [30, 250], pcs: [2], packed: null },
     { f: 'firstcastshorejigging', sec: 'ショアジギング・ロックショア', desc: 'ライトショアジギングから大型青物まで全6モデル。8,250円からの入門ロッド。', fish: ['青物', 'ロックフィッシュ'], len: [9.5, 10], lure: [15, 100], pcs: [2], packed: null, year: 2026 },
     { f: 'firstcasteging', sec: 'エギング', desc: '全5モデル、7,150円からの入門エギングロッド。対応エギは1.5〜4.0号。', fish: ['イカ'], len: [7.75, 8.5], lure: [5, 25], pcs: [2], packed: null, year: 2026 },
