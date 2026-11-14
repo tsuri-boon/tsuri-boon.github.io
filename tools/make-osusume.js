@@ -93,13 +93,15 @@ for (const f of fs.readdirSync(ART).filter(f => f.endsWith('.html')).map(f => f.
   const img = og && fs.existsSync(path.join(ROOT, 'image', og)) ? og : 'tsuriboon_logo7.png';
   const ttl0 = (h.match(/<title>([^<]*)/) || [])[1] || '';
   const kind = MAKER_PAGES[f] ? 'maker'
-    : /ロッド|リール|ライフジャケット|ベスト|ウェーディング|グローブ|ランディング|シャフト|ルアーケース/.test(ttl0) ? 'gear' : 'other';
-  const linked = [...new Set([...h.matchAll(/href="(?:\.\.\/article\/|\/article\/)?([a-zA-Z0-9_-]+)\.html"/g)].map(x => x[1]))];
+    : /ロッド|リール|ライフジャケット|ベスト|ウェーディング|グローブ|ランディング|シャフト|ルアーケース|防寒/.test(ttl0) ? 'gear' : 'other';
+  // 本文のリンク（オススメ記事の欄は除く。前回選んだ記事に引っぱられないように）
+  const hb = h.indexOf(START) >= 0 && h.indexOf(END) > h.indexOf(START) ? h.slice(0, h.indexOf(START)) + h.slice(h.indexOf(END)) : h;
+  const linked = [...new Set([...hb.matchAll(/href="(?:\.\.\/article\/|\/article\/)?([a-zA-Z0-9_-]+)\.html"/g)].map(x => x[1]))];
   const ttl = (h.match(/<title>([^<]*)/) || [])[1] || '';
   const cats = Object.keys(CAT_WORDS).filter(c => CAT_WORDS[c].some(w => ttl.includes(w)));
   const makers = kind === 'maker' ? [MAKER_PAGES[f]] : Object.keys(MAKER_WORDS).filter(k => MAKER_WORDS[k].some(w => ttl.includes(w)));
   copy = pageTitle(f);
-  others[f] = { file: f, kind, title, img, cats, makers, linked, copy };
+  others[f] = { file: f, kind, title, ttl, img, cats, makers, linked, copy };
 }
 const makerPageOf = {}; for (const [p, k] of Object.entries(MAKER_PAGES)) if (others[p]) makerPageOf[k] = p;
 
@@ -146,6 +148,9 @@ function pick(self, h) {
       add(spread(Object.values(makerPageOf).map(p => others[p]).filter(o => [...makers].some(k => makerPageOf[k] === o.file)), self), 2, 'メーカー');
       add(spread(L.filter(x => makers.has(x.maker)), self), 5, x => makerName(x.maker));
       add(spread(Object.values(others).filter(o => o.kind === 'gear' && o.makers.some(k => makers.has(k))), self), me.kind === 'gear' ? 2 : 1, 'ロッド・グッズ');
+      // 防寒ウェアなど、同じ種類のグッズ（タイトルの言葉が同じもの）
+      const gw = ['防寒', 'ライフジャケット', 'グローブ'].filter(w => me.ttl.includes(w));
+      if (me.kind === 'gear' && gw.length) add(spread(Object.values(others).filter(o => o.kind === 'gear' && gw.some(w => o.ttl.includes(w))), self), 4, 'ウェア');
       add(spread(L.filter(x => cats.has(x.cat)), self), 3, [...cats][0] || 'ルアー');
       add(spread(Object.values(others).filter(o => o.kind === 'other' && o.cats.some(c => cats.has(c))), self), 1, 'まとめ');
     }
