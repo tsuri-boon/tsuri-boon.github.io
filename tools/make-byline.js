@@ -188,6 +188,8 @@ const TOOLS = [
   ['../mukoindex.html', '../image/mukoindex-card.jpg', '武庫川一文字 青物指数', '武庫川一文字 青物指数｜ブリ・サワラが釣れる日を先読み'],
   ['../chouka-price.html', '../image/chouka-price-card.jpg', '釣果値段換算ツール', '釣果値段換算ツール｜釣った魚はいくら？'],
   ['egi-sink-checker.html', '../image/egi-sink-checker.jpg', 'エギ沈下速度計算', 'エギ沈下速度計算｜水深ごとのフォール時間を計算'],
+  // 記事に出るのは先頭の4枚（その記事自身は除く）。ロッド図鑑は入口として4枚目に置く
+  ['../rod-zukan.html', '../image/rod-zukan-card.jpg', 'ロッド図鑑', 'ロッド図鑑｜長さ・ルアー重量・継数からロッドを探す'],
   ['../lure-gatya.html', '../image/home_gacha.jpg', 'ルアーガチャ', 'ルアーガチャ｜今日投げるルアーをガチャで決めよう'],
   ['../lure-zukan.html', '../image/home_zukan.jpg', 'ルアー図鑑', 'ルアー図鑑｜魚種・ジャンルからルアーを探す'],
 ];

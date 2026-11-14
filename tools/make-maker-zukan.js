@@ -248,6 +248,7 @@ const html = `<!DOCTYPE html>
     <a href="tsuri-boon.html">tsuri-boonとは</a>
     <a href="maker-zukan.html">メーカー図鑑</a>
     <a href="lure-zukan.html">ルアー図鑑</a>
+    <a href="rod-zukan.html">ロッド図鑑</a>
   </nav>
 </div>
 
