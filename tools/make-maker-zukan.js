@@ -19,6 +19,7 @@ const MAKERS = {
   'duo':              { name: 'DUO', kana: 'デュオ', article: 'duo', img: 'tideminnowslim178f.jpg' },
   'goto9':            { name: 'GOTO9', kana: 'ゴートゥーナイン', article: 'goto9', img: 'swarm80.jpg' },
   'blueblue':         { name: 'BlueBlue', kana: 'ブルーブルー', article: 'blueblue', img: 'blooowin140s.jpg' },
+  'transcendence':    { name: 'TRANSCENDENCE', kana: 'トランスセンデンス', article: 'transcendence', img: 'tc_pulchra62b.jpg' },
   'daiwa':            { name: 'DAIWA', kana: 'ダイワ' },
   'shimano':          { name: 'SHIMANO', kana: 'シマノ' },
   'megabass':         { name: 'Megabass', kana: 'メガバス' },

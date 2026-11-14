@@ -23,6 +23,8 @@ const ROD = {
   lead: 'ターゲット魚種・長さ・ルアー重量・継数・仕舞寸法から、気になるロッドを探せるロッド図鑑です。電車や旅行にも持って行けるパックロッドも紹介。随時更新中。',
   sections: ['シーバス', 'ライトゲーム', 'ショアジギング・ロックショア', 'エギング', 'オフショア', 'バス', 'トラウト', 'マルチ'],
   items: [
+    { f: 'foojinzexiv', sec: 'シーバス', pack: true, desc: 'フラッグシップのフージンZを4本継にした、村岡昌憲さん監修の2025年限定パックロッド。', fish: ['シーバス'], len: [8.5, 10.25], lure: [3, 42], pcs: [4], packed: [78, 94.5], year: 2025 },
+    { f: 'dialunamb', sec: 'シーバス', pack: true, desc: '定番シーバスロッド「ディアルーナ」の4ピースのモバイルモデル。仕舞寸法61.6〜72.8cm。', fish: ['シーバス'], len: [7.5, 9], lure: [5, 28], pcs: [4], packed: [61.6, 72.8] },
     { f: 'cds80mlcst', sec: 'シーバス', pack: true, desc: '電車や自転車での釣行に合わせた、5ピースの振出シーバスロッド。仕舞寸法62cm。', fish: ['シーバス'], len: [8, 8], lure: [0, 30], pcs: [5], packed: [62, 62], tags: ['振出'] },
     { f: 'dianact85ml5', sec: 'シーバス', pack: true, desc: '「普段使い」の快適さを追求した5ピースのシーバスロッド。仕舞寸法59cm。', fish: ['シーバス'], len: [8 + 5 / 12, 8 + 5 / 12], lure: [5, 25], pcs: [5], packed: [59, 59], year: 2026 },
     { f: 'foojinz', sec: 'シーバス', desc: 'アピアのフラッグシップシーバスロッド。東レの第3世代カーボンを使った6代目。', fish: ['シーバス'], len: [7 + 7 / 12, 10 + 8 / 12], lure: [3, 63], pcs: [2, 4], packed: null },
@@ -457,7 +459,7 @@ build(ACCESSORY, 'accessory');
 
 // 一覧に入っていないロッド・リールらしい記事（タイトルに「ロッド｜」「リール｜」を含む）を知らせる
 const listed = new Set([...ROD.items, ...ACCESSORY.items].map(i => i.f));
-const makerPages = new Set(['breaden', 'dstyle', 'goto9']);
+const makerPages = new Set(['breaden', 'dstyle', 'goto9', 'transcendence']);
 const unlisted = fs.readdirSync(path.join(ROOT, 'article')).filter(f => f.endsWith('.html')).map(f => f.slice(0, -5))
   .filter(f => !listed.has(f) && !makerPages.has(f) && /ロッド｜|ロッド（|リール｜/.test((read(`article/${f}.html`).match(/<title>([^<]*)/) || [])[1] || ''));
 if (unlisted.length) console.log('一覧に入っていないロッド・リールらしい記事：', unlisted.join(', '));
