@@ -74,6 +74,18 @@ async function inspect(tok, url) {
       return r.verdict !== 'PASS' || days(r.checkedAt) >= 30;
     }).sort((a, b) => order(a) - order(b));
   }
+  // --newest：作成日（初めてコミットした日）の新しい順に調べる
+  if (process.argv.includes('--newest')) {
+    const born = {};
+    const log = require('child_process').execSync('git log --diff-filter=A --name-only --format=@%as', { cwd: ROOT, encoding: 'utf8', maxBuffer: 1 << 26 });
+    let d = '';
+    for (const line of log.split('\n')) {
+      if (line.startsWith('@')) d = line.slice(1);
+      else if (line && !born[line]) born[line] = d; // 新しい順に読むので、消して足し直したファイルは最新の追加日になる
+    }
+    const fileOf = u => (u.replace(SITE, '') || 'index.html').replace(/\/$/, '/index.html');
+    urls.sort((a, b) => (born[fileOf(b)] || '').localeCompare(born[fileOf(a)] || ''));
+  }
   if (arg('--limit')) urls = urls.slice(0, Number(arg('--limit')));
   console.log(`チェックするURL: ${urls.length}件`);
   let tok = await token();
