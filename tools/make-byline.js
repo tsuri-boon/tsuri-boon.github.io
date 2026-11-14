@@ -155,7 +155,7 @@ const POPULAR_EGI = [CARD.tungsten, CARD.egi, CARD.lure, CARD.muko, CARD.rank];
 // 期間限定で「人気記事はこちら」の先頭に入れるカード（until の日まで。日本時間）。
 // 期間中は先頭に入れて4枚目を外し、期間が過ぎたら次の実行で外して POPULAR から足りない分を足す。
 const PROMO = [
-  { card: ['furusato-tsurigu.html', '../image/furusato-tsurigu.jpg', 'ふるさと納税でもらえる釣具おすすめ', '【2026年】ふるさと納税でもらえる釣具おすすめ｜ターゲット別に紹介'], until: '2026-12-31' },
+  { card: ['furusato-tsurigu.html', '../image/furusato-tsurigu.jpg', 'ふるさと納税のおすすめ釣り具返礼品', '【2026年】ふるさと納税のおすすめ釣り具返礼品｜ジャンル別に紹介'], until: '2026-12-31' },
 ];
 const todayJST = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
 const cardHtml = ([href, img, alt, title], nl) => [
