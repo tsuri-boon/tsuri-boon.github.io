@@ -152,12 +152,42 @@ const CARD = {
 };
 const POPULAR = [CARD.tungsten, CARD.sawara, CARD.lure, CARD.muko, CARD.rank];
 const POPULAR_EGI = [CARD.tungsten, CARD.egi, CARD.lure, CARD.muko, CARD.rank];
+// 期間限定で「人気記事はこちら」の先頭に入れるカード（until の日まで。日本時間）。
+// 期間中は先頭に入れて4枚目を外し、期間が過ぎたら次の実行で外して POPULAR から足りない分を足す。
+const PROMO = [
+  { card: ['furusato-tsurigu.html', '../image/furusato-tsurigu.jpg', 'ふるさと納税でもらえる釣具おすすめ', '【2026年】ふるさと納税でもらえる釣具おすすめ｜ターゲット別に紹介'], until: '2026-12-31' },
+];
+const todayJST = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+const cardHtml = ([href, img, alt, title], nl) => [
+  `      <a href="${href}" class="article-card">`,
+  `        <img src="${img}" alt="${alt}">`,
+  `        <h3>${title}</h3>`,
+  '      </a>',
+].join(nl);
+function applyPromo(html, f, nl, open) {
+  const close = html.indexOf('</div>', open);
+  let block = html.slice(open, close);
+  // いったん期間限定カードを外す
+  for (const { card } of PROMO) {
+    block = block.replace(new RegExp(`[ \\t]*<a href="${card[0].replace(/\./g, '\\.')}" class="article-card">[\\s\\S]*?<\\/a>\\r?\\n`), '');
+  }
+  const active = PROMO.filter(p => todayJST <= p.until && p.card[0] !== f).map(p => p.card);
+  if (active.length) {
+    // 先頭に入れて、POPULAR_MAX を超えた分を後ろから外す
+    const head = block.indexOf('\n') + 1;
+    block = block.slice(0, head) + active.map(c => cardHtml(c, nl)).join(nl) + nl + block.slice(head);
+    const cards = [...block.matchAll(/[ \t]*<a href="[^"]+" class="article-card">[\s\S]*?<\/a>\r?\n/g)];
+    for (const m of cards.slice(POPULAR_MAX).reverse()) block = block.slice(0, m.index) + block.slice(m.index + m[0].length);
+  }
+  return html.slice(0, open) + block + html.slice(close);
+}
 const isEgiPage = f => fishOf[f] === 'エギング' || /egi|eging/.test(f);
 function fillPopular(html, f, nl) {
   const p = html.indexOf('<p>人気記事はこちら</p>');
   if (p < 0) return html;
   const open = html.indexOf('<div class="article-cards">', p);
   if (open < 0) return html;
+  html = applyPromo(html, f, nl, open);
   const egiPage = isEgiPage(f);
   {
     // エギング以外のページからは新作エギ、エギングのページからはサワラのカードを外す（見本の記事から写したカードも直す）
