@@ -4,62 +4,119 @@
   "name": "バトゥータ80S+",
   "copy": "トランスセンデンスのパックロッド（エギング・ライトゲーム）｜特徴・スペック",
   "img": "batuta80s.jpg",
-  "date": "2026-11-15"
+  "date": "2026-11-15",
+  "genre": "ロッド"
  },
  {
   "file": "nuptsebootiewp7short",
   "name": "ヌプシ ブーティ ウォータープルーフ VII ショート",
   "copy": "ザ・ノース・フェイスの防寒ブーツ｜特徴・使い方・似ているアイテム比較",
   "img": "nuptsebootiewp7short.jpg",
-  "date": "2026-11-14"
+  "date": "2026-11-14",
+  "genre": "アクセサリー"
  },
  {
   "file": "chomolungma",
   "name": "チョモランマ",
   "copy": "ひだまりの防寒インナー｜特徴・使い方・似ているアイテム比較",
   "img": "chomolungma.jpg",
-  "date": "2026-11-14"
+  "date": "2026-11-14",
+  "genre": "アクセサリー"
  },
  {
   "file": "geolineexp",
   "name": "ジオライン EXP.",
   "copy": "モンベルの防寒インナー｜特徴・使い方・シリーズ比較",
   "img": "geolineexp.jpg",
-  "date": "2026-11-14"
+  "date": "2026-11-14",
+  "genre": "アクセサリー"
  },
  {
   "file": "galupa86b",
   "name": "ガルッパ86B+",
   "copy": "トランスセンデンスのパックロッド（ロックショア）｜特徴・スペック",
   "img": "galupa86b.jpg",
-  "date": "2026-11-14"
+  "date": "2026-11-14",
+  "genre": "ロッド"
  },
  {
   "file": "lb510",
   "name": "レイトブルーミングス510+",
   "copy": "トランスセンデンスのパックロッド（ベイト）｜特徴・スペック",
   "img": "lb510.jpg",
-  "date": "2026-11-14"
+  "date": "2026-11-14",
+  "genre": "ロッド"
  },
  {
   "file": "empinado91s",
   "name": "エンピナード91S+",
   "copy": "トランスセンデンスのパックロッド（ヒラスズキ）｜特徴・スペック",
   "img": "empinado91s.jpg",
-  "date": "2026-11-14"
+  "date": "2026-11-14",
+  "genre": "ロッド"
  },
  {
   "file": "pulchra62b",
   "name": "プルクラ62B+",
   "copy": "トランスセンデンスのパックロッド（ベイト）｜特徴・スペック",
   "img": "pulchra62b.jpg",
-  "date": "2026-11-14"
+  "date": "2026-11-14",
+  "genre": "ロッド"
  },
  {
   "file": "currentes82s",
   "name": "カレンテス82S+",
   "copy": "トランスセンデンスのパックロッド（シーバス）｜特徴・スペック",
   "img": "currentes82s.jpg",
-  "date": "2026-11-14"
+  "date": "2026-11-14",
+  "genre": "ロッド"
+ },
+ {
+  "file": "transcendence",
+  "name": "TRANSCENDENCE（トランスセンデンス）「Pack rod is not a compromise.」全ロッドがパックロッドのブランド",
+  "copy": "全ロッドがパックロッドのブランドの特徴と人気ロッド（プルクラ・レイトブルーミングス・エンピナード）",
+  "img": "maker_transcendence.jpg",
+  "date": "2026-11-14",
+  "genre": "その他"
+ },
+ {
+  "file": "noten150",
+  "name": "ノーテン150",
+  "copy": "マルジンのワーム系スティックベイト｜特徴・使い方・シリーズ比較",
+  "img": "noten150.jpg",
+  "date": "2026-11-13",
+  "genre": "ルアー"
+ },
+ {
+  "file": "metalmagicshore",
+  "name": "メタルマジック ショア",
+  "copy": "アクアウェーブのテールスピンジグ｜特徴・使い方・シリーズ比較",
+  "img": "metalmagicshore.jpg",
+  "date": "2026-11-12",
+  "genre": "ルアー"
+ },
+ {
+  "file": "furusato-tsurigu",
+  "name": "【2026年】ふるさと納税のおすすめ釣り具返礼品",
+  "copy": "釣り人のためのふるさと納税のおすすめ返礼品｜ルアー・リール・ラインなどジャンル別に釣具紹介",
+  "img": "furusato-tsurigu.jpg",
+  "date": "2026-11-12",
+  "genre": "その他"
+ },
+ {
+  "file": "balt",
+  "name": "バルト",
+  "copy": "エコギアのシャッドテールワーム｜特徴・使い方・シリーズ比較",
+  "img": "balt.jpg",
+  "date": "2026-11-12",
+  "genre": "ルアー"
+ },
+ {
+  "file": "kansai-release-size",
+  "name": "関西のリリースサイズと抱卵時期まとめ",
+  "copy": "魚ごとのリリースサイズと抱卵時期まとめ｜法律の決まり・漁業者のお願い・資源を守る目安",
+  "img": "kansai-release-size.jpg",
+  "date": "2026-11-08",
+  "genre": "その他"
  }
 ]

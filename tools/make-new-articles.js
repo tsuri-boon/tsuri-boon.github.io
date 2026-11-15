@@ -5,8 +5,11 @@
 //   - 各記事には「オススメ記事はこちら」のすぐ上に、空の枠（<!-- 新着記事 start --> 〜 end）を一度だけ入れる。
 //     枠の中身は固定なので、2回目以降は記事のHTMLを書き換えない。
 //   - トップページ（index.html）には、おすすめ記事の上に新着8本を直接書き込む（<!-- 新着記事 start --> 〜 end）。
-//   - 並び順は構造化データの datePublished の新しい順（同じ日は初めてコミットした時刻の新しい順）。
-//     対象は sitemap.xml に載っている article/ の記事で、メイン画像（og:image）があるもの。
+//   - 新しさは構造化データの datePublished（同じ日は初めてコミットした時刻）で決める。
+//     対象は article/ の記事で、make-sitemap.js の EXCLUDE・noindex を除き、メイン画像（og:image）があるもの。
+//   - ジャンルがかぶらないように、ルアー（lure-zukan）・ロッド（rod-zukan）・アクセサリー（accessory-zukan）・
+//     その他（まとめ・メーカー記事など）から2本ずつ、新しい順に選ぶ。並びは「各ジャンルの1本目 → 2本目」の順で、
+//     足りないジャンルがあれば残りの新しい記事で埋める。記事側（js/new-articles.js）も同じ選び方をする。
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
@@ -14,7 +17,9 @@ const { execSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 const ART = path.join(ROOT, 'article');
 const SHOW = 8;           // 表示する本数
-const KEEP = SHOW + 1;    // 記事自身を外しても8本になるように1本多く持つ
+const PER = 2;            // 1ジャンルから表示する本数
+const KEEP_PER = PER + 1;  // 記事自身を外しても2本になるように、ジャンルごとに1本多く持つ
+const GENRES = ['ルアー', 'ロッド', 'アクセサリー', 'その他'];
 const START = '<!-- 新着記事 start -->';
 const END = '<!-- 新着記事 end -->';
 const OSUSUME = '<!-- オススメ記事 start -->';
@@ -37,12 +42,31 @@ for (const line of execSync('git log --diff-filter=A --name-only --format=@%ct -
   else if (line.startsWith('article/')) { const f = line.slice(8).replace(/\.html$/, ''); if (!(f in born)) born[f] = t; }
 }
 
+// ジャンル：どの図鑑にリンクがあるか
+const linksIn = z => new Set([...fs.readFileSync(path.join(ROOT, z), 'utf8').matchAll(/href="\/?article\/([^"#?]+)\.html"/g)].map(m => m[1]));
+const LURE = linksIn('lure-zukan.html'), ROD = linksIn('rod-zukan.html'), ACC = linksIn('accessory-zukan.html');
+const genreOf = f => LURE.has(f) ? 'ルアー' : ROD.has(f) ? 'ロッド' : ACC.has(f) ? 'アクセサリー' : 'その他';
+
+// ジャンルごとに2本ずつ選ぶ（js/new-articles.js と同じ選び方）
+function pick(items, self) {
+  const pool = items.filter(x => x.file !== self);
+  const rows = [];
+  for (let i = 0; i < PER; i++) for (const g of GENRES) {
+    const x = pool.filter(y => y.genre === g)[i];
+    if (x) rows.push(x);
+  }
+  for (const x of pool) { if (rows.length >= SHOW) break; if (!rows.includes(x)) rows.push(x); }
+  return rows.slice(0, SHOW);
+}
+
 const list = [];
 for (const f of files) {
   const p = path.join(ART, f + '.html');
   if (!fs.existsSync(p)) continue;
   const h = fs.readFileSync(p, 'utf8');
-  const date = (h.match(/"datePublished":\s*"([0-9-]+)"/) || [])[1];
+  // 公開日：datePublished。無いページ（メーカー記事など）は初めてコミットした日（日本時間）、未コミットなら今日
+  const jst = ms => new Date(ms + 9 * 3600 * 1000).toISOString().slice(0, 10);
+  const date = (h.match(/"datePublished":\s*"([0-9-]+)"/) || [])[1] || (born[f] ? jst(born[f] * 1000) : jst(Date.now()));
   const img = (h.match(/property="og:image" content="[^"]*\/image\/([^"]+)"/) || [])[1];
   if (!date || !img || !fs.existsSync(path.join(ROOT, 'image', img))) continue;
   const h1 = (h.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || '';
@@ -50,10 +74,13 @@ for (const f of files) {
   // 説明：タイトルから「｜tsuri-boon」と先頭の【名前】を外したもの
   const title = strip((h.match(/<title>([^<]*)<\/title>/) || [])[1] || '').replace(/\s*｜\s*tsuri-boon\s*$/, '');
   const copy = title.replace(/^【[^】]*】\s*/, '') || title;
-  list.push({ file: f, name, copy, img, date, t: born[f] ?? Infinity });
+  list.push({ file: f, name, copy, img, date, genre: genreOf(f), t: born[f] ?? Infinity });
 }
 list.sort((a, b) => b.date.localeCompare(a.date) || b.t - a.t || a.file.localeCompare(b.file));
-const latest = list.slice(0, KEEP).map(({ file, name, copy, img, date }) => ({ file, name, copy, img, date }));
+// JSON には、各ジャンルの新しい3本と、全体の新しい9本（足りないジャンルを埋める用）を入れる
+const keep = new Set([...GENRES.flatMap(g => list.filter(x => x.genre === g).slice(0, KEEP_PER)), ...list.slice(0, SHOW + 1)].map(x => x.file));
+const latest = list.filter(x => keep.has(x.file)).map(({ file, name, copy, img, date, genre }) => ({ file, name, copy, img, date, genre }));
+const shown = pick(latest, null);
 
 // ---- data/new-articles.json ----
 const jsonPath = path.join(ROOT, 'data', 'new-articles.json');
@@ -85,7 +112,7 @@ for (const f of fs.readdirSync(ART).filter(x => x.endsWith('.html'))) {
 // ---- トップページに直接書き込む ----
 const top = path.join(ROOT, 'index.html');
 let ih = fs.readFileSync(top, 'utf8');
-const cards = latest.slice(0, SHOW).map(x =>
+const cards = shown.map(x =>
   `<a class="osusume-card" href="article/${x.file}.html"><span class="osusume-thumb"><img src="image/${esc(x.img)}" alt="${esc(x.name)}" loading="lazy"></span><span class="osusume-name">${esc(x.name)}</span><span class="osusume-copy">${esc(x.copy)}</span></a>`).join('');
 // トップページは css/style.css を読まないので、カードの見た目をこの欄の中だけに書く
 const CSS = '#new-articles{background:#fff}'
@@ -108,5 +135,5 @@ else {
 const topChanged = ih !== fs.readFileSync(top, 'utf8');
 if (topChanged) fs.writeFileSync(top, ih);
 
-console.log(`新着記事：${latest.slice(0, SHOW).map(x => x.file).join(', ')}`);
+console.log(`新着記事：${shown.map(x => `${x.file}（${x.genre}）`).join(', ')}`);
 console.log(`data/new-articles.json ${json === oldJson ? 'は変更なし' : 'を更新'}／枠を入れた記事 ${slotted}／トップページ${topChanged ? "を更新" : "は変更なし"}`);

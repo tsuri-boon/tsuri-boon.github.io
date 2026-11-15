@@ -210,7 +210,8 @@ Claude Code は**該当箇所にプレースホルダーのコメントだけ残
 
 記事を追加したら、`tools/make-osusume.js` のあとに **`node tools/make-new-articles.js`** を実行する（`make-byline.js` より前）。
 
-- 新着は構造化データの `datePublished` の新しい順に8本（同じ日は初めてコミットした時刻の新しい順）。対象は `article/` の記事のうち、`tools/make-sitemap.js` の `EXCLUDE` と `noindex` のページを除いた、メイン画像（og:image）があるもの（`sitemap.xml` は読まないので、サイトマップより先に実行しても新しい記事が入る）。
+- 新着は8本。**ジャンルがかぶらないように、ルアー（`lure-zukan.html` にカードがある記事）・ロッド（`rod-zukan.html`）・アクセサリー（`accessory-zukan.html`）・その他（まとめ・メーカー記事など）から2本ずつ**、新しい順に選ぶ。並びは各ジャンルの1本目→2本目（4列なら1段に各ジャンル1本）。足りないジャンルは残りの新しい記事で埋める。
+- 新しさは構造化データの `datePublished`（同じ日は初めてコミットした時刻の新しい順。`datePublished` が無いメーカー記事などは初めてコミットした日）。対象は `article/` の記事のうち、`tools/make-sitemap.js` の `EXCLUDE` と `noindex` のページを除いた、メイン画像（og:image）があるもの（`sitemap.xml` は読まないので、サイトマップより先に実行しても新しい記事が入る）。
 - 一覧は `data/new-articles.json` に書き出す。各記事の「新着記事はこちら」（「オススメ記事はこちら」のすぐ上）は、`js/new-articles.js` がこの JSON を読んで表示する。**記事を足しても各記事のHTMLは書き換わらない**（全ページを毎回更新しないため）。表示はその記事自身を除いた8本。
 - 各記事の枠（`<!-- 新着記事 start -->` 〜 end）はスクリプトが一度だけ入れる。中身は固定なので手で編集しない。
 - トップページ（`index.html`）には、おすすめ記事の上に新着8本を直接書き込む（同じ start 〜 end の範囲。検索エンジンが新しい記事を見つけやすいように、トップだけはHTMLに直接書く）。

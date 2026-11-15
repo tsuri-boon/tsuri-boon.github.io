@@ -10,7 +10,18 @@
   fetch('../data/new-articles.json')
     .then(function (r) { return r.ok ? r.json() : []; })
     .then(function (list) {
-      var items = list.filter(function (x) { return x.file !== here; }).slice(0, 8);
+      // ジャンルがかぶらないように、ルアー・ロッド・アクセサリー・その他から2本ずつ（tools/make-new-articles.js と同じ選び方）
+      var GENRES = ['ルアー', 'ロッド', 'アクセサリー', 'その他'];
+      var pool = list.filter(function (x) { return x.file !== here; });
+      var items = [];
+      for (var i = 0; i < 2; i++) {
+        GENRES.forEach(function (g) {
+          var x = pool.filter(function (y) { return y.genre === g; })[i];
+          if (x) items.push(x);
+        });
+      }
+      pool.forEach(function (x) { if (items.length < 8 && items.indexOf(x) < 0) items.push(x); });
+      items = items.slice(0, 8);
       if (!items.length) return;
       box.querySelector('.osusume-cards').innerHTML = items.map(function (x) {
         return '<a href="' + esc(x.file) + '.html" class="osusume-card">'
