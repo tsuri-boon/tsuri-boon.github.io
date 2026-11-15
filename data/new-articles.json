@@ -1,5 +1,45 @@
 [
  {
+  "file": "jigparaendertg",
+  "name": "ジグパラ エンダーTG",
+  "copy": "メジャークラフトのタングステンジグ｜特徴・使い方・シリーズ比較",
+  "img": "jigparaendertg.png",
+  "date": "2026-11-15",
+  "genre": "ルアー"
+ },
+ {
+  "file": "okashirahead",
+  "name": "オカシラヘッド",
+  "copy": "メガバスのジグヘッド（フィッシュヘッドジグ）｜特徴・使い方・シリーズ比較",
+  "img": "okashirahead.jpg",
+  "date": "2026-11-15",
+  "genre": "ルアー"
+ },
+ {
+  "file": "okashirascrewhead",
+  "name": "オカシラ・スクリューヘッド",
+  "copy": "メガバスのジグヘッド（プロップ付き）｜特徴・使い方・シリーズ比較",
+  "img": "okashirascrewhead.jpg",
+  "date": "2026-11-15",
+  "genre": "ルアー"
+ },
+ {
+  "file": "outbackpuppy",
+  "name": "アウトバック パピー",
+  "copy": "テイルウォークのパックロッド（振出）｜特徴・スペック",
+  "img": "outbackpuppy.jpg",
+  "date": "2026-11-15",
+  "genre": "ロッド"
+ },
+ {
+  "file": "relevante20",
+  "name": "Réレバンテ2.0",
+  "copy": "ブルーストームのゲームベスト（ライフジャケット）｜特徴・使い方・似ているアイテム比較",
+  "img": "relevante20.jpg",
+  "date": "2026-11-15",
+  "genre": "アクセサリー"
+ },
+ {
   "file": "hisoka150fssr",
   "name": "モアザン ヒソカ150F-SSR",
   "copy": "ダイワのシャローランナー｜特徴・使い方・シリーズ比較",
@@ -48,26 +88,10 @@
   "genre": "アクセサリー"
  },
  {
-  "file": "geolineexp",
-  "name": "ジオライン EXP.",
-  "copy": "モンベルの防寒インナー｜特徴・使い方・シリーズ比較",
-  "img": "geolineexp.jpg",
-  "date": "2026-11-14",
-  "genre": "アクセサリー"
- },
- {
   "file": "galupa86b",
   "name": "ガルッパ86B+",
   "copy": "トランスセンデンスのパックロッド（ロックショア）｜特徴・スペック",
   "img": "galupa86b.jpg",
-  "date": "2026-11-14",
-  "genre": "ロッド"
- },
- {
-  "file": "lb510",
-  "name": "レイトブルーミングス510+",
-  "copy": "トランスセンデンスのパックロッド（ベイト）｜特徴・スペック",
-  "img": "lb510.jpg",
   "date": "2026-11-14",
   "genre": "ロッド"
  },
