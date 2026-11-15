@@ -22,8 +22,12 @@ const OSUSUME = '<!-- オススメ記事 start -->';
 const strip = s => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
-// sitemap.xml に載っている記事だけ（テスト用・テンプレートなどは入らない）
-const files = [...fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8').matchAll(/<loc>[^<]*\/article\/([^<\/]+)\.html<\/loc>/g)].map(m => m[1]);
+// article/ の記事のうち、サイトマップに載せるものだけ（make-sitemap.js の EXCLUDE と noindex のページは入らない）。
+// sitemap.xml を読むと、作り直す前に実行したとき新しい記事が漏れるので、記事のフォルダから直接集める
+const exSrc = fs.readFileSync(path.join(__dirname, 'make-sitemap.js'), 'utf8');
+const EXCLUDE = new Set([...(exSrc.match(/const EXCLUDE = new Set\(\[([\s\S]*?)\]\)/) || ['', ''])[1].matchAll(/'article\/([^']+)\.html'/g)].map(m => m[1]));
+const files = fs.readdirSync(ART).filter(x => x.endsWith('.html')).map(x => x.replace(/\.html$/, ''))
+  .filter(f => !EXCLUDE.has(f) && !/<meta name="robots" content="[^"]*noindex/.test(fs.readFileSync(path.join(ART, f + '.html'), 'utf8')));
 
 // 初めてコミットした時刻（同じ日の並び替え用。未コミットの記事はいちばん新しい扱い）
 const born = {};
