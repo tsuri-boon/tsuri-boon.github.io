@@ -1,5 +1,13 @@
 [
  {
+  "file": "zowazowa",
+  "name": "ゾワゾワ",
+  "copy": "エバーグリーンのフラット系ワーム｜特徴・使い方・シリーズ比較",
+  "img": "zowazowa.jpg",
+  "date": "2026-11-16",
+  "genre": "ルアー"
+ },
+ {
   "file": "gulpfloatinglightcrawler",
   "name": "ガルプ！ソルトウォーター フローティングライトクローラー2.5インチ",
   "copy": "バークレイのアジング・メバリングワーム｜特徴・使い方・似ているルアー比較",
@@ -62,14 +70,6 @@
   "img": "relevante20.jpg",
   "date": "2026-11-15",
   "genre": "アクセサリー"
- },
- {
-  "file": "hisoka150fssr",
-  "name": "モアザン ヒソカ150F-SSR",
-  "copy": "ダイワのシャローランナー｜特徴・使い方・シリーズ比較",
-  "img": "hisoka150fssr.jpg",
-  "date": "2026-11-15",
-  "genre": "ルアー"
  },
  {
   "file": "batuta80s",
