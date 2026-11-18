@@ -1,5 +1,13 @@
 [
  {
+  "file": "sperar64s",
+  "name": "スペラール64S+",
+  "copy": "トランスセンデンスのパックロッド（バス・ライトゲーム）｜特徴・スペック",
+  "img": "sperar64s.png",
+  "date": "2026-11-19",
+  "genre": "ロッド"
+ },
+ {
   "file": "zowazowa",
   "name": "ゾワゾワ",
   "copy": "エバーグリーンのフラット系ワーム｜特徴・使い方・シリーズ比較",
@@ -94,14 +102,6 @@
   "img": "chomolungma.jpg",
   "date": "2026-11-14",
   "genre": "アクセサリー"
- },
- {
-  "file": "galupa86b",
-  "name": "ガルッパ86B+",
-  "copy": "トランスセンデンスのパックロッド（ロックショア）｜特徴・スペック",
-  "img": "galupa86b.jpg",
-  "date": "2026-11-14",
-  "genre": "ロッド"
  },
  {
   "file": "transcendence",

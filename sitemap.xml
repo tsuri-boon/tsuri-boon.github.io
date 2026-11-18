@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tsuri-boon.github.io/</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -2371,6 +2371,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://tsuri-boon.github.io/article/sperar64s.html</loc>
+    <lastmod>2026-11-19</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://tsuri-boon.github.io/article/squidjunkylivelydart.html</loc>
     <lastmod>2026-11-03</lastmod>
     <priority>0.7</priority>
@@ -2527,7 +2532,7 @@
   </url>
   <url>
     <loc>https://tsuri-boon.github.io/article/transcendence.html</loc>
-    <lastmod>2026-11-15</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -2827,12 +2832,12 @@
   </url>
   <url>
     <loc>https://tsuri-boon.github.io/rod-zukan.html</loc>
-    <lastmod>2026-11-15</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tsuri-boon.github.io/sitemap.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.5</priority>
   </url>
   <url>

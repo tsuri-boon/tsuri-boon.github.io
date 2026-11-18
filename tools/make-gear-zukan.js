@@ -52,6 +52,7 @@ const ROD = {
     { f: 'firstcasteging', sec: 'エギング', desc: '全5モデル、7,150円からの入門エギングロッド。対応エギは1.5〜4.0号。', fish: ['イカ'], len: [7.75, 8.5], lure: [5, 25], pcs: [2], packed: null, year: 2026 },
     { f: 'umitaroaoi70ls', sec: 'オフショア', desc: 'SLJ・バチコン・イカメタルまでこなす「オフショアのなんでもロッド」。', fish: ['青物', 'ロックフィッシュ', 'メバル・アジ', 'イカ'], len: [7, 7], lure: [10, 60], pcs: [2], packed: [110, 110] },
     { f: 'pulchra62b', sec: 'バス', pack: true, desc: 'ティップML・バットH〜XHの、6.2ftと7.3ftに組み替えられるベイトのバーサタイルパックロッド。', fish: ['バス', 'シーバス', 'ロックフィッシュ', '青物'], len: [6 + 2 / 12, 7 + 3 / 12], lure: [5, 56], pcs: [4, 5], packed: [52.5, 52.5], tags: ['ベイト', '可変レングス'] },
+    { f: 'sperar64s', sec: 'バス', pack: true, desc: '6.4ftと7.5ftに組み替えられる、フィネス用のスピニングパックロッド。仕舞寸法535mm。', fish: ['バス', 'メバル・アジ', 'ロックフィッシュ', 'トラウト'], len: [6 + 4 / 12, 7 + 5 / 12], lure: [1, 14], pcs: [4, 5], packed: [53.5, 53.5], tags: ['可変レングス'] },
     { f: 'bluetrek', sec: 'バス', desc: '青木大介さんの経験を詰め込んだ、DSTYLEのバスロッドシリーズ。', fish: ['バス'], len: null, lure: null, pcs: null, packed: null },
     { f: 'firstcastbass', sec: 'バス', desc: 'ベイト3・スピニング2の全5モデル。7,150円からの入門バスロッド。', fish: ['バス'], len: [6.5, 7], lure: [1.8, 42.5], pcs: [2], packed: null, year: 2027 },
     { f: 'shibumi', sec: 'トラウト', desc: '辺見哲也さんがフリップキャストに特化させた、セミダブルハンドの渓流ロッド。', fish: ['トラウト'], len: [5 + 8 / 12, 6 + 1 / 12], lure: [0, 8], pcs: null, packed: null, tags: ['渓流'] },
