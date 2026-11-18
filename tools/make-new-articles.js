@@ -115,7 +115,7 @@ let ih = fs.readFileSync(top, 'utf8');
 const cards = shown.map(x =>
   `<a class="osusume-card" href="article/${x.file}.html"><span class="osusume-thumb"><img src="image/${esc(x.img)}" alt="${esc(x.name)}" loading="lazy"></span><span class="osusume-name">${esc(x.name)}</span><span class="osusume-copy">${esc(x.copy)}</span></a>`).join('');
 // トップページは css/style.css を読まないので、カードの見た目をこの欄の中だけに書く
-const CSS = '#new-articles{background:#fff}'
+const CSS = '#new-articles{background:transparent}#new-articles>.wrap{border-top:2px dashed #7ca4b5;padding-top:36px}'
   + '#new-articles .osusume-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}'
   + '#new-articles .osusume-card{display:flex;flex-direction:column;background:#fff;border:2px solid #143246;border-radius:14px;overflow:hidden;color:#143246;transition:.2s}'
   + '#new-articles .osusume-card:hover{transform:translateY(-3px)}'
