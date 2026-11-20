@@ -6,13 +6,14 @@
 //     （登録済みのページは前回から30日たったものだけ確認し直す。--fresh で全部やり直す）
 //   - 調べる順番は「まだ調べていないページ → 未登録のページ → 30日たった登録済みのページ」
 //   - 鍵ファイルと結果はリポジトリに置かない（鍵はパスワードと同じ）
+//   - 別のプロパティを調べるときは --site <プロパティ>（例：sc-domain:tsuriboon.com）と --sitemap <sitemap.xml のパス>
 //   - API の上限は 1日2,000件・1分600件。念のため1件ずつ少し間を空けて送る
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
-const SITE = 'https://tsuri-boon.github.io/';
+const SITE = process.argv.includes('--site') ? process.argv[process.argv.indexOf('--site') + 1] : 'https://tsuri-boon.github.io/';
 const arg = name => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : null; };
 const KEY = arg('--key') || process.env.GSC_KEY;
 const OUT = arg('--out');
@@ -62,7 +63,7 @@ async function inspect(tok, url) {
 (async () => {
   const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' });
   let urls = arg('--url') ? [arg('--url')]
-    : [...fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+    : [...fs.readFileSync(arg('--sitemap') || path.join(ROOT, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
   const out = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf8')) : {};
   if (!process.argv.includes('--fresh')) {
     const days = d => (Date.parse(today) - Date.parse(d)) / 864e5;
