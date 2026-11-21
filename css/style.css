@@ -569,7 +569,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: none; /* 下のメニュー（.sub-nav）と1つのヘッダーに見えるように影は付けない */
   position: sticky; /* スクロール固定 */
   top: 0;
   z-index: 100;
@@ -712,8 +712,10 @@ nav a:hover {
   .sub-nav-inner {
     gap: 8px;
     padding: 2px 0 10px 16px;
-    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
-    mask-image: linear-gradient(to right, #000 85%, transparent);
+    --nav-fade-l: 0px;
+    --nav-fade-r: 48px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--nav-fade-l), #000 calc(100% - var(--nav-fade-r)), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 var(--nav-fade-l), #000 calc(100% - var(--nav-fade-r)), transparent 100%);
   }
   .sub-nav-inner::after {
     content: "";
@@ -2181,5 +2183,25 @@ main table td {
   main table:not(.cal) th,
   main table:not(.cal) td {
     padding: 6px 5px !important;
+  }
+}
+
+/* ヘッダーのメニューの横スクロール：右端まで行ったら右のフェードを消して、左にフェードを付ける
+   （スクロール連動アニメーションに対応したブラウザだけ。対応していなければ右だけフェードのまま） */
+@property --nav-fade-l { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --nav-fade-r { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@keyframes nav-fade {
+  0% { --nav-fade-l: 0px; --nav-fade-r: 48px; }
+  8% { --nav-fade-l: 48px; }
+  92% { --nav-fade-r: 48px; }
+  100% { --nav-fade-l: 48px; --nav-fade-r: 0px; }
+}
+@supports (animation-timeline: scroll()) {
+  @media (max-width: 600px) {
+    .sub-nav-inner {
+      --nav-fade-r: 0px; /* スクロールできないときはフェードなし */
+      animation: nav-fade linear both;
+      animation-timeline: scroll(self inline);
+    }
   }
 }
