@@ -372,3 +372,6 @@ for (const f of fs.readdirSync(DIR).filter(x => x.endsWith('.html') && !EXCLUDE.
   if (html !== before) { fs.writeFileSync(p, html); count++; }
 }
 console.log(`更新日と著者の枠を ${count} 記事に反映しました`);
+
+// 表の折り返し位置（<wbr>）も入れ直す（tools/make-table-wbr.js）
+require('./make-table-wbr').run();

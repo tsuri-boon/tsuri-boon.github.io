@@ -229,6 +229,7 @@ Claude Code は**該当箇所にプレースホルダーのコメントだけ残
 - パンくずは6つに分ける：ルアー記事が「トップ › ルアー図鑑 › 魚種 › 記事名」（魚種は図鑑の `data-category`、リンク先は `lure-zukan.html?cat=魚種`）、ロッド記事が「トップ › ロッド図鑑 › 釣り方 › 記事名」（`rod-zukan.html`）、アクセサリー記事が「トップ › アクセサリー図鑑 › 種類 › 記事名」（`accessory-zukan.html`）、メーカー記事（`maker-zukan.html` か `tools/make-osusume.js` の `MAKER_PAGES`）が「トップ › メーカー図鑑 › 記事名」、便利ツール（`tools/make-byline.js` の `TOOL_PAGES`）が「トップ › 便利ツール（トップページの #tools） › ツール名」、それ以外のまとめ・ガイドが「トップ › 記事一覧（sitemap.html） › 記事名」。構造化データの `BreadcrumbList` もスクリプトが同じ内容で作り直すので、記事に手で書かない（記事名を変えたいときは `BreadcrumbList` の最後の `name` を直して実行する）。
 - 更新日は構造化データの `dateModified`（無ければ `datePublished`）から作る。内容を変えた記事は `dateModified` を更新してから実行する。全ページ一括の機械的な変更では `dateModified` を変えない。
 - 記事内の `<!-- パンくず start -->`・`<!-- パンくず構造化データ start -->`・`<!-- 更新日 start -->`・`<!-- 著者 start -->` 〜 end の範囲だけをスクリプトが書き換える。**この範囲は手で編集しない。** 枠の文章やアイコンは `tools/make-byline.js` の `AUTHOR` で変える。
+- `make-byline.js` の最後に `tools/make-table-wbr.js` も実行され、記事の表（`<table>`）の文字に文節の区切りで `<wbr>` を入れる（スマホで単語の途中で改行しないように。区切りは BudouX＝`tools/lib/budoux-ja.js`）。表の `<wbr>` は手で入れなくてよい（入れ直されるので消してもよい）。
 - 著者は `meta author`・構造化データの `author` とも「こすけ」（Person。`url` は `tsuri-boon.html`）。プロフィールは `tsuri-boon.html` の `#author`。
 - 身を守るため、サイトに「個人で運営」のような表現は書かない。
 

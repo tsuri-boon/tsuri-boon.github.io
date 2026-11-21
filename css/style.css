@@ -2151,3 +2151,35 @@ body.is-filtered .encyclopedia-page .lure-item:not(.is-hidden) {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
+
+/* ──────────────── */
+/* 表：スマホで単語の途中で改行しないようにする */
+/* 表の文字には tools/make-table-wbr.js が文節の区切りに <wbr> を入れているので、
+   keep-all にして <wbr>（と空白）の位置でだけ折り返す。どうしても入らない長い単語だけ overflow-wrap で折る */
+/* ──────────────── */
+main table th,
+main table td {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+}
+/* 対応しているブラウザ（Chrome・Edge など）は、<wbr> の無い表も文節で折り返す */
+@supports (word-break: auto-phrase) {
+  main table th,
+  main table td {
+    word-break: auto-phrase;
+  }
+}
+/* スマホではセルの左右の余白を詰めて、文字を置ける幅を広げる */
+@media (max-width: 600px) {
+  /* 長い単語で入りきらない表は、ページ全体ではなく表の中だけ横にスクロールさせる */
+  main table:not(.cal) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  main table:not(.cal) th,
+  main table:not(.cal) td {
+    padding: 6px 5px !important;
+  }
+}
