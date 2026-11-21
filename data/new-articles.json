@@ -16,6 +16,14 @@
   "genre": "ロッド"
  },
  {
+  "file": "kaienshallowmaster",
+  "name": "海燕（カイエン）シャローマスター",
+  "copy": "マーズのシーバス用ソフトスイムベイト｜特徴・使い方・シリーズ比較",
+  "img": "kaienshallowmaster.jpg",
+  "date": "2026-11-21",
+  "genre": "ルアー"
+ },
+ {
   "file": "vj16powerhook",
   "name": "VJ-16 バイブレーションジグヘッド パワーフック",
   "copy": "コアマンの強化フック仕様バイブレーションジグヘッド｜特徴・使い方・シリーズ比較",
@@ -60,14 +68,6 @@
   "name": "ガルプ！ソルトウォーター フローティングライトクローラー2.5インチ",
   "copy": "バークレイのアジング・メバリングワーム｜特徴・使い方・似ているルアー比較",
   "img": "gulpfloatinglightcrawler.jpg",
-  "date": "2026-11-16",
-  "genre": "ルアー"
- },
- {
-  "file": "umitaroajikakeset",
-  "name": "海太郎 アジ掛けセット",
-  "copy": "イッセイのアジング用ワーム＋ジグヘッドセット｜特徴・使い方・似ているルアー比較",
-  "img": "umitaroajikakeset.jpg",
   "date": "2026-11-16",
   "genre": "ルアー"
  },
