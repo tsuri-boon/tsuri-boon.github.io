@@ -1,5 +1,21 @@
 [
  {
+  "file": "athlete14svg",
+  "name": "アスリート+ 14SVG",
+  "copy": "ジャクソンのシンキングミノー｜特徴・使い方・シリーズ比較",
+  "img": "athlete14svg.jpg",
+  "date": "2026-11-22",
+  "genre": "ルアー"
+ },
+ {
+  "file": "k2f162t3",
+  "name": "K2F162 T:3",
+  "copy": "タックルハウスの青物用フローティングミノー｜特徴・使い方・シリーズ比較",
+  "img": "k2f162t3.jpg",
+  "date": "2026-11-22",
+  "genre": "ルアー"
+ },
+ {
   "file": "avenger125f",
   "name": "アベンジャー125F",
   "copy": "エバーグリーンのリップレスミノー｜特徴・使い方・シリーズ比較",
@@ -54,22 +70,6 @@
   "img": "sperar64s.png",
   "date": "2026-11-19",
   "genre": "ロッド"
- },
- {
-  "file": "zowazowa",
-  "name": "ゾワゾワ",
-  "copy": "エバーグリーンのフラット系ワーム｜特徴・使い方・シリーズ比較",
-  "img": "zowazowa.jpg",
-  "date": "2026-11-16",
-  "genre": "ルアー"
- },
- {
-  "file": "gulpfloatinglightcrawler",
-  "name": "ガルプ！ソルトウォーター フローティングライトクローラー2.5インチ",
-  "copy": "バークレイのアジング・メバリングワーム｜特徴・使い方・似ているルアー比較",
-  "img": "gulpfloatinglightcrawler.jpg",
-  "date": "2026-11-16",
-  "genre": "ルアー"
  },
  {
   "file": "outbackpuppy",
