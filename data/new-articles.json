@@ -1,5 +1,61 @@
 [
  {
+  "file": "bulkygimlet",
+  "name": "バルキーギムレット",
+  "copy": "エバーグリーンのアジング用ワーム｜特徴・使い方・シリーズ比較",
+  "img": "bulkygimlet.jpg",
+  "date": "2026-11-23",
+  "genre": "ルアー"
+ },
+ {
+  "file": "corsairdrifttune",
+  "name": "コルセア ドリフトチューン",
+  "copy": "エバーグリーンのライトゲームプラグ｜特徴・使い方・シリーズ比較",
+  "img": "corsairdrifttune.jpg",
+  "date": "2026-11-23",
+  "genre": "ルアー"
+ },
+ {
+  "file": "exalis01",
+  "name": "EXALIS-01",
+  "copy": "リトルジャックのブレード付きメタルジグ｜特徴・使い方・シリーズ比較",
+  "img": "exalis01.jpg",
+  "date": "2026-11-23",
+  "genre": "ルアー"
+ },
+ {
+  "file": "flanjer",
+  "name": "フランジャー",
+  "copy": "ボトムアップのジャークベイト｜特徴・使い方・似ているルアー比較",
+  "img": "flanjer.jpg",
+  "date": "2026-11-23",
+  "genre": "ルアー"
+ },
+ {
+  "file": "octopusmini",
+  "name": "オクトパスミニ",
+  "copy": "フィッシュマグネットのクリーチャーワーム｜特徴・使い方・シリーズ比較",
+  "img": "octopusmini.jpg",
+  "date": "2026-11-23",
+  "genre": "ルアー"
+ },
+ {
+  "file": "rigge35ss",
+  "name": "リッジ35SS",
+  "copy": "ジップベイツのメバル用マイクロミノー｜特徴・使い方・シリーズ比較",
+  "img": "rigge35ss.png",
+  "date": "2026-11-23",
+  "genre": "ルアー"
+ },
+ {
+  "file": "volupminnow40",
+  "name": "ヴァラップミノー4.0インチ",
+  "copy": "ボトムアップのミノーワーム｜特徴・使い方・シリーズ比較",
+  "img": "volupminnow40.jpg",
+  "date": "2026-11-23",
+  "genre": "ルアー"
+ },
+ {
   "file": "wakeyboo112",
   "name": "ウェイキーブー112",
   "copy": "ロンジンのウェイクベイト｜特徴・使い方・シリーズ比較",
@@ -16,60 +72,12 @@
   "genre": "その他"
  },
  {
-  "file": "bfreeze78s",
-  "name": "ビーフリーズ78S",
-  "copy": "ラッキークラフトのシーバスミノー｜特徴・使い方・シリーズ比較",
-  "img": "bfreeze78s.jpg",
-  "date": "2026-11-22",
-  "genre": "ルアー"
- },
- {
-  "file": "silentassassin99s",
-  "name": "サイレントアサシン99S",
-  "copy": "シマノのシーバスミノー｜特徴・使い方・シリーズ比較",
-  "img": "silentassassin99s.jpg",
-  "date": "2026-11-22",
-  "genre": "ルアー"
- },
- {
-  "file": "athlete14svg",
-  "name": "アスリート+ 14SVG",
-  "copy": "ジャクソンのシンキングミノー｜特徴・使い方・シリーズ比較",
-  "img": "athlete14svg.jpg",
-  "date": "2026-11-22",
-  "genre": "ルアー"
- },
- {
-  "file": "k2f162t3",
-  "name": "K2F162 T:3",
-  "copy": "タックルハウスの青物用フローティングミノー｜特徴・使い方・シリーズ比較",
-  "img": "k2f162t3.jpg",
-  "date": "2026-11-22",
-  "genre": "ルアー"
- },
- {
-  "file": "avenger125f",
-  "name": "アベンジャー125F",
-  "copy": "エバーグリーンのリップレスミノー｜特徴・使い方・シリーズ比較",
-  "img": "avenger125f.jpg",
-  "date": "2026-11-21",
-  "genre": "ルアー"
- },
- {
   "file": "htinfinity",
   "name": "ハンターズ HT-∞∞ ゲームチェンジャー",
   "copy": "モンスターキスのパックロッド（怪魚・大物）｜特徴・スペック",
   "img": "htinfinity.jpg",
   "date": "2026-11-21",
   "genre": "ロッド"
- },
- {
-  "file": "kaienshallowmaster",
-  "name": "海燕（カイエン）シャローマスター",
-  "copy": "マーズのシーバス用ソフトスイムベイト｜特徴・使い方・シリーズ比較",
-  "img": "kaienshallowmaster.jpg",
-  "date": "2026-11-21",
-  "genre": "ルアー"
  },
  {
   "file": "sperar64s",
