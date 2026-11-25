@@ -171,7 +171,7 @@ const html = `<!DOCTYPE html>
   <!-- このページは tools/make-sitemap.js で自動生成しています。直接編集せず、スクリプトを実行して作り直してください。 -->
   <title>サイトマップ｜tsuri-boon</title>
   <meta name="description" content="${desc}">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="${BASE}sitemap.html">
   <link rel="icon" href="./image/tsuriboon_favicon.png" type="image/png">
   <meta property="og:title" content="サイトマップ｜tsuri-boon">
