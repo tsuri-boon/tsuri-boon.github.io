@@ -241,3 +241,19 @@ ${sections.map(([id, h, rels, useH1]) => [
 `;
 fs.writeFileSync(path.join(ROOT, 'sitemap.html'), html);
 console.log(`sitemap.html を作成しました（${pages.length} ページ）`);
+
+// 画像のチェック：サムネ（og:image・twitter:image・構造化データの image）と本文の画像で、ファイルが無いものを知らせる
+// （コメントの中の画像は、プレースホルダーなので数えない）
+{
+  const B = 'https://tsuri-boon.github.io/image/';
+  const has = p => fs.existsSync(path.join(ROOT, 'image', decodeURIComponent(p)));
+  const report = [];
+  for (const rel of pages) {
+    const s = fs.readFileSync(path.join(ROOT, rel), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
+    const bad = new Set();
+    for (const m of s.matchAll(/(?:og:image" content="|twitter:image" content="|"image": *\[?\s*")https:\/\/tsuri-boon\.github\.io\/image\/([^"]+)"/g)) if (!has(m[1])) bad.add('サムネ ' + m[1]);
+    for (const m of s.matchAll(/<img [^>]*src="(?:\.\.\/|\/)?image\/([^"]+)"/g)) if (!has(m[1])) bad.add('本文 ' + m[1]);
+    if (bad.size) report.push(`  ${rel}：${[...bad].join('、')}`);
+  }
+  if (report.length) console.log(`\n画像ファイルが見つからないページ（${report.length}）：\n${report.join('\n')}`);
+}
