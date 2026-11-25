@@ -1,5 +1,13 @@
 [
  {
+  "file": "kossorirodset",
+  "name": "こっそりロッドセット",
+  "copy": "DODのコンパクトロッドセット｜特徴・スペック",
+  "img": "kossorirodset.png",
+  "date": "2026-11-25",
+  "genre": "ロッド"
+ },
+ {
   "file": "easyshaker",
   "name": "イージーシェイカー",
   "copy": "ケイテックのワーム｜特徴・使い方・シリーズ比較",
@@ -64,26 +72,10 @@
   "genre": "アクセサリー"
  },
  {
-  "file": "esdrive",
-  "name": "エスドライブ",
-  "copy": "エバーグリーンのビッグベイト｜特徴・使い方・似ているルアー比較",
-  "img": "esdrive.jpg",
-  "date": "2026-11-24",
-  "genre": "ルアー"
- },
- {
   "file": "backpacker",
   "name": "バックパッカー",
   "copy": "メジャークラフトのパックロッド（マルチピース）｜特徴・スペック",
   "img": "backpacker.jpg",
-  "date": "2026-11-24",
-  "genre": "ロッド"
- },
- {
-  "file": "unfix",
-  "name": "アンフィックス",
-  "copy": "シマノのパックロッド（モバイルゲームロッド）｜特徴・スペック",
-  "img": "unfix.jpg",
   "date": "2026-11-24",
   "genre": "ロッド"
  },
