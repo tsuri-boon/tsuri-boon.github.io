@@ -1,5 +1,69 @@
 [
  {
+  "file": "easyshaker",
+  "name": "イージーシェイカー",
+  "copy": "ケイテックのワーム｜特徴・使い方・シリーズ比較",
+  "img": "easyshaker.jpg",
+  "date": "2026-11-25",
+  "genre": "ルアー"
+ },
+ {
+  "file": "feelacanth",
+  "name": "フィーラカンス",
+  "copy": "DSTYLEのエラストマーワーム｜特徴・使い方・シリーズ比較",
+  "img": "feelacanth.png",
+  "date": "2026-11-25",
+  "genre": "ルアー"
+ },
+ {
+  "file": "levelvib",
+  "name": "レベルバイブ",
+  "copy": "レイドジャパンのバイブレーション｜特徴・使い方・似ているルアー比較",
+  "img": "levelvib.jpg",
+  "date": "2026-11-25",
+  "genre": "ルアー"
+ },
+ {
+  "file": "pescissorsmagnum",
+  "name": "ピースパッ！シザース MAGNUM",
+  "copy": "バリバスのPEシザース｜特徴・使い方・似ているアイテム比較",
+  "img": "pescissorsmagnum.jpg",
+  "date": "2026-11-25",
+  "genre": "アクセサリー"
+ },
+ {
+  "file": "shorelineshinersl",
+  "name": "ショアラインシャイナーSL",
+  "copy": "ダイワの海サクラミノー｜特徴・使い方・シリーズ比較",
+  "img": "shorelineshinersl.jpg",
+  "date": "2026-11-25",
+  "genre": "ルアー"
+ },
+ {
+  "file": "sparkshad",
+  "name": "スパークシャッド",
+  "copy": "メガバスのシャッドワーム｜特徴・使い方・シリーズ比較",
+  "img": "sparkshad.jpg",
+  "date": "2026-11-25",
+  "genre": "ルアー"
+ },
+ {
+  "file": "supermultistickmx",
+  "name": "スーパーマルチスティック MX",
+  "copy": "ダイワのマルチロッド｜特徴・スペック",
+  "img": "supermultistickmx.jpg",
+  "date": "2026-11-25",
+  "genre": "ロッド"
+ },
+ {
+  "file": "ua32",
+  "name": "VISOA 2wayLEDライト UA32",
+  "copy": "槌屋ヤックの2wayLEDライト｜特徴・使い方・似ているアイテム比較",
+  "img": "ua32.jpg",
+  "date": "2026-11-25",
+  "genre": "アクセサリー"
+ },
+ {
   "file": "esdrive",
   "name": "エスドライブ",
   "copy": "エバーグリーンのビッグベイト｜特徴・使い方・似ているルアー比較",
@@ -24,54 +88,6 @@
   "genre": "ロッド"
  },
  {
-  "file": "kyucoike",
-  "name": "旧コイケ",
-  "copy": "ハイドアップのワーム｜特徴・使い方・似ているルアー比較",
-  "img": "kyucoike.png",
-  "date": "2026-11-24",
-  "genre": "ルアー"
- },
- {
-  "file": "octopus",
-  "name": "オクトパス",
-  "copy": "フィッシュマグネットのワーム｜特徴・使い方・シリーズ比較",
-  "img": "octopus.jpg",
-  "date": "2026-11-24",
-  "genre": "ルアー"
- },
- {
-  "file": "bulkygimlet",
-  "name": "バルキーギムレット",
-  "copy": "エバーグリーンのアジング用ワーム｜特徴・使い方・シリーズ比較",
-  "img": "bulkygimlet.jpg",
-  "date": "2026-11-23",
-  "genre": "ルアー"
- },
- {
-  "file": "corsairdrifttune",
-  "name": "コルセア ドリフトチューン",
-  "copy": "エバーグリーンのライトゲームプラグ｜特徴・使い方・シリーズ比較",
-  "img": "corsairdrifttune.jpg",
-  "date": "2026-11-23",
-  "genre": "ルアー"
- },
- {
-  "file": "exalis01",
-  "name": "EXALIS-01",
-  "copy": "リトルジャックのブレード付きメタルジグ｜特徴・使い方・シリーズ比較",
-  "img": "exalis01.jpg",
-  "date": "2026-11-23",
-  "genre": "ルアー"
- },
- {
-  "file": "flanjer",
-  "name": "フランジャー",
-  "copy": "ボトムアップのジャークベイト｜特徴・使い方・似ているルアー比較",
-  "img": "flanjer.jpg",
-  "date": "2026-11-23",
-  "genre": "ルアー"
- },
- {
   "file": "3dprinter-lure",
   "name": "3Dプリンターでルアーを自作するのに必要なもの",
   "copy": "3Dプリンターでルアーを自作するのに必要なもの｜設計ソフト・プリンター・フィラメント・ワイヤー・ウエイトの選び方",
@@ -80,35 +96,11 @@
   "genre": "その他"
  },
  {
-  "file": "htinfinity",
-  "name": "ハンターズ HT-∞∞ ゲームチェンジャー",
-  "copy": "モンスターキスのパックロッド（怪魚・大物）｜特徴・スペック",
-  "img": "htinfinity.jpg",
-  "date": "2026-11-21",
-  "genre": "ロッド"
- },
- {
   "file": "relevante20",
   "name": "Réレバンテ2.0",
   "copy": "ブルーストームのゲームベスト（ライフジャケット）｜特徴・使い方・似ているアイテム比較",
   "img": "relevante20.jpg",
   "date": "2026-11-15",
-  "genre": "アクセサリー"
- },
- {
-  "file": "nuptsebootiewp7short",
-  "name": "ヌプシ ブーティ ウォータープルーフ VII ショート",
-  "copy": "ザ・ノース・フェイスの防寒ブーツ｜特徴・使い方・似ているアイテム比較",
-  "img": "nuptsebootiewp7short.jpg",
-  "date": "2026-11-14",
-  "genre": "アクセサリー"
- },
- {
-  "file": "chomolungma",
-  "name": "チョモランマ",
-  "copy": "ひだまりの防寒インナー｜特徴・使い方・似ているアイテム比較",
-  "img": "chomolungma.jpg",
-  "date": "2026-11-14",
   "genre": "アクセサリー"
  },
  {
