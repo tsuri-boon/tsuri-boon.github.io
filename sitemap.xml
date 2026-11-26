@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tsuri-boon.github.io/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -783,6 +783,11 @@
   <url>
     <loc>https://tsuri-boon.github.io/article/edgevibe120.html</loc>
     <lastmod>2026-11-11</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tsuri-boon.github.io/article/egi-jushinidou.html</loc>
+    <lastmod>2026-11-27</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
