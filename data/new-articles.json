@@ -1,5 +1,77 @@
 [
  {
+  "file": "aorieqmagnetss",
+  "name": "アオリーQ マグネット SS",
+  "copy": "YO-ZURIの重心移動エギ｜特徴・使い方・似ているルアー比較",
+  "img": "aorieqmagnetss.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "clinchlongappealjetboost",
+  "name": "セフィア クリンチ ロングアピール ジェットブースト",
+  "copy": "シマノの重心移動エギ｜特徴・使い方・シリーズ比較",
+  "img": "clinchlongappealjetboost.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "egistabtb",
+  "name": "エギスタBTB",
+  "copy": "釣研の重心移動エギ｜特徴・使い方・似ているルアー比較",
+  "img": "egistabtb.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "emeraldasdartlc",
+  "name": "エメラルダス ダートLC",
+  "copy": "ダイワの重心移動エギ｜特徴・使い方・シリーズ比較",
+  "img": "emeraldasdartlc.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "emeraldasfalllcrattle",
+  "name": "エメラルダス フォールLC ラトル",
+  "copy": "ダイワの重心移動エギ｜特徴・使い方・シリーズ比較",
+  "img": "emeraldasfalllcrattle.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "emeraldasshinelc",
+  "name": "エメラルダス シャインLC レーザーインパクト",
+  "copy": "ダイワの重心移動エギ｜特徴・使い方・シリーズ比較",
+  "img": "emeraldasshinelc.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "ezqmagnettg",
+  "name": "イージーQ マグネットTG（マグパタ）",
+  "copy": "DUELの重心移動エギ｜特徴・使い方・シリーズ比較",
+  "img": "ezqmagnettg.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "magqtungsten",
+  "name": "マグQ タングステン",
+  "copy": "DUELの重心移動エギ｜特徴・使い方・シリーズ比較",
+  "img": "magqtungsten.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "tobukirari",
+  "name": "飛ぶキラリ",
+  "copy": "ラッキークラフトの重心移動エギ｜特徴・使い方・シリーズ比較",
+  "img": "tobukirari.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
   "file": "egi-jushinidou",
   "name": "重心移動エギおすすめ9選",
   "copy": "重心移動エギおすすめ9選｜飛距離を比較・遠投のコツも解説",
@@ -16,52 +88,12 @@
   "genre": "ロッド"
  },
  {
-  "file": "easyshaker",
-  "name": "イージーシェイカー",
-  "copy": "ケイテックのワーム｜特徴・使い方・シリーズ比較",
-  "img": "easyshaker.jpg",
-  "date": "2026-11-25",
-  "genre": "ルアー"
- },
- {
-  "file": "feelacanth",
-  "name": "フィーラカンス",
-  "copy": "DSTYLEのエラストマーワーム｜特徴・使い方・シリーズ比較",
-  "img": "feelacanth.png",
-  "date": "2026-11-25",
-  "genre": "ルアー"
- },
- {
-  "file": "levelvib",
-  "name": "レベルバイブ",
-  "copy": "レイドジャパンのバイブレーション｜特徴・使い方・似ているルアー比較",
-  "img": "levelvib.jpg",
-  "date": "2026-11-25",
-  "genre": "ルアー"
- },
- {
   "file": "pescissorsmagnum",
   "name": "ピースパッ！シザース MAGNUM",
   "copy": "バリバスのPEシザース｜特徴・使い方・似ているアイテム比較",
   "img": "pescissorsmagnum.jpg",
   "date": "2026-11-25",
   "genre": "アクセサリー"
- },
- {
-  "file": "shorelineshinersl",
-  "name": "ショアラインシャイナーSL",
-  "copy": "ダイワの海サクラミノー｜特徴・使い方・シリーズ比較",
-  "img": "shorelineshinersl.jpg",
-  "date": "2026-11-25",
-  "genre": "ルアー"
- },
- {
-  "file": "sparkshad",
-  "name": "スパークシャッド",
-  "copy": "メガバスのシャッドワーム｜特徴・使い方・シリーズ比較",
-  "img": "sparkshad.jpg",
-  "date": "2026-11-25",
-  "genre": "ルアー"
  },
  {
   "file": "supermultistickmx",
