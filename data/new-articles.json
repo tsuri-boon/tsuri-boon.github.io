@@ -1,5 +1,53 @@
 [
  {
+  "file": "cdje95",
+  "name": "カウントダウン ジョインテッドエリート95",
+  "copy": "ラパラのジョイントミノー｜特徴・使い方・似ているルアー比較",
+  "img": "cdje95.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "gunship45f",
+  "name": "ガンシップ45F",
+  "copy": "スミスのメバル用ミノー｜特徴・使い方・シリーズ比較",
+  "img": "gunship45f.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "gunship45hf",
+  "name": "ガンシップ45HF",
+  "copy": "スミスのメバル用ミノー｜特徴・使い方・シリーズ比較",
+  "img": "gunship45hf.png",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "gunship45ss",
+  "name": "ガンシップ45SS",
+  "copy": "スミスのメバル用ミノー｜特徴・使い方・シリーズ比較",
+  "img": "gunship45ss.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "hardcorelgsinkingpencil50",
+  "name": "ハードコア LG シンキングペンシル50",
+  "copy": "DUELのライトゲーム用シンペン｜特徴・使い方・似ているルアー比較",
+  "img": "hardcorelgsinkingpencil50.jpg",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
+  "file": "stillpencil50",
+  "name": "ロックライバー スティルペンシル50",
+  "copy": "メジャークラフトのライトゲーム用ペンシル｜特徴・使い方・似ているルアー比較",
+  "img": "stillpencil50.png",
+  "date": "2026-11-28",
+  "genre": "ルアー"
+ },
+ {
   "file": "aorieqmagnetss",
   "name": "アオリーQ マグネット SS",
   "copy": "YO-ZURIの重心移動エギ｜特徴・使い方・似ているルアー比較",
@@ -20,54 +68,6 @@
   "name": "エギスタBTB",
   "copy": "釣研の重心移動エギ｜特徴・使い方・似ているルアー比較",
   "img": "egistabtb.jpg",
-  "date": "2026-11-28",
-  "genre": "ルアー"
- },
- {
-  "file": "emeraldasdartlc",
-  "name": "エメラルダス ダートLC",
-  "copy": "ダイワの重心移動エギ｜特徴・使い方・シリーズ比較",
-  "img": "emeraldasdartlc.jpg",
-  "date": "2026-11-28",
-  "genre": "ルアー"
- },
- {
-  "file": "emeraldasfalllcrattle",
-  "name": "エメラルダス フォールLC ラトル",
-  "copy": "ダイワの重心移動エギ｜特徴・使い方・シリーズ比較",
-  "img": "emeraldasfalllcrattle.jpg",
-  "date": "2026-11-28",
-  "genre": "ルアー"
- },
- {
-  "file": "emeraldasshinelc",
-  "name": "エメラルダス シャインLC レーザーインパクト",
-  "copy": "ダイワの重心移動エギ｜特徴・使い方・シリーズ比較",
-  "img": "emeraldasshinelc.jpg",
-  "date": "2026-11-28",
-  "genre": "ルアー"
- },
- {
-  "file": "ezqmagnettg",
-  "name": "イージーQ マグネットTG（マグパタ）",
-  "copy": "DUELの重心移動エギ｜特徴・使い方・シリーズ比較",
-  "img": "ezqmagnettg.jpg",
-  "date": "2026-11-28",
-  "genre": "ルアー"
- },
- {
-  "file": "magqtungsten",
-  "name": "マグQ タングステン",
-  "copy": "DUELの重心移動エギ｜特徴・使い方・シリーズ比較",
-  "img": "magqtungsten.jpg",
-  "date": "2026-11-28",
-  "genre": "ルアー"
- },
- {
-  "file": "tobukirari",
-  "name": "飛ぶキラリ",
-  "copy": "ラッキークラフトの重心移動エギ｜特徴・使い方・シリーズ比較",
-  "img": "tobukirari.jpg",
   "date": "2026-11-28",
   "genre": "ルアー"
  },
